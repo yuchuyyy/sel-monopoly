@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>情緒領航員 SEL 大富翁 - 大螢幕主控台</title>
+    <style>
+        /* 簡單的地圖樣式 */
+        .map-container { display: flex; gap: 10px; margin-bottom: 20px; }
+        .grid { width: 100px; height: 100px; border: 2px solid #333; padding: 5px; background: #f0f0f0; position: relative; }
+        .active-grid { border-color: #ff5722; background: #fff3e0; }
+        .scoreboard { display: flex; gap: 20px; font-size: 24px; font-weight: bold; }
+        .team-token { display: inline-block; width: 20px; height: 20px; border-radius: 50%; margin: 2px; }
+        .card-display { font-size: 28px; color: #d32f2f; margin: 20px 0; padding: 15px; border: 3px dashed #d32f2f; display: none; }
+    </style>
+</head>
+<body>
+
+    <h1>🧭 情緒領航員：SEL 大富翁 🧭</h1>
+    
+    <div class="scoreboard">
+        <div id="t1">第一組: 0 分</div>
+        <div id="t2">第二組: 0 分</div>
+        <div id="t3">第三組: 0 分</div>
+        <div id="t4">第四組: 0 分</div>
+    </div>
+
+    <h2 id="current-turn-info">當前回合：正在等待玩家...</h2>
+
+    <div id="card-popup" class="card-display"></div>
+
+    <div class="map-container" id="map"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    <script src="config.js"></script>
+    <script>
+        // 初始化 Firebase (填入你的 Firebase 專案金鑰)
+        const firebaseConfig = { databaseURL: "https://你的專案ID.firebaseio.com/" };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // 渲染地圖
+        const mapDiv = document.getElementById('map');
+        MAP_GRID.forEach((grid, index) => {
+            mapDiv.innerHTML += `<div class="grid" id="grid-${index}"><b>${grid.label}</b><div id="tokens-${index}"></div></div>`;
+        });
+
+        // 監聽資料庫變動，即時更新大螢幕
+        db.ref().on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (!data) return;
+
+            // 1. 更新分數
+            document.getElementById('t1').innerText = `第一組: ${data.teams.team1.score} 分`;
+            document.getElementById('t2').innerText = `第二組: ${data.teams.team2.score} 分`;
+            document.getElementById('t3').innerText = `第三組: ${data.teams.team3.score} 分`;
+            document.getElementById('t4').innerText = `第四組: ${data.teams.team4.score} 分`;
+
+            // 2. 更新當前輪到誰
+            document.getElementById('current-turn-info').innerText = `當前輪到：第 ${data.gameState.currentTurn} 組行動`;
+
+            // 3. 清空並重新繪製所有組別的棋子位置
+            for(let i=0; i<MAP_GRID.length; i++) {
+                document.getElementById(`tokens-${i}`).innerHTML = '';
+                document.getElementById(`grid-${i}`).classList.remove('active-grid');
+            }
+
+            // 繪製棋子
+            const colors = { team1: 'red', team2: 'blue', team3: 'green', team4: 'orange' };
+            Object.keys(data.teams).forEach(teamKey => {
+                const pos = data.teams[teamKey].position;
+                const token = `<span class="team-token" style="background:${colors[teamKey]}"></span>`;
+                document.getElementById(`tokens-${pos}`).innerHTML += token;
+            });
+
+            // 4. 判斷是否觸發卡牌顯示
+            if (data.gameState.status === "showing_card" && data.gameState.activeCard) {
+                const popup = document.getElementById('card-popup');
+                popup.style.display = 'block';
+                popup.innerText = data.gameState.activeCard;
+            } else {
+                document.getElementById('card-popup').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

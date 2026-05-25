@@ -1,0 +1,12 @@
+{
+  "gameState": {
+    "currentTurn": 1, 
+    "status": "waiting_dice"
+  },
+  "teams": {
+    "team1": { "name": "第一組", "score": 0, "position": 0 },
+    "team2": { "name": "第二組", "score": 0, "position": 0 },
+    "team3": { "name": "第三組", "score": 0, "position": 0 },
+    "team4": { "name": "第四組", "score": 0, "position": 0 }
+  }
+}

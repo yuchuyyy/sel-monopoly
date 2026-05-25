@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEL 大富翁 - 手機控制器</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        .btn { width: 80%; padding: 20px; margin: 10px auto; font-size: 22px; background: #4CAF50; color: white; border: none; border-radius: 10px; display: none;}
+        #dice-result { font-size: 48px; margin: 20px; color: #ff5722; }
+    </style>
+</head>
+<body>
+
+    <h2>📱 小組行動控制台</h2>
+    <div id="setup">
+        <p>請選擇你的組別：</p>
+        <button onclick="selectTeam(1)">第一組</button>
+        <button onclick="selectTeam(2)">第二組</button>
+        <button onclick="selectTeam(3)">第三組</button>
+        <button onclick="selectTeam(4)">第四組</button>
+    </div>
+
+    <div id="game-panel" style="display:none;">
+        <h3 id="team-title"></h3>
+        <div id="dice-result">🎲</div>
+        <button id="btn-dice" class="btn" onclick="rollDice()">擲骰子</button>
+        <button id="btn-action" class="btn" style="background:#2196F3;" onclick="drawCard('ACTION')">抽行動卡</button>
+        <button id="btn-challenge" class="btn" style="background:#9c27b0;" onclick="drawCard('CHALLENGE')">抽挑戰卡</button>
+        <button id="btn-finish" class="btn" style="background:#ff9800;" onclick="finishTurn()">完成任務（換下一組）</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    <script src="config.js"></script>
+    <script>
+        const firebaseConfig = { databaseURL: "https://你的專案ID.firebaseio.com/" };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        let myTeamNum = null;
+        let myTeamKey = '';
+
+        function selectTeam(num) {
+            myTeamNum = num;
+            myTeamKey = 'team' + num;
+            document.getElementById('setup').style.display = 'none';
+            document.getElementById('game-panel').style.display = 'block';
+            document.getElementById('team-title').innerText = `你已登入為：第 ${num} 組`;
+            listenToGame();
+        }
+
+        function listenToGame() {
+            db.ref().on('value', (snapshot) => {
+                const data = snapshot.val();
+                const isMyTurn = (data.gameState.currentTurn === myTeamNum);
+                const status = data.gameState.status;
+
+                // 控制按鈕的顯示隱藏
+                document.getElementById('btn-dice').style.display = (isMyTurn && status === "waiting_dice") ? 'block' : 'none';
+                document.getElementById('btn-action').style.display = (isMyTurn && status === "waiting_action") ? 'block' : 'none';
+                document.getElementById('btn-challenge').style.display = (isMyTurn && status === "waiting_challenge") ? 'block' : 'none';
+                document.getElementById('btn-finish').style.display = (isMyTurn && status === "showing_card") ? 'block' : 'none';
+            });
+        }
+
+        function rollDice() {
+            const points = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('dice-result').innerText = `🎲 ${points} 點！`;
+
+            db.ref('teams/' + myTeamKey + '/position').once('value', (snap) => {
+                let currentPos = snap.val();
+                let newPos = (currentPos + points) % MAP_GRID.length; // 確保繞圈
+                
+                // 根據落點判定下一個狀態
+                let nextStatus = "showing_card";
+                let targetGrid = MAP_GRID[newPos];
+                let cardText = "";
+
+                if(targetGrid.type === "ACTION") { nextStatus = "waiting_action"; }
+                else if(targetGrid.type === "CHALLENGE") { nextStatus = "waiting_challenge"; }
+                else if(targetGrid.type === "STOP") { cardText = "冷靜角！全組深呼吸，暫停一回合。"; }
+                else if(targetGrid.type === "ALL_PLUS") { cardText = "大家共好！全班所有組別一起加 1 分！"; /* 實務上這裡要寫加分邏輯 */ }
+                else { cardText = "踩到了安全補給站！"; }
+
+                // 更新到 Firebase
+                db.ref('teams/' + myTeamKey).update({ position: newPos });
+                db.ref('gameState').update({ 
+                    status: nextStatus,
+                    activeCard: cardText
+                });
+            });
+        }
+
+        function drawCard(type) {
+            let cardText = "";
+            if(type === 'ACTION') {
+                cardText = ACTION_CARDS[Math.floor(Math.random() * ACTION_CARDS.length)];
+                // 行動卡有時需要搭配隨機情緒卡
+                if(cardText.includes("情緒卡")) {
+                    const emo = EMOTION_CARDS[Math.floor(Math.random() * EMOTION_CARDS.length)];
+                    cardText += ` 【抽到的情緒：${emo}】`;
+                }
+            } else {
+                cardText = CHALLENGE_CARDS[Math.floor(Math.random() * CHALLENGE_CARDS.length)];
+            }
+
+            db.ref('gameState').update({
+                status: "showing_card",
+                activeCard: cardText
+            });
+        }
+
+        function finishTurn() {
+            db.ref('gameState/currentTurn').once('value', (snap) => {
+                let current = snap.val();
+                let nextTurn = current === 4 ? 1 : current + 1; // 四組輪流
+                
+                db.ref('gameState').update({
+                    currentTurn: nextTurn,
+                    status: "waiting_dice",
+                    activeCard: ""
+                });
+                document.getElementById('dice-result').innerText = `🎲`;
+            });
+        }
+    </script>
+</body>
+</html>
