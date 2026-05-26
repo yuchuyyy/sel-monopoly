@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>情緒領航員 — SEL大富翁</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#040C18;--sf:#0B1A2E;--sf2:#0F2238;
+  --bd:rgba(0,210,255,.2);--r:12px;--rs:8px;
+  --t0:#00BFFF;--t1:#FF6B9D;--t2:#4DDD80;--t3:#FFD700;
+  --ca:#00D4FF;--ca-d:rgba(0,212,255,.12);
+  --cs:#FFB347;--cs-d:rgba(255,179,71,.12);
+  --cc:#9B6DFF;--cc-d:rgba(155,109,255,.12);
+  --gr:#2ED573;--re:#FF4757;--tx:#E8F4FD;--mu:rgba(232,244,253,.5)
+}
+html,body{height:100%}
+body{font-family:-apple-system,'PingFang TC','Noto Sans TC',sans-serif;background:var(--bg);color:var(--tx);overflow:hidden;height:100dvh}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;background:#fff;border-radius:50%;animation:tw var(--d,3s) ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.12}50%{opacity:.75}}
+
+/* ── ROLE SCREEN ── */
+#roleScreen{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100dvh;padding:28px 20px;gap:14px;text-align:center}
+.rlogo{font-size:68px;animation:bob 2.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.rtitle{font-size:32px;font-weight:900;color:var(--ca);letter-spacing:3px}
+.rsub{font-size:15px;color:var(--mu);margin-bottom:6px;line-height:1.7}
+.rbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:340px}
+.rbtns .span2{grid-column:span 2}
+.rbtn{height:56px;border-radius:28px;border:2px solid;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .1s;background:transparent}
+.rbtn:active{transform:scale(.95)}
+.rb-t{border-color:var(--ca);color:var(--ca);background:var(--ca-d)}
+.rb-0{border-color:var(--t0);color:var(--t0);background:rgba(0,191,255,.1)}
+.rb-1{border-color:var(--t1);color:var(--t1);background:rgba(255,107,157,.1)}
+.rb-2{border-color:var(--t2);color:var(--t2);background:rgba(77,221,128,.1)}
+.rb-3{border-color:var(--t3);color:var(--t3);background:rgba(255,215,0,.1)}
+.hint{font-size:13px;color:var(--mu);padding:12px 16px;background:var(--sf);border-radius:var(--rs);max-width:340px;line-height:1.7}
+.hint b{color:var(--ca)}
+
+/* ── TEACHER VIEW ── */
+#teachView{position:relative;z-index:1;display:none;flex-direction:column;align-items:center;gap:6px;padding:8px 6px;min-height:100dvh}
+.tv-hdr{width:100%;max-width:540px;display:flex;align-items:center;gap:8px;padding:0 2px}
+.tv-title{font-size:16px;font-weight:800;color:var(--ca);letter-spacing:2px;flex:1}
+.tv-round{font-size:14px;color:var(--mu)}
+.tv-end{padding:7px 14px;background:rgba(255,71,87,.1);color:var(--re);border:1px solid rgba(255,71,87,.3);border-radius:16px;font-size:13px;cursor:pointer;font-family:inherit}
+
+/* ── BOARD ── */
+.board-wrap{width:min(500px,96vw);height:min(500px,96vw);flex-shrink:0}
+.board{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr);width:100%;height:100%;background:var(--sf2);border:2px solid var(--ca);border-radius:10px;gap:2px;padding:2px}
+.sp{background:var(--sf);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:10px;color:var(--mu);text-align:center;padding:2px;gap:0;cursor:default}
+.sp-num{position:absolute;top:2px;left:3px;font-size:8px;opacity:.4}
+.sp-ico{font-size:min(20px,3vw);line-height:1}
+.sp-lbl{font-size:min(10px,1.6vw);line-height:1.2;margin-top:2px;font-weight:600}
+.sp.t-action{border:1px solid rgba(0,212,255,.2)}
+.sp.t-scenario{border:1px solid rgba(255,179,71,.3);background:rgba(255,179,71,.04)}
+.sp.t-challenge{border:1px solid rgba(155,109,255,.3);background:rgba(155,109,255,.04)}
+.sp.t-plus_all{border:1px solid rgba(46,213,115,.35);background:rgba(46,213,115,.05)}
+.sp.t-minus_one,.sp.t-minus_all{border:1px solid rgba(255,71,87,.3);background:rgba(255,71,87,.04)}
+.sp.t-calm{border:1px solid rgba(155,109,255,.4);background:rgba(120,80,220,.07)}
+.sp.t-start{border:1px solid var(--ca);background:rgba(0,212,255,.07)}
+.sp.landed{box-shadow:inset 0 0 0 2px #fff;animation:land .4s ease}
+@keyframes land{0%{transform:scale(1.06)}100%{transform:scale(1)}}
+.tkwrap{display:flex;flex-wrap:wrap;justify-content:center;gap:1px;margin-top:2px}
+.tk{width:min(12px,1.8vw);height:min(12px,1.8vw);border-radius:50%;font-size:min(7px,1.1vw);display:flex;align-items:center;justify-content:center;font-weight:900;color:#040C18;flex-shrink:0}
+
+/* Center */
+.sp-ctr{grid-row:2/6;grid-column:2/6;background:var(--sf);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px}
+.ctr-title{font-size:min(15px,2.2vw);font-weight:900;color:var(--ca);letter-spacing:2px}
+.deck-row{display:flex;flex-direction:column;gap:5px;width:100%}
+.dbtn{height:min(40px,5.2vw);border-radius:7px;font-size:min(13px,1.9vw);font-weight:800;cursor:pointer;font-family:inherit;border:1.5px solid;transition:transform .1s;display:flex;align-items:center;justify-content:center;gap:4px}
+.dbtn:active{transform:scale(.95)}
+.dbtn:disabled{opacity:.35;cursor:not-allowed}
+.db-a{background:var(--ca-d);border-color:var(--ca);color:var(--ca)}
+.db-s{background:var(--cs-d);border-color:var(--cs);color:var(--cs)}
+.db-c{background:var(--cc-d);border-color:var(--cc);color:var(--cc)}
+.ctr-scores{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;width:100%;margin-top:3px}
+.csi{background:var(--sf2);border-radius:5px;padding:4px 5px;text-align:center}
+.csi-n{font-size:min(10px,1.5vw);opacity:.6}
+.csi-p{font-size:min(22px,3.2vw);font-weight:900}
+
+/* Turn bar */
+.tv-tbar{width:100%;max-width:540px;display:flex;align-items:center;gap:8px;padding:2px}
+.tvt-box{flex:1;background:var(--sf);border-radius:var(--rs);padding:6px 10px}
+.tvt-lbl{font-size:12px;color:var(--mu)}
+.tvt-name{font-size:20px;font-weight:900}
+.tvt-phase{font-size:13px;color:var(--mu);margin-top:2px}
+
+/* ── CARD POPUP (Teacher) ── */
+.cpop{position:fixed;inset:0;background:rgba(4,12,24,.92);backdrop-filter:blur(8px);z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;padding:16px}
+.cpop.show{display:flex}
+.cbox{width:100%;max-width:500px;background:var(--sf);border-radius:20px;padding:20px 18px 18px;border:1px solid var(--bd);animation:cin .28s cubic-bezier(.34,1.56,.64,1)}
+@keyframes cin{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
+.cbadge{display:inline-flex;align-items:center;gap:5px;padding:5px 14px;border-radius:16px;font-size:14px;font-weight:800;letter-spacing:1px;margin-bottom:12px}
+.cb-a{background:var(--ca-d);color:var(--ca);border:1px solid rgba(0,212,255,.3)}
+.cb-s{background:var(--cs-d);color:var(--cs);border:1px solid rgba(255,179,71,.3)}
+.cb-c{background:var(--cc-d);color:var(--cc);border:1px solid rgba(155,109,255,.3)}
+.cemo{display:inline-block;padding:7px 20px;border-radius:20px;font-size:26px;font-weight:900;background:rgba(255,100,200,.12);color:#FF78D2;border:1px solid rgba(255,100,200,.3);margin-bottom:10px}
+.ctxt{font-size:18px;line-height:1.8;white-space:pre-line;margin-bottom:14px;min-height:60px}
+.cptsl{font-size:14px;color:var(--mu);margin-bottom:10px}
+.cptsl b{color:var(--gr);font-size:20px}
+.cdbl-badge{display:inline-block;padding:3px 12px;background:rgba(255,215,0,.15);color:#FFD700;border:1px solid rgba(255,215,0,.3);border-radius:12px;font-size:13px;font-weight:700;margin-left:8px}
+.twrap{height:6px;background:rgba(255,255,255,.1);border-radius:3px;margin-bottom:6px;overflow:hidden}
+.tbar{height:100%;background:var(--ca);border-radius:3px;transition:width 1s linear}
+.tbar.w{background:var(--cs)}.tbar.u{background:var(--re)}
+.ttxt{font-size:13px;color:var(--mu);text-align:right;margin-bottom:14px}
+.cbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bok{height:54px;background:rgba(46,213,115,.12);border:1.5px solid var(--gr);color:var(--gr);border-radius:27px;font-size:18px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .1s}
+.bok:active{transform:scale(.96)}
+.bsk{height:54px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);color:var(--mu);border-radius:27px;font-size:16px;cursor:pointer;font-family:inherit}
+
+/* ── STUDENT VIEW ── */
+#studView{position:relative;z-index:1;display:none;flex-direction:column;min-height:100dvh;overflow-y:auto}
+.sv-hdr{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd);flex-shrink:0;position:sticky;top:0;background:var(--bg);z-index:10}
+.svh-team{font-size:22px;font-weight:900}
+.svh-pill{font-size:13px;padding:5px 14px;border-radius:14px;font-weight:700}
+.svh-pill.on{background:rgba(46,213,115,.15);color:var(--gr);border:1px solid rgba(46,213,115,.3)}
+.svh-pill.off{background:rgba(255,255,255,.05);color:var(--mu)}
+
+.sv-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:8px 10px;flex-shrink:0}
+.ssc{background:var(--sf);border-radius:var(--rs);padding:7px 4px;text-align:center;border:1.5px solid transparent;transition:border-color .3s}
+.ssc.cur{border-color:currentColor}
+.ssc-n{font-size:11px;color:var(--mu)}
+.ssc-p{font-size:24px;font-weight:900}
+
+.sv-section{font-size:12px;font-weight:800;color:var(--mu);letter-spacing:2px;padding:8px 16px 3px;text-transform:uppercase}
+
+/* Power cards */
+.sv-powers{display:flex;gap:7px;padding:0 10px 10px;flex-shrink:0}
+.pwr{flex:1;background:var(--sf);border-radius:var(--rs);padding:10px 6px;text-align:center;border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:3px;transition:opacity .3s}
+.pwr.used{opacity:.28}
+.pwi{font-size:26px}
+.pwn{font-size:12px;font-weight:700;color:rgba(232,244,253,.9)}
+.pwc{font-size:11px;color:var(--mu);line-height:1.4}
+.pwb{margin-top:5px;height:34px;border-radius:17px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;border:1.5px solid;background:transparent;transition:transform .1s}
+.pwb:active{transform:scale(.95)}
+.pwb:disabled{opacity:.3;cursor:not-allowed}
+
+/* Dice */
+.sv-dice{padding:12px 16px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0}
+.sdf{font-size:72px;user-select:none;transition:transform .05s}
+.sdb{width:100%;max-width:280px;height:60px;background:linear-gradient(135deg,#00B4E6,#0077CC);border:none;border-radius:30px;color:#fff;font-size:20px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .1s,opacity .2s;letter-spacing:1px}
+.sdb:active{transform:scale(.96)}
+.sdb:disabled{opacity:.28;cursor:not-allowed;background:var(--sf)}
+.sd-inf{font-size:14px;color:var(--mu);text-align:center;min-height:20px}
+.sdb.reroll-mode{background:linear-gradient(135deg,#00B4E6,#0077CC);border:2px solid var(--ca)}
+
+/* Question display on student */
+.sv-qbox{margin:0 10px 14px;border-radius:var(--r);padding:16px 16px;display:none;flex-shrink:0}
+.svq-badge{font-size:13px;font-weight:800;letter-spacing:1px;margin-bottom:8px;opacity:.8}
+.svq-emo{font-size:22px;font-weight:900;padding:5px 16px;border-radius:18px;background:rgba(255,100,200,.12);color:#FF78D2;display:inline-block;margin-bottom:8px}
+.svq-txt{font-size:16px;line-height:1.8;white-space:pre-line}
+.svq-pts{font-size:14px;margin-top:8px;color:var(--mu)}
+.svq-pts b{color:var(--gr)}
+
+/* ── OVERLAYS ── */
+.calm-ov{position:fixed;inset:0;background:rgba(40,20,120,.88);backdrop-filter:blur(8px);z-index:150;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px}
+.calm-ico{font-size:84px;animation:breath 4s ease-in-out infinite}
+@keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+.calm-ttl{font-size:26px;font-weight:900;color:var(--cc);margin:14px 0 8px}
+.calm-dsc{font-size:16px;color:var(--mu);line-height:1.9;margin-bottom:26px}
+.calm-btn{height:52px;width:180px;background:var(--cc-d);border:2px solid var(--cc);color:var(--cc);border-radius:26px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit}
+
+.imm-ov{position:fixed;inset:0;background:rgba(4,12,24,.88);backdrop-filter:blur(6px);z-index:130;display:none;align-items:center;justify-content:center;padding:20px}
+.imm-box{background:var(--sf);border-radius:20px;padding:28px 22px;border:1px solid rgba(255,71,87,.3);max-width:360px;width:100%;text-align:center}
+.imm-ico{font-size:56px;margin-bottom:10px}
+.imm-ttl{font-size:22px;font-weight:900;color:var(--re);margin-bottom:8px}
+.imm-dsc{font-size:15px;color:var(--mu);line-height:1.7;margin-bottom:22px}
+.imm-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.imm-y{height:52px;background:rgba(255,71,87,.12);border:2px solid var(--re);color:var(--re);border-radius:26px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit}
+.imm-n{height:52px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--mu);border-radius:26px;font-size:15px;cursor:pointer;font-family:inherit}
+
+.gameover-ov{position:fixed;inset:0;background:var(--bg);z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+.go-t{font-size:72px;margin-bottom:12px}
+.go-h{font-size:30px;font-weight:900;color:var(--ca);margin-bottom:6px}
+.go-s{font-size:15px;color:var(--mu);margin-bottom:22px}
+.go-rows{width:100%;max-width:300px;display:flex;flex-direction:column;gap:9px;margin-bottom:28px}
+.go-row{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--sf);border-radius:var(--rs)}
+.go-row.w{background:var(--ca-d);border:1px solid rgba(0,212,255,.3)}
+.go-rk{font-size:20px;min-width:30px}.go-nm{flex:1;text-align:left;font-size:16px}.go-pt{font-size:24px;font-weight:900}
+.go-btn{width:200px;height:54px;background:linear-gradient(135deg,#00B4E6,#0077CC);border:none;border-radius:27px;color:#fff;font-size:18px;font-weight:800;cursor:pointer;font-family:inherit}
+
+/* Float points */
+.fpt{position:fixed;font-size:26px;font-weight:900;pointer-events:none;z-index:250;animation:fup 1.1s ease forwards}
+@keyframes fup{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-55px)}}
+.fpt.pos{color:var(--gr)}.fpt.neg{color:var(--re)}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<!-- ROLE SELECTION -->
+<div id="roleScreen">
+  <div class="rlogo">🚀</div>
+  <div class="rtitle">情緒領航員</div>
+  <div class="rsub">SEL 大富翁 — 請選擇你的角色</div>
+  <div class="rbtns">
+    <button class="rbtn rb-t span2" onclick="setRole('teacher')">👩‍🏫 老師（地圖控制畫面）</button>
+    <button class="rbtn rb-0" onclick="setRole(0)">🔵 第一組</button>
+    <button class="rbtn rb-1" onclick="setRole(1)">🔴 第二組</button>
+    <button class="rbtn rb-2" onclick="setRole(2)">🟢 第三組</button>
+    <button class="rbtn rb-3" onclick="setRole(3)">🟡 第四組</button>
+  </div>
+  <div class="hint"><b>提示：</b>老師開啟地圖畫面並投影；各組同學在手機上選擇自己的組別，可擲骰子和使用功能牌。同一裝置多分頁亦可測試。</div>
+</div>
+
+<!-- TEACHER VIEW -->
+<div id="teachView">
+  <div class="tv-hdr">
+    <span class="tv-title">🚀 情緒領航員</span>
+    <span class="tv-round" id="tvRound">第1回合</span>
+    <button class="tv-end" onclick="endGame()">結束遊戲</button>
+  </div>
+  <div class="board-wrap">
+    <div class="board" id="boardEl"></div>
+  </div>
+  <div class="tv-tbar">
+    <div class="tvt-box">
+      <div class="tvt-lbl">目前回合</div>
+      <div class="tvt-name" id="tvtName">—</div>
+      <div class="tvt-phase" id="tvtPhase">等待擲骰</div>
+    </div>
+    <div style="display:flex;gap:6px;flex-direction:column">
+      <button class="dbtn db-a" id="btnDrawA" onclick="teacherDraw('action')" disabled>📗 手動抽行動卡</button>
+    </div>
+  </div>
+</div>
+
+<!-- STUDENT VIEW -->
+<div id="studView">
+  <div class="sv-hdr">
+    <div class="svh-team" id="svhTeam">—</div>
+    <div class="svh-pill" id="svhPill">等待中</div>
+  </div>
+  <div class="sv-scores" id="svScores"></div>
+  <div class="sv-section">功能牌</div>
+  <div class="sv-powers" id="svPowers"></div>
+  <div class="sv-section">擲骰子</div>
+  <div class="sv-dice">
+    <div class="sdf" id="sdf">🎲</div>
+    <button class="sdb" id="sdb" onclick="studentRoll()" disabled>等待你的回合...</button>
+    <div class="sd-inf" id="sdInf"></div>
+  </div>
+  <div class="sv-section">本題目</div>
+  <div class="sv-qbox" id="svQBox"></div>
+</div>
+
+<!-- CARD POPUP (teacher) -->
+<div class="cpop" id="cpop">
+  <div class="cbox">
+    <div class="cbadge" id="cbadge"></div>
+    <div id="cemoWrap" style="display:none"><div class="cemo" id="cemo"></div></div>
+    <div class="ctxt" id="ctxt"></div>
+    <div class="cptsl">完成可獲得 <b id="cpts">+1</b> 分 <span class="cdbl-badge" id="dblBadge" style="display:none">⚡雙倍!</span></div>
+    <div class="twrap"><div class="tbar" id="tbar"></div></div>
+    <div class="ttxt" id="ttxt">60 秒</div>
+    <div class="cbtns">
+      <button class="bok" id="bokBtn" onclick="answerCard(true)">✓ 完成 +N分</button>
+      <button class="bsk" onclick="answerCard(false)">✕ 跳過</button>
+    </div>
+  </div>
+</div>
+
+<!-- CALM CORNER -->
+<div class="calm-ov" id="calmOv">
+  <div class="calm-ico">🧘</div>
+  <div class="calm-ttl">冷靜角</div>
+  <div class="calm-dsc">跟著圖示慢慢吸氣——吐氣<br>深呼吸三次，讓心情沉澱</div>
+  <button class="calm-btn" onclick="dismissCalm()">準備好了 ✓</button>
+</div>
+
+<!-- IMMUNITY PROMPT -->
+<div class="imm-ov" id="immOv">
+  <div class="imm-box">
+    <div class="imm-ico">🛡️</div>
+    <div class="imm-ttl" id="immTtl">踩到扣分格！</div>
+    <div class="imm-dsc" id="immDsc">你有免死金牌，要使用來免除扣分嗎？</div>
+    <div class="imm-btns">
+      <button class="imm-y" onclick="useImmunity(true)">🛡️ 使用免死金牌</button>
+      <button class="imm-n" onclick="useImmunity(false)">放棄，接受扣分</button>
+    </div>
+  </div>
+</div>
+
+<!-- GAME OVER -->
+<div class="gameover-ov" id="goOv">
+  <div class="go-t">🏆</div>
+  <div class="go-h" id="goH">—</div>
+  <div class="go-s">最終排名</div>
+  <div class="go-rows" id="goRows"></div>
+  <button class="go-btn" onclick="location.reload()">再玩一次 🔄</button>
+</div>
+
+<script>
+// ═══ DATA ═══
+const TDEFS=[
+  {name:'第一組',color:'#00BFFF',emoji:'🔵'},
+  {name:'第二組',color:'#FF6B9D',emoji:'🔴'},
+  {name:'第三組',color:'#4DDD80',emoji:'🟢'},
+  {name:'第四組',color:'#FFD700',emoji:'🟡'},
+];
+const BSPACES=[
+  {id:0,lbl:'START',ico:'🚀',t:'start'},
+  {id:1,lbl:'行動卡',ico:'📗',t:'action'},
+  {id:2,lbl:'情境卡',ico:'🌟',t:'scenario'},
+  {id:3,lbl:'行動卡',ico:'📗',t:'action'},
+  {id:4,lbl:'挑戰卡',ico:'🔮',t:'challenge'},
+  {id:5,lbl:'全體+1',ico:'⭐',t:'plus_all'},
+  {id:6,lbl:'行動卡',ico:'📗',t:'action'},
+  {id:7,lbl:'挑戰卡',ico:'🔮',t:'challenge'},
+  {id:8,lbl:'個人-1',ico:'💫',t:'minus_one'},
+  {id:9,lbl:'行動卡',ico:'📗',t:'action'},
+  {id:10,lbl:'冷靜角',ico:'🧘',t:'calm'},
+  {id:11,lbl:'情境卡',ico:'🌟',t:'scenario'},
+  {id:12,lbl:'行動卡',ico:'📗',t:'action'},
+  {id:13,lbl:'挑戰卡',ico:'🔮',t:'challenge'},
+  {id:14,lbl:'行動卡',ico:'📗',t:'action'},
+  {id:15,lbl:'全體-1',ico:'🌀',t:'minus_all'},
+  {id:16,lbl:'行動卡',ico:'📗',t:'action'},
+  {id:17,lbl:'情境卡',ico:'🌟',t:'scenario'},
+  {id:18,lbl:'全體+1',ico:'⭐',t:'plus_all'},
+  {id:19,lbl:'挑戰卡',ico:'🔮',t:'challenge'},
+];
+// Grid pos [row,col] 1-indexed for each space 0..19
+const GPOS=[[6,1],[6,2],[6,3],[6,4],[6,5],[6,6],[5,6],[4,6],[3,6],[2,6],[1,6],[1,5],[1,4],[1,3],[1,2],[1,1],[2,1],[3,1],[4,1],[5,1]];
+
+const PWRDEFS={
+  immunity:{name:'免死金牌',ico:'🛡️',desc:'避免個人-1扣分',color:'#FF4757'},
+  reroll:  {name:'幸運再擲',ico:'🎲',desc:'重新擲骰一次',color:'#00D4FF'},
+  double:  {name:'雙倍奇蹟',ico:'⚡',desc:'本次答題得2倍分',color:'#FFD700'},
+};
+
+const EMOTS=['驕傲','滿足','平靜','放鬆','快樂','勇敢','輕鬆','好奇','感動','興奮','期待','冷靜','希望','幸福','自信','悲傷','委屈','尷尬','疑惑','驚喜','自卑','不高興','焦慮','害怕','生氣','恐懼','無聊','憤怒','疲憊','心碎'];
+
+const ACARDS=[
+  {t:'（先抽情緒詞）\n分享自己有這種情緒時，最想聽什麼類型的歌？說說理由。',e:true},
+  {t:'（先抽情緒詞）\n說說自己在什麼情況下最容易出現這種情緒？舉一個例子。',e:true},
+  {t:'（先抽情緒詞）\n這個情緒對人有什麼幫助？說明你的想法。',e:true},
+  {t:'（先抽情緒詞）\n當你有這種情緒時，最想做什麼？你通常怎麼處理？',e:true},
+  {t:'（先抽情緒詞）\n分享今天或最近有感受到這個情緒的一件事。',e:true},
+  {t:'分享最近做的一個讓你感到驕傲的決定，說說你當時怎麼想的。',e:false},
+  {t:'在團隊合作中，你喜歡擔任隊長還是隊員？說出你的理由。',e:false},
+  {t:'分享一次你主動關心他人的經驗。對方有什麼回應？你有什麼感受？',e:false},
+  {t:'如果你現在的心情是一種天氣，是什麼天氣？為什麼？小組輪流說。',e:false},
+  {t:'分享最近學到一句對你有幫助的話，說說是什麼讓你有這個體悟。',e:false},
+  {t:'說說右手邊那組的一個你觀察到的優點，給他們一句鼓勵。',e:false},
+  {t:'全組一起：站起來伸展雙臂 5 秒，深吸一口氣再放鬆！',e:false},
+  {t:'全組一起：閉上眼睛深呼吸 3 次。吸氣 4 秒，吐氣 6 秒。',e:false},
+  {t:'給右手邊隊伍說一個你欣賞的特質，並解釋為什麼欣賞。',e:false},
+  {t:'分享一件你曾幫助過別人的小事，說說當時的感受和對方的反應。',e:false},
+  {t:'給未來一年後的自己一句鼓勵的話，並大聲說出來！',e:false},
+  {t:'你們小組最常用來調節情緒的方法是什麼？分享最有效的一個。',e:false},
+  {t:'分享一個讓你想再體驗一次的快樂回憶，說說那時候的感受。',e:false},
+  {t:'分享一次你覺得沒被理解的經驗，說說你希望別人當時怎麼做。',e:false},
+  {t:'面對壓力時，你通常怎麼讓自己冷靜？分享一個你實際用過的方法。',e:false},
+  {t:'如果你的情緒是一種食物，此刻它是什麼？為什麼？',e:false},
+  {t:'說出一件你最近感謝某人的事，不管大小，說出為什麼感謝。',e:false},
+  {t:'你認為「情緒管理」最重要的是什麼？用一句話說明你的想法。',e:false},
+  {t:'分享一件你認為自己做得很好的事，別謙虛，大方說出來！',e:false},
+  {t:'描述一個讓你感到有歸屬感、被接納的時刻，當時發生了什麼？',e:false},
+  {t:'如果你是情緒教練，你會給壓力很大的同學哪三個建議？',e:false},
+  {t:'你上次真心大笑是什麼時候？是什麼事讓你這麼開心？',e:false},
+  {t:'你最常用哪種方式表達「我在乎你」？說一個真實的例子。',e:false},
+  {t:'分享一個你「忍住情緒，事後很慶幸沒有衝動」的經驗。',e:false},
+  {t:'說說你最近觀察到有人做了一件體貼的事，那件事是什麼？',e:false},
+];
+const CCARDS=[
+  {t:'看到他人做了不對的事，你通常怎麼做？說一個具體方法和理由。',e:false},
+  {t:'說出最近你觀察到別人需要幫助的情況，以及你當時如何回應。',e:false},
+  {t:'說說最近一次做錯決定的事，事後你如何面對後果？學到什麼？',e:false},
+  {t:'分享一次你因考慮別人感受而改變了自己原本決定的情況。',e:false},
+  {t:'不小心傷害了他人的感受，你通常怎麼處理？有真實例子嗎？',e:false},
+  {t:'描述一次你做決定時，主動考慮別人的感受或權益的經驗。',e:false},
+  {t:'當感到生氣或難過時，你怎麼察覺自己的情緒？有哪些身體信號？',e:false},
+  {t:'想拒絕他人但不想傷害對方時，你怎麼做？說出具體步驟。',e:false},
+  {t:'與朋友吵架後，你怎麼修補關係？說明你認為最有效的方法。',e:false},
+  {t:'說出最近讓你有負面情緒的事，以及你如何一步步調適心情。',e:false},
+  {t:'看到他人失誤時，你心裡第一反應是什麼？你會說或做什麼？',e:false},
+  {t:'發現朋友心情不好但不說原因，你怎麼做？說明你的考量。',e:false},
+  {t:'（先抽情緒詞）\n分享近期感到這個情緒的時刻，詳細描述身體和心理的反應。',e:true},
+  {t:'你曾因壓力太大影響和別人的關係嗎？你如何察覺並處理？',e:false},
+  {t:'如果朋友正在承受很大的情緒壓力，你怎麼支持他/她？說三個做法。',e:false},
+];
+const SCARDS=[
+  {t:'【情境討論】你的好朋友考試不及格，在角落哭泣。\n\n討論：三種不同的回應方式各是什麼？哪一種最能幫助朋友，為什麼？'},
+  {t:'【情境討論】小組作業時，一名組員一直滑手機不做事。\n\n討論：你是組長，怎麼處理？如何在不傷感情的情況下溝通？'},
+  {t:'【情境討論】你看到班上同學在背後說某位同學的壞話。\n\n討論：你們怎麼反應？如何幫助被說壞話的同學？'},
+  {t:'【情境討論】你和朋友因誤會發生衝突，對方好幾天沒跟你說話。\n\n討論：最好的修復方式是什麼？說出第一步的具體行動。'},
+  {t:'【情境討論】班上發表意見時，有同學嘲笑你，讓你很難堪。\n\n討論：如何在眾人面前調整情緒並繼續？事後怎麼處理這段關係？'},
+  {t:'【情境討論】朋友最近情緒低落，但不願說原因。\n\n討論：怎麼讓對方感到被理解、願意開口？分享三個不帶壓力的做法。'},
+  {t:'【情境討論】你們小組在競賽中輸了，有組員開始互相指責。\n\n討論：怎麼化解衝突？如何幫大家重新找回合作動力？'},
+  {t:'【情境討論】每次分組都有一位同學沒有人邀請一起。\n\n討論：你們發現這件事時，怎麼做？如何讓他有歸屬感？'},
+  {t:'【情境討論】同學成績比預期差，說自己「很笨」，感到很沮喪。\n\n討論：你們怎麼幫助他？說出三個具體的鼓勵和支持方法。'},
+  {t:'【情境討論】朋友說因壓力太大，想放棄重要的比賽或活動。\n\n討論：你說什麼幫助他面對壓力？如何鼓勵而不強迫？'},
+];
+
+// ═══ STATE ═══
+function mkState(){
+  return{
+    started:false, phase:'roll',
+    cur:0, round:1,
+    card:null, cardType:null, cardPts:0, cardEmo:null,
+    doubleActive:false, rerollState:0, // 0=none,1=used(first roll done)
+    immPending:false, immTeam:-1,
+    skipNext:[false,false,false,false],
+    teams:TDEFS.map(d=>({...d,score:0,pos:0,powers:{immunity:1,reroll:1,double:1}})),
+    ts:0
+  };
+}
+
+let S=mkState();
+let role=null; // 'teacher'|0|1|2|3
+let aDk,cDk,sDk,eDk;
+let timerInt=null;
+let lastActTs=0;
+let pollInt=null;
+let bc=null; // BroadcastChannel
+
+function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]]}return b}
+function fromDeck(dk,fb){if(!dk.length)dk.push(...shuf([...fb]));return dk.shift()}
+function initDecks(){aDk=shuf([...ACARDS,...ACARDS.slice(0,5)]);cDk=shuf([...CCARDS]);sDk=shuf([...SCARDS]);eDk=shuf([...EMOTS])}
+function drawEmo(){if(!eDk.length)eDk=shuf([...EMOTS]);return eDk.shift()}
+
+// ═══ STORAGE/SYNC ═══
+const SK={gs:'sel4:gs',act:'sel4:act'};
+
+async function saveS(){
+  S.ts=Date.now();
+  const j=JSON.stringify(S);
+  try{if(window.storage)await window.storage.set(SK.gs,j,true);}catch(e){}
+  try{localStorage.setItem(SK.gs,j);}catch(e){}
+  try{bc&&bc.postMessage({type:'gs',data:j});}catch(e){}
+}
+
+async function loadS(){
+  let j=null;
+  try{if(window.storage){const r=await window.storage.get(SK.gs);if(r)j=r.value;}}catch(e){}
+  if(!j){try{j=localStorage.getItem(SK.gs);}catch(e){}}
+  if(j){const ns=JSON.parse(j);if(ns.ts>S.ts)S=ns;}
+}
+
+async function sendAct(a){
+  const j=JSON.stringify({...a,ts:Date.now()});
+  try{if(window.storage)await window.storage.set(SK.act,j,true);}catch(e){}
+  try{localStorage.setItem(SK.act,j);}catch(e){}
+  try{bc&&bc.postMessage({type:'act',data:j});}catch(e){}
+}
+
+async function pollAct(){
+  let j=null;
+  try{if(window.storage){const r=await window.storage.get(SK.act);if(r)j=r.value;}}catch(e){}
+  if(!j){try{j=localStorage.getItem(SK.act);}catch(e){}}
+  if(j){const a=JSON.parse(j);if(a.ts>lastActTs){lastActTs=a.ts;await handleAction(a);}}
+}
+
+// ═══ ROLE SELECTION ═══
+function setRole(r){
+  role=r;
+  initDecks();
+  document.getElementById('roleScreen').style.display='none';
+  if(r==='teacher'){
+    document.getElementById('teachView').style.display='flex';
+    buildBoard();
+    renderTeacher();
+    // Poll for student actions
+    pollInt=setInterval(async()=>{
+      await pollAct();
+      renderTeacher();
+    },600);
+    // BroadcastChannel
+    try{bc=new BroadcastChannel('sel4');bc.onmessage=e=>{if(e.data.type==='act'){const a=JSON.parse(e.data.data);if(a.ts>lastActTs){lastActTs=a.ts;handleAction(a).then(()=>renderTeacher());}}}}catch(ex){}
+  }else{
+    document.getElementById('studView').style.display='flex';
+    renderStudent();
+    // Poll for state updates
+    pollInt=setInterval(async()=>{
+      await loadS();
+      renderStudent();
+    },800);
+    try{bc=new BroadcastChannel('sel4');bc.onmessage=e=>{if(e.data.type==='gs'){const ns=JSON.parse(e.data.data);if(ns.ts>S.ts){S=ns;renderStudent();}}}}catch(ex){}
+    // Also save initial state if teacher hasn't yet
+    setTimeout(async()=>{await loadS();renderStudent();},300);
+  }
+  createStars();
+}
+
+// ═══ TEACHER ACTIONS ═══
+function buildBoard(){
+  const b=document.getElementById('boardEl');
+  b.innerHTML='';
+  BSPACES.forEach(sp=>{
+    const[r,c]=GPOS[sp.id];
+    const d=document.createElement('div');
+    d.className=`sp t-${sp.t}`;
+    d.style.gridRow=r;d.style.gridColumn=c;
+    d.id=`sp${sp.id}`;
+    b.appendChild(d);
+  });
+  const ctr=document.createElement('div');
+  ctr.className='sp-ctr';
+  ctr.id='spCtr';
+  b.appendChild(ctr);
+  updateBoard();
+}
+
+function updateBoard(){
+  BSPACES.forEach(sp=>{
+    const d=document.getElementById(`sp${sp.id}`);
+    if(!d)return;
+    const here=S.teams.filter(t=>t.pos===sp.id);
+    const tks=here.map(t=>`<div class="tk" style="background:${t.color}">${t.emoji}</div>`).join('');
+    d.innerHTML=`<span class="sp-num">${sp.id}</span><span class="sp-ico">${sp.ico}</span><span class="sp-lbl">${sp.lbl}</span>${tks?`<div class="tkwrap">${tks}</div>`:''}`;
+  });
+  // Center
+  const ctr=document.getElementById('spCtr');
+  if(ctr){
+    const deckDis=S.phase==='roll'&&!S.card?'':'disabled';
+    ctr.innerHTML=`
+      <div class="ctr-title">情緒領航員</div>
+      <div class="deck-row">
+        <button class="dbtn db-a" onclick="teacherDraw('action')" ${deckDis}>📗 行動卡 <small>+1</small></button>
+        <button class="dbtn db-s" onclick="teacherDraw('scenario')" ${deckDis}>🌟 情境卡 <small>+2</small></button>
+        <button class="dbtn db-c" onclick="teacherDraw('challenge')" ${deckDis}>🔮 挑戰卡 <small>+3</small></button>
+      </div>
+      <div class="ctr-scores">
+        ${S.teams.map(t=>`<div class="csi"><div class="csi-n" style="color:${t.color}">${t.emoji} ${t.name}</div><div class="csi-p" style="color:${t.color}">${t.score}</div></div>`).join('')}
+      </div>`;
+  }
+}
+
+function renderTeacher(){
+  const t=S.teams[S.cur];
+  const nameEl=document.getElementById('tvtName');
+  nameEl.textContent=`${t.emoji} ${t.name}`;nameEl.style.color=t.color;
+  const phaseMap={roll:'等待擲骰',moving:'移動中...',card:'作答中',calm:'冷靜角',immunity:'免死金牌?',gameover:'遊戲結束'};
+  document.getElementById('tvtPhase').textContent=phaseMap[S.phase]||S.phase;
+  document.getElementById('tvRound').textContent=`第${S.round}回合`;
+  updateBoard();
+  if(S.phase==='gameover')showGameover();
+}
+
+async function handleAction(a){
+  if(a.type==='roll'){
+    if(S.phase!=='roll')return;
+    const ti=a.team;
+    if(ti!==S.cur)return;
+    const steps=a.result;
+    await doMove(ti,steps);
+  } else if(a.type==='usePower'){
+    const ti=a.team;
+    const p=a.power;
+    if(ti!==S.cur)return;
+    if(S.teams[ti].powers[p]<=0)return;
+    S.teams[ti].powers[p]--;
+    if(p==='double'){S.doubleActive=true;}
+    else if(p==='reroll'){S.rerollState=1;} // teacher will expect second roll
+    await saveS();
+    renderTeacher();
+  } else if(a.type==='roll2'){
+    // second roll after reroll power
+    if(S.rerollState!==1)return;
+    S.rerollState=2;
+    const ti=a.team;
+    const steps=a.result;
+    await doMove(ti,steps);
+  } else if(a.type==='useImmunity'){
+    if(!S.immPending)return;
+    if(a.use){
+      // immunity used, skip penalty
+      S.teams[S.immTeam].powers.immunity--;
+      document.getElementById('immOv').style.display='none';
+    } else {
+      // apply penalty
+      if(S.immType==='minus_one') S.teams[S.immTeam].score=Math.max(0,S.teams[S.immTeam].score-1);
+      if(S.immType==='minus_all') S.teams.forEach(t=>t.score=Math.max(0,t.score-1));
+      document.getElementById('immOv').style.display='none';
+    }
+    S.immPending=false;S.immTeam=-1;
+    await nextTurn();
+  }
+}
+
+async function doMove(ti,steps){
+  S.phase='moving';
+  const t=S.teams[ti];
+  t.pos=(t.pos+steps)%BSPACES.length;
+  await saveS();renderTeacher();
+  // Highlight landed space
+  setTimeout(()=>{const el=document.getElementById(`sp${t.pos}`);if(el){el.classList.add('landed');setTimeout(()=>el.classList.remove('landed'),500);}},100);
+  setTimeout(async()=>await processSpace(ti,BSPACES[t.pos]),400);
+}
+
+async function processSpace(ti,sp){
+  const t=S.teams[ti];
+  switch(sp.t){
+    case'start':
+      S.phase='roll';await saveS();renderTeacher();break;
+    case'action':
+      await autoDrawCard('action');break;
+    case'scenario':
+      await autoDrawCard('scenario');break;
+    case'challenge':
+      await autoDrawCard('challenge');break;
+    case'plus_all':
+      S.teams.forEach(x=>x.score++);
+      showFloat(null,1,'全體 +1');
+      await nextTurn();break;
+    case'minus_one':
+      if(S.teams[ti].powers.immunity>0){
+        S.immPending=true;S.immTeam=ti;S.immType='minus_one';
+        S.phase='immunity';await saveS();
+        showImmPrompt(t.name,'個人 -1');
+      }else{
+        S.teams[ti].score=Math.max(0,S.teams[ti].score-1);
+        showFloat(ti,-1,'');
+        await nextTurn();
+      }break;
+    case'minus_all':
+      // Check if current team has immunity
+      if(S.teams[ti].powers.immunity>0){
+        S.immPending=true;S.immTeam=ti;S.immType='minus_all';
+        S.phase='immunity';await saveS();
+        showImmPrompt(t.name,'全體 -1');
+      }else{
+        S.teams.forEach(x=>x.score=Math.max(0,x.score-1));
+        showFloat(null,-1,'全體 -1');
+        await nextTurn();
+      }break;
+    case'calm':
+      S.skipNext[ti]=true;S.phase='calm';
+      await saveS();
+      document.getElementById('calmOv').style.display='flex';
+      break;
+  }
+}
+
+async function autoDrawCard(type){
+  let card,pts,tMax;
+  const emo=null;
+  if(type==='action'){card=fromDeck(aDk,ACARDS);pts=1;tMax=60;}
+  else if(type==='scenario'){card=fromDeck(sDk,SCARDS);pts=2;tMax=120;}
+  else{card=fromDeck(cDk,CCARDS);pts=3;tMax=90;}
+  const emoW=card.e?drawEmo():null;
+  S.card={...card,emo:emoW};S.cardType=type;S.cardPts=pts;S.phase='card';
+  await saveS();
+  showCardPopup(card,type,pts,emoW);
+}
+
+function teacherDraw(type){autoDrawCard(type);}
+
+function showCardPopup(card,type,pts,emo){
+  const pop=document.getElementById('cpop');
+  const bdgEl=document.getElementById('cbadge');
+  const bdgMap={action:['cb-a','📗 行動卡'],scenario:['cb-s','🌟 情境卡'],challenge:['cb-c','🔮 挑戰卡']};
+  const[cls,lbl]=bdgMap[type];
+  bdgEl.className=`cbadge ${cls}`;bdgEl.textContent=lbl;
+  const ew=document.getElementById('cemoWrap');
+  if(emo){document.getElementById('cemo').textContent=emo;ew.style.display='block';}else ew.style.display='none';
+  document.getElementById('ctxt').textContent=card.t;
+  const effPts=S.doubleActive?pts*2:pts;
+  document.getElementById('cpts').textContent=`+${effPts}`;
+  document.getElementById('dblBadge').style.display=S.doubleActive?'inline-block':'none';
+  document.getElementById('bokBtn').textContent=`✓ 完成 +${effPts}分`;
+  pop.classList.add('show');
+  startTimer(pts===2?120:pts===3?90:60);
+}
+
+function startTimer(sec){
+  clearInterval(timerInt);
+  let left=sec;
+  const bar=document.getElementById('tbar');
+  const txt=document.getElementById('ttxt');
+  bar.style.width='100%';bar.className='tbar';txt.textContent=`${sec} 秒`;
+  timerInt=setInterval(()=>{
+    left--;
+    const p=left/sec*100;
+    bar.style.width=p+'%';txt.textContent=`${left} 秒`;
+    if(p<=25)bar.className='tbar u';else if(p<=55)bar.className='tbar w';
+    if(left<=0){clearInterval(timerInt);answerCard(false);}
+  },1000);
+}
+
+async function answerCard(ok){
+  clearInterval(timerInt);
+  document.getElementById('cpop').classList.remove('show');
+  if(ok){
+    const pts=S.doubleActive?S.cardPts*2:S.cardPts;
+    S.teams[S.cur].score+=pts;
+    showFloat(S.cur,pts,'');
+  }
+  S.card=null;S.doubleActive=false;S.rerollState=0;
+  await nextTurn();
+}
+
+async function nextTurn(){
+  if(S.phase==='gameover')return;
+  // Check win
+  if(S.teams.some(t=>t.score>=15)){S.phase='gameover';await saveS();showGameover();return;}
+  let next=(S.cur+1)%4;
+  if(next===0)S.round++;
+  // Handle skip
+  if(S.skipNext[next]){S.skipNext[next]=false;next=(next+1)%4;if(next===0)S.round++;}
+  S.cur=next;S.phase='roll';
+  await saveS();renderTeacher();
+}
+
+async function dismissCalm(){
+  document.getElementById('calmOv').style.display='none';
+  await nextTurn();
+}
+
+function showImmPrompt(tname,type){
+  document.getElementById('immTtl').textContent=`${tname} 踩到 ${type}！`;
+  document.getElementById('immDsc').textContent=`${tname} 有免死金牌，要使用來免除扣分嗎？`;
+  document.getElementById('immOv').style.display='flex';
+}
+
+async function useImmunity(use){
+  document.getElementById('immOv').style.display='none';
+  // Send action from teacher's perspective
+  await handleAction({type:'useImmunity',team:S.cur,use,ts:Date.now()});
+}
+
+function showFloat(ti,pts,label){
+  const el=document.createElement('div');
+  el.className=`fpt ${pts>0?'pos':'neg'}`;
+  el.textContent=(pts>0?'+':'')+pts+(label?' '+label:'');
+  if(ti!=null){
+    const cards=document.querySelectorAll('.ssc');
+    const c=cards[ti];
+    if(c){const r=c.getBoundingClientRect();el.style.left=(r.left+r.width/2)+'px';el.style.top=r.top+'px';}
+    else{el.style.left='50%';el.style.top='40%';}
+  }else{el.style.left='50%';el.style.top='40%';}
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),1300);
+}
+
+function endGame(){S.phase='gameover';saveS();showGameover();}
+function showGameover(){
+  const sorted=[...S.teams].sort((a,b)=>b.score-a.score);
+  const medals=['🥇','🥈','🥉','🏅'];
+  document.getElementById('goH').textContent=`${sorted[0].emoji} ${sorted[0].name} 獲勝！`;
+  document.getElementById('goRows').innerHTML=sorted.map((t,i)=>`<div class="go-row${i===0?' w':''}"><span class="go-rk">${medals[i]}</span><span class="go-nm" style="color:${t.color}">${t.emoji} ${t.name}</span><span class="go-pt" style="color:${t.color}">${t.score}</span></div>`).join('');
+  document.getElementById('goOv').style.display='flex';
+}
+
+// ═══ STUDENT VIEW ═══
+function renderStudent(){
+  if(role===null||role==='teacher')return;
+  const ti=typeof role==='number'?role:0;
+  const t=S.teams[ti];
+  const isMyTurn=(S.cur===ti);
+  const canRoll=isMyTurn&&S.phase==='roll';
+
+  // Header
+  document.getElementById('svhTeam').textContent=`${t.emoji} ${t.name}`;
+  document.getElementById('svhTeam').style.color=t.color;
+  const pill=document.getElementById('svhPill');
+  pill.textContent=isMyTurn?(S.phase==='roll'?'你的回合！':'進行中...'):'等待中';
+  pill.className='svh-pill '+(isMyTurn?'on':'off');
+
+  // Scores
+  document.getElementById('svScores').innerHTML=S.teams.map((tm,i)=>`<div class="ssc${S.cur===i?' cur':''}" style="color:${tm.color};border-color:${S.cur===i?tm.color:'transparent'}"><div class="ssc-n">${tm.emoji} ${tm.name}</div><div class="ssc-p">${tm.score}</div></div>`).join('');
+
+  // Powers
+  const pws=['immunity','reroll','double'];
+  document.getElementById('svPowers').innerHTML=pws.map(pk=>{
+    const pd=PWRDEFS[pk];const cnt=t.powers[pk];
+    const canUse=isMyTurn&&cnt>0&&(pk==='reroll'?S.phase==='roll'&&S.rerollState===0:pk==='double'?S.phase==='roll':S.phase==='immunity');
+    return`<div class="pwr${cnt<=0?' used':''}">
+      <div class="pwi">${pd.ico}</div>
+      <div class="pwn">${pd.name}</div>
+      <div class="pwc">${pd.desc}</div>
+      <div class="pwc">剩餘 ${cnt}</div>
+      <button class="pwb" style="border-color:${pd.color};color:${pd.color}" onclick="usePower('${pk}')" ${canUse?'':'disabled'}>使用</button>
+    </div>`;
+  }).join('');
+
+  // Dice button
+  const sdb=document.getElementById('sdb');
+  const sdf=document.getElementById('sdf');
+  const sdInf=document.getElementById('sdInf');
+  if(canRoll){
+    sdb.disabled=false;
+    sdb.textContent=S.rerollState===1?'🎲 再擲一次！':'🎲 擲骰子';
+    sdInf.textContent=S.doubleActive?'⚡ 雙倍奇蹟啟動！':S.rerollState===1?'幸運再擲已啟用':'';
+  }else{
+    sdb.disabled=true;
+    sdb.textContent=isMyTurn?'處理中...':'等待你的回合...';
+    sdInf.textContent='';
+  }
+
+  // Question display
+  const qb=document.getElementById('svQBox');
+  if(S.card&&(S.phase==='card')){
+    const bdgMap={action:['var(--ca-d)','var(--ca)','📗 行動卡 +'+S.cardPts],scenario:['var(--cs-d)','var(--cs)','🌟 情境卡 +'+S.cardPts],challenge:['var(--cc-d)','var(--cc)','🔮 挑戰卡 +'+S.cardPts]};
+    const[bg,cl,bl]=bdgMap[S.cardType]||['','',''];
+    const effPts=S.doubleActive?S.cardPts*2:S.cardPts;
+    qb.style.display='block';qb.style.background=bg;qb.style.border=`1px solid ${cl}`;
+    qb.innerHTML=`<div class="svq-badge" style="color:${cl}">${bl}</div>${S.card.emo?`<div class="svq-emo">${S.card.emo}</div>`:''}
+    <div class="svq-txt" style="color:${cl==='var(--ca)'?'#E8F4FD':cl==='var(--cs)'?'#FFB347':'#C0AAFF'}">${S.card.t}</div>
+    <div class="svq-pts">完成可得 <b>+${effPts}分</b>${S.doubleActive?'（雙倍！）':''}</div>`;
+  }else qb.style.display='none';
+
+  if(S.phase==='gameover')showGameover();
+}
+
+function studentRoll(){
+  if(typeof role!=='number')return;
+  const ti=role;
+  if(S.cur!==ti||S.phase!=='roll')return;
+  const faces=['⚀','⚁','⚂','⚃','⚄','⚅'];
+  const sdf=document.getElementById('sdf');
+  document.getElementById('sdb').disabled=true;
+  let c=0;
+  const a=setInterval(()=>{sdf.textContent=faces[0|Math.random()*6];c++;},80);
+  setTimeout(()=>{
+    clearInterval(a);
+    const r=(0|Math.random()*6)+1;
+    sdf.textContent=faces[r-1];
+    const type=S.rerollState===1?'roll2':'roll';
+    sendAct({type,team:ti,result:r});
+    document.getElementById('sdInf').textContent=`擲出了 ${r}！`;
+  },600);
+}
+
+async function usePower(pk){
+  if(typeof role!=='number')return;
+  const ti=role;
+  if(S.cur!==ti)return;
+  if(S.teams[ti].powers[pk]<=0)return;
+  if(pk==='immunity'){
+    // Only usable during immunity prompt phase
+    if(S.phase!=='immunity')return;
+    await sendAct({type:'useImmunity',team:ti,use:true});
+  }else{
+    await sendAct({type:'usePower',team:ti,power:pk});
+    document.getElementById('sdInf').textContent=`${PWRDEFS[pk].ico} ${PWRDEFS[pk].name} 已啟用！`;
+    // Reload state
+    setTimeout(async()=>{await loadS();renderStudent();},500);
+  }
+}
+
+// ═══ STARS ═══
+function createStars(){
+  const c=document.getElementById('stars');
+  if(c.children.length>0)return;
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*2.5+.5;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${Math.random()*3+2}s;animation-delay:${Math.random()*4}s`;
+    c.appendChild(s);
+  }
+}
+createStars();
+</script>
+</body>
+</html>
