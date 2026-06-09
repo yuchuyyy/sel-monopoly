@@ -3,397 +3,379 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>情緒領航員 — SEL大富翁 RPG</title>
+<title>情緒領航員 SEL</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+TC:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  /* BRIGHT light-mode palette */
-  --bg:#F0F4FF;--sf:#FFFFFF;--sf2:#E8EEFF;--sf3:#D4DCFF;
-  --gold:#D4800A;--gold2:#B8620A;--gold-d:rgba(212,128,10,.18);
-  --opp:#0A8A4E;--opp-l:#0BBE6A;--opp-d:rgba(10,138,78,.12);
-  --fate:#CC2222;--fate-l:#E83333;--fate-d:rgba(204,34,34,.12);
-  --cross:#1155CC;--cross-l:#2266EE;--cross-d:rgba(17,85,204,.12);
-  --mart:#AA5500;--mart-l:#CC6600;--mart-d:rgba(170,85,0,.12);
-  --hp-hi:#0A8A4E;--hp-mid:#CC7700;--hp-lo:#CC2222;
-  --tx:#111122;--mu:rgba(17,17,34,.5);--r:8px;--rs:6px;
-  --c1:#0066CC;--c2:#CC2222;--c3:#0A8A4E;--c4:#CC8800;
-  --glow-gold:0 0 0 3px #D4800A, 0 4px 16px rgba(212,128,10,.4);
-  --glow-opp:0 0 0 2px #0BBE6A;
-  --glow-fate:0 0 0 2px #E83333;
+  --bg:#F7F8FC;--sf:#FFFFFF;--sf2:#F0F2F8;--sf3:#E4E8F2;
+  --gold:#F5A623;--gold2:#D4890A;--gold-d:rgba(245,166,35,.15);
+  --opp:#22C55E;--opp-l:#16A34A;--opp-d:rgba(34,197,94,.13);
+  --fate:#EF4444;--fate-l:#DC2626;--fate-d:rgba(239,68,68,.13);
+  --cross:#3B82F6;--cross-l:#2563EB;--cross-d:rgba(59,130,246,.13);
+  --mart:#F97316;--mart-l:#EA580C;--mart-d:rgba(249,115,22,.13);
+  --hp-hi:#22C55E;--hp-mid:#F97316;--hp-lo:#EF4444;
+  --tx:#1E1E2E;--mu:rgba(30,30,46,.45);
+  --c1:#3B82F6;--c2:#EF4444;--c3:#22C55E;--c4:#F5A623;
+  --card-r:12px;
+  --shadow-card:0 2px 8px rgba(30,30,46,.1),0 1px 2px rgba(30,30,46,.06);
+  --shadow-lift:0 8px 24px rgba(30,30,46,.18),0 2px 6px rgba(30,30,46,.1);
 }
-html{height:100%}
-body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);color:var(--tx);min-height:100dvh;
-  background-image:
-    repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(100,120,255,.06) 40px),
-    repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(100,120,255,.06) 40px)}
+html,body{height:100%}
+body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);color:var(--tx);min-height:100dvh}
 
-/* STARS (subtle on light bg) */
-.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.star{position:absolute;border-radius:50%;animation:tw var(--d,4s) ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:.1}50%{opacity:.6}}
-
-/* ─── SCREENS ─── */
+/* ─── NAV SCREENS ─── */
 .pg{display:none;position:relative;z-index:1;min-height:100dvh;flex-direction:column;align-items:center;justify-content:center;padding:24px 18px;gap:14px;text-align:center}
 .pg.on{display:flex}
-.logo{font-size:56px;animation:bob 2s steps(4) infinite;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.2))}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.rune{font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:3px;color:var(--gold);opacity:.9;line-height:1.8}
-.pg-title{font-family:'Press Start 2P',monospace;font-size:18px;color:var(--gold);text-shadow:3px 3px 0 rgba(212,128,10,.3);letter-spacing:2px;line-height:1.7}
-.pg-sub{font-size:13px;color:var(--mu);line-height:1.8;max-width:320px}
+.logo{font-size:60px;animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.pg-title{font-weight:900;font-size:32px;color:#F5A623;letter-spacing:4px}
+.pg-sub{font-size:13px;color:#64748B;line-height:1.9;max-width:320px}
 .cw{width:100%;max-width:360px;display:flex;flex-direction:column;gap:10px}
-
-/* PIXEL BUTTONS */
-.btn{height:52px;border-radius:0;border:none;font-size:14px;font-weight:800;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:transform .08s,box-shadow .1s;background:transparent;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;position:relative;letter-spacing:.5px;outline:3px solid;outline-offset:0}
-.btn:active{transform:translate(2px,2px);box-shadow:none!important}
-.btn-gold{outline-color:var(--gold);color:var(--gold2);background:rgba(212,128,10,.1);box-shadow:3px 3px 0 var(--gold)}
-.btn-gold:hover{background:rgba(212,128,10,.18)}
-.btn-opp{outline-color:var(--opp);color:var(--opp);background:rgba(10,138,78,.1);box-shadow:3px 3px 0 var(--opp)}
-.btn-fate{outline-color:var(--fate);color:var(--fate);background:rgba(204,34,34,.1);box-shadow:3px 3px 0 var(--fate)}
-.btn-t0{outline-color:var(--c1);color:var(--c1);background:rgba(0,102,204,.1);box-shadow:3px 3px 0 var(--c1)}
-.btn-t1{outline-color:var(--c2);color:var(--c2);background:rgba(204,34,34,.1);box-shadow:3px 3px 0 var(--c2)}
-.btn-t2{outline-color:var(--c3);color:var(--c3);background:rgba(10,138,78,.1);box-shadow:3px 3px 0 var(--c3)}
-.btn-t3{outline-color:var(--c4);color:var(--c4);background:rgba(204,136,0,.1);box-shadow:3px 3px 0 var(--c4)}
+.btn{height:52px;border-radius:var(--card-r);border:none;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;transition:transform .1s,box-shadow .1s}
+.btn:active{transform:translateY(2px);box-shadow:none!important}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#2d1b0e;box-shadow:0 4px 0 #8B6000,var(--shadow-card)}
+.btn-opp{background:linear-gradient(135deg,var(--opp),#28904e);color:#fff;box-shadow:0 4px 0 #1a7040,var(--shadow-card)}
+.btn-fate{background:linear-gradient(135deg,var(--fate),#b03030);color:#fff;box-shadow:0 4px 0 #902020,var(--shadow-card)}
+.btn-t0{background:linear-gradient(135deg,#4080e0,#2060c0);color:#fff;box-shadow:0 4px 0 #1040a0,var(--shadow-card)}
+.btn-t1{background:linear-gradient(135deg,#e04040,#b02020);color:#fff;box-shadow:0 4px 0 #902020,var(--shadow-card)}
+.btn-t2{background:linear-gradient(135deg,#3ab86a,#28904e);color:#fff;box-shadow:0 4px 0 #1a7040,var(--shadow-card)}
+.btn-t3{background:linear-gradient(135deg,#d08030,#a06020);color:#fff;box-shadow:0 4px 0 #805020,var(--shadow-card)}
 .btn-2g{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
-.btn-2g .btn{height:48px;font-size:13px}
-.infobox{background:var(--sf);outline:2px solid rgba(212,128,10,.3);padding:12px 16px;font-size:12.5px;color:var(--mu);line-height:1.8;width:100%;max-width:360px;box-shadow:2px 2px 0 rgba(212,128,10,.2)}
-.infobox b{color:var(--gold2)}
-
-.cinput{width:100%;height:60px;background:var(--sf);border:none;outline:3px solid rgba(212,128,10,.4);color:var(--gold2);font-size:28px;font-weight:900;letter-spacing:8px;text-align:center;font-family:'Press Start 2P',monospace;transition:outline-color .2s;text-transform:uppercase}
-.cinput:focus{outline-color:var(--gold);box-shadow:var(--glow-gold)}
-
-/* Lobby */
-.codebox{background:var(--sf);outline:3px solid var(--gold);padding:20px 24px;width:100%;box-shadow:4px 4px 0 var(--gold)}
-.codebox-lbl{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--mu);margin-bottom:8px;letter-spacing:2px}
-.codebox-num{font-size:40px;font-family:'Press Start 2P',monospace;color:var(--gold2);letter-spacing:8px;text-shadow:2px 2px 0 rgba(212,128,10,.3)}
-.codebox-hint{font-size:11px;color:var(--mu);margin-top:6px}
-.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%}
-.tslot{background:var(--sf);padding:9px 12px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;outline:2px solid rgba(0,0,0,.12);transition:all .2s}
-.tslot.ok{outline-color:var(--opp);box-shadow:2px 2px 0 var(--opp)}
-.tslot-ico{font-size:18px}
+.btn-2g .btn{height:52px}
+.infobox{background:#FFFFFF;border-radius:var(--card-r);padding:14px 18px;font-size:13px;color:#64748B;line-height:1.9;width:100%;max-width:360px;box-shadow:var(--shadow-card)}
+.infobox b{color:#F5A623}
+.cinput{width:100%;height:60px;background:#F7F8FC;border:2px solid #E4E8F2;border-radius:var(--card-r);color:#1E1E2E;font-size:28px;font-weight:900;letter-spacing:8px;text-align:center;font-family:inherit;box-shadow:var(--shadow-card);outline:2px solid transparent;transition:outline-color .2s}
+.cinput:focus{outline-color:var(--gold)}
+.codebox{background:var(--sf);border-radius:var(--card-r);padding:20px 24px;width:100%;box-shadow:0 6px 0 rgba(240,192,80,.3),var(--shadow-card)}
+.codebox-lbl{font-size:11px;color:#94A3B8;margin-bottom:8px;letter-spacing:3px}
+.codebox-num{font-size:40px;font-weight:900;color:var(--gold);letter-spacing:10px;text-shadow:0 0 20px rgba(240,192,80,.4)}
+.codebox-hint{font-size:11px;color:#94A3B8;margin-top:6px}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;box-shadow:var(--shadow-card);transition:all .2s}
+.tslot.ok{box-shadow:0 0 0 2px var(--opp),var(--shadow-card)}
+.tslot-ico{font-size:20px}
 .tslot-st{font-size:11px;margin-left:auto;color:var(--mu)}
 .tslot.ok .tslot-st{color:var(--opp);font-weight:800}
-.lobby-st{font-size:13px;color:var(--mu);min-height:20px}
-
-.spin{font-size:48px;animation:sp .7s steps(8) infinite}
+.lobby-st{font-size:13px;color:#64748B}
+.spin{font-size:48px;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-.cmsg{font-family:'Press Start 2P',monospace;font-size:13px;color:var(--gold2);line-height:1.8}
-.csub{font-size:13px;color:var(--mu)}
+.cmsg{font-size:16px;color:#F5A623;font-weight:800}
+.csub{font-size:13px;color:#64748B}
 
 /* ─── TEACHER BOARD ─── */
-#pgTeach{display:none;position:relative;z-index:1;flex-direction:column;align-items:center;gap:4px;padding:5px 5px;min-height:100dvh;background:var(--bg)}
+#pgTeach{display:none;position:relative;z-index:1;flex-direction:column;align-items:center;gap:4px;padding:5px;min-height:100dvh;background:#F7F8FC}
 #pgTeach.on{display:flex}
 .tv-hdr{width:100%;max-width:1000px;display:flex;align-items:center;gap:8px;padding:3px 4px}
-.tv-ttl{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--gold2);letter-spacing:1px;flex:1}
-.tv-rnd{font-size:12px;color:var(--mu);font-weight:700}
-.tv-end{padding:5px 14px;background:rgba(204,34,34,.1);color:var(--fate);outline:2px solid var(--fate);font-size:12px;cursor:pointer;font-family:inherit;font-weight:700}
-
-/* HP bars teacher */
+.tv-ttl{font-weight:900;font-size:18px;color:#1E1E2E;flex:1}
+.tv-rnd{font-size:12px;color:#64748B;font-weight:700}
+.tv-end{padding:6px 14px;background:var(--fate-d);color:var(--fate);border:1px solid var(--fate);border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:700}
 .hp-grid{width:100%;max-width:1000px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
-.hp-team-mini{background:var(--sf);padding:7px 10px;outline:2px solid rgba(0,0,0,.1);box-shadow:2px 2px 0 rgba(0,0,0,.1)}
-.hp-team-mini.cur-team{outline-width:3px;box-shadow:3px 3px 0 currentColor}
-.hptm-name{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--mu);margin-bottom:4px;font-weight:700}
-.hptm-val{font-size:18px;font-weight:900;margin-bottom:4px}
-.hpbar-wrap{height:10px;background:rgba(0,0,0,.1);overflow:hidden;outline:1px solid rgba(0,0,0,.15)}
-.hpbar{height:100%;transition:width .5s steps(10),background .5s}
-
-/* Step-by-step move indicator (inside board center) */
-.teach-dice-face{font-size:44px;line-height:1;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.2))}
-.teach-dice-face.spin-anim{animation:diceSpin .08s steps(2) infinite}
-@keyframes diceSpin{0%{transform:scale(1.15) rotate(-8deg)}50%{transform:scale(.9) rotate(8deg)}100%{transform:scale(1.05) rotate(-3deg)}}
-.teach-move-trail{display:flex;gap:3px;justify-content:center;flex-wrap:wrap;min-height:14px}
-.trail-dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.15);transition:background .1s,transform .1s}
-.trail-dot.active{background:var(--gold);transform:scale(1.6)}
-.trail-dot.done{background:var(--opp)}
-
-/* Board */
-.bwrap{width:min(1000px,99vw);flex-shrink:0}
-.board{display:grid;width:100%;background:var(--sf2);outline:4px solid var(--gold);gap:3px;padding:3px;box-shadow:5px 5px 0 var(--gold2)}
-.sp{background:var(--sf);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;text-align:center;padding:5px 3px;min-height:78px;outline:1px solid rgba(0,0,0,.1);cursor:default;transition:all .15s}
-.sp-n{position:absolute;top:2px;left:3px;font-family:'Press Start 2P',monospace;font-size:7px;opacity:.35;color:var(--gold2)}
-.sp-ico{font-size:22px;line-height:1}
-.sp-lbl{font-size:12px;line-height:1.25;margin-top:3px;font-weight:900;color:var(--tx)}
-.sp-sub{font-size:9px;opacity:.7;line-height:1;margin-top:2px;color:var(--mu)}
-/* Cell type colors - bright & saturated */
-.sp.t-opp{outline:2px solid var(--opp-l);background:#DFFFF0}
-.sp.t-opp .sp-lbl{color:var(--opp)}
-.sp.t-fate{outline:2px solid var(--fate-l);background:#FFE0E0}
-.sp.t-fate .sp-lbl{color:var(--fate)}
-.sp.t-cross{outline:2px solid var(--cross-l);background:#E0EAFF}
-.sp.t-cross .sp-lbl{color:var(--cross)}
-.sp.t-martial{outline:2px solid var(--mart-l);background:#FFF0D8}
-.sp.t-martial .sp-lbl{color:var(--mart)}
-.sp.t-bonus_all,.sp.t-holy_all{outline:2px solid var(--gold);background:#FFF8D0}
-.sp.t-bonus_all .sp-lbl,.sp.t-holy_all .sp-lbl{color:var(--gold2)}
-.sp.t-curse_all{outline:2px solid #993333;background:#FFE4E4}
-.sp.t-curse_all .sp-lbl{color:#AA2222}
-.sp.t-start{outline:4px solid var(--gold);background:#FFF0B0}
-.sp.t-start .sp-lbl{color:var(--gold2)}
-/* Moving highlight - very obvious */
-.sp.moving-highlight{outline:4px solid #FF6600!important;background:#FFEECC!important;box-shadow:0 0 0 3px rgba(255,102,0,.5);transform:scale(1.03);z-index:2}
-.sp.land-flash{animation:landFlash .35s ease}
-@keyframes landFlash{0%{background:#FFFF00;outline-color:#FF6600;transform:scale(1.08)}100%{}}
-.tkwrap{display:flex;flex-wrap:wrap;justify-content:center;gap:2px;margin-top:3px}
-.tk{width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;outline:2px solid rgba(0,0,0,.3);flex-shrink:0;border-radius:3px}
-
-
-/* Board center card display */
-.ctr-card{width:100%;padding:10px 12px;border-radius:0;overflow:hidden;max-height:200px;overflow-y:auto}
-.ctr-card-type{font-family:'Press Start 2P',monospace;font-size:9px;font-weight:800;letter-spacing:1px;margin-bottom:6px}
-.ctr-card-txt{font-size:13px;line-height:1.7;color:var(--tx);white-space:pre-line;text-align:left}
-.ctr-type-big{font-family:'Press Start 2P',monospace;font-size:20px;font-weight:900;letter-spacing:2px;text-align:center;padding:10px 0 8px;text-shadow:2px 2px 0 rgba(0,0,0,.1)}
-.ctr-wait{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--mu);text-align:center;padding:14px 0;letter-spacing:1px;line-height:1.8}
-
-/* Cross confirm button variants */
-.cross-confirm-btn.neutral{outline-color:rgba(0,0,0,.25);color:var(--tx);background:var(--sf2)}
-.cross-confirm-btn.ok{outline-color:var(--opp);color:var(--opp);background:rgba(10,138,78,.1)}
-.cross-confirm-btn.imm{outline-color:var(--gold);color:var(--gold2);background:rgba(212,128,10,.1)}
-.cross-confirm-btn.rev{outline-color:var(--cross);color:var(--cross);background:rgba(17,85,204,.1)}
-.cross-confirm-btn.blk{outline-color:var(--fate);color:var(--fate);background:rgba(204,34,34,.1)}
-.cross-hp-reveal{font-size:13px;font-weight:900;white-space:nowrap;padding:2px 6px;margin-left:4px}
-.cross-hp-reveal.pos{color:var(--opp);background:rgba(10,138,78,.1);outline:1px solid var(--opp)}
-.cross-hp-reveal.neg{color:var(--fate);background:rgba(204,34,34,.1);outline:1px solid var(--fate)}
-/* pause btn */
-.pause-btn{height:36px;padding:0 14px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;outline:2px solid var(--gold);color:var(--gold2);background:rgba(212,128,10,.1);box-shadow:2px 2px 0 var(--gold2)}
-.pause-btn.paused{outline-color:var(--fate);color:var(--fate);background:rgba(204,34,34,.1);box-shadow:2px 2px 0 var(--fate)}
-/* Board center */
-.sp-ctr{background:linear-gradient(135deg,#EEF2FF 0%,#F5F8FF 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;outline:2px solid rgba(212,128,10,.25)}
-.ctr-ttl{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--gold2);letter-spacing:1px;text-align:center;margin-bottom:4px}
-.draw-row{display:flex;flex-direction:column;gap:5px;width:100%}
-.dbtn{height:36px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;border:none;outline:2px solid;transition:transform .08s,box-shadow .1s;display:flex;align-items:center;justify-content:center;gap:3px;background:transparent}
-.dbtn:active{transform:translate(2px,2px);box-shadow:none!important}
-.dbtn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
-.dbtn-opp{outline-color:var(--opp);color:var(--opp);background:var(--opp-d);box-shadow:2px 2px 0 var(--opp)}
-.dbtn-fate{outline-color:var(--fate);color:var(--fate);background:var(--fate-d);box-shadow:2px 2px 0 var(--fate)}
-.dbtn-cross{outline-color:var(--cross);color:var(--cross);background:var(--cross-d);box-shadow:2px 2px 0 var(--cross)}
-.dbtn-mart{outline-color:var(--mart);color:var(--mart);background:var(--mart-d);box-shadow:2px 2px 0 var(--mart)}
-
-/* Turn info */
+.hp-team-mini{background:#FFFFFF;padding:7px 10px;border-radius:8px;box-shadow:var(--shadow-card)}
+.hp-team-mini.cur-team{box-shadow:0 0 0 2px currentColor,var(--shadow-card)}
+.hptm-name{font-size:11px;color:#64748B;margin-bottom:3px;font-weight:700}
+.hptm-val{font-size:18px;font-weight:900;margin-bottom:3px}
+.hpbar-wrap{height:8px;background:#E4E8F2;border-radius:4px;overflow:hidden}
+.hpbar{height:100%;border-radius:4px;transition:width .5s ease,background .5s}
 .tbar{width:100%;max-width:1000px;display:flex;align-items:center;gap:7px;padding:2px 4px}
-.tbar-box{flex:1;background:var(--sf);padding:7px 12px;outline:2px solid rgba(212,128,10,.25);box-shadow:2px 2px 0 rgba(212,128,10,.2)}
-.tbar-lbl{font-family:'Press Start 2P',monospace;font-size:7px;color:var(--mu);letter-spacing:1px}
+.tbar-box{flex:1;background:#FFFFFF;padding:8px 13px;border-radius:8px;box-shadow:var(--shadow-card)}
+.tbar-lbl{font-size:9px;color:#94A3B8;letter-spacing:2px;text-transform:uppercase}
 .tbar-name{font-size:20px;font-weight:900}
-.tbar-ph{font-size:12px;color:var(--mu);margin-top:1px}
-/* Direction indicator */
-.tbar-dir{font-family:'Press Start 2P',monospace;font-size:8px;padding:4px 8px;outline:2px solid;margin-left:4px}
-.tbar-dir.cw{color:var(--opp);outline-color:var(--opp);background:rgba(10,138,78,.1)}
-.tbar-dir.ccw{color:var(--cross);outline-color:var(--cross);background:rgba(17,85,204,.1)}
-
-.pwr-notif{display:none;padding:6px 12px;font-size:13px;font-weight:700;background:rgba(212,128,10,.12);outline:2px solid var(--gold);color:var(--gold2);margin-bottom:8px;text-align:center}
+.tbar-ph{font-size:12px;color:#94A3B8;margin-top:1px}
+.tbar-dir{font-size:11px;padding:5px 10px;border-radius:6px;font-weight:700}
+.tbar-dir.cw{background:#DCFCE7;color:#15803D}
+.tbar-dir.ccw{background:#DBEAFE;color:#1D4ED8}
+.dbtn{height:36px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:6px;transition:transform .08s,box-shadow .1s;display:flex;align-items:center;justify-content:center;gap:3px;padding:0 12px}
+.dbtn:active{transform:translateY(2px);box-shadow:none!important}
+.dbtn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+.dbtn-opp{background:linear-gradient(135deg,var(--opp),#28904e);color:#fff;box-shadow:0 3px 0 #1a7040}
+.dbtn-fate{background:linear-gradient(135deg,var(--fate),#b03030);color:#fff;box-shadow:0 3px 0 #902020}
+.dbtn-cross{background:linear-gradient(135deg,var(--cross),#2860c0);color:#fff;box-shadow:0 3px 0 #1040a0}
+.dbtn-mart{background:linear-gradient(135deg,var(--mart),#b06020);color:#fff;box-shadow:0 3px 0 #904010}
+.pwr-notif{display:none;padding:6px 12px;font-size:13px;font-weight:700;background:#FFFBEB;border-radius:6px;color:#92400E;margin-bottom:8px;text-align:center;border:1px solid #FDE68A}
 .pwr-notif.show{display:block}
 
-/* Cross answer status on teacher popup */
-.cross-answer-status{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-.cas-chip{padding:4px 10px;font-size:12px;font-weight:800;outline:2px solid;font-family:'Press Start 2P',monospace;font-size:8px}
-.cas-chip.waiting{outline-color:rgba(0,0,0,.2);color:var(--mu);background:var(--sf2)}
-.cas-chip.answered{outline-color:var(--opp);color:var(--opp);background:rgba(10,138,78,.12)}
+/* ─── CARD GRID BOARD ─── */
+.bwrap{width:min(1000px,99vw);flex-shrink:0}
+.board{display:grid;width:100%;gap:3px;padding:4px;background:#E4E8F2;border-radius:14px;box-shadow:0 4px 20px rgba(30,30,46,.12)}
+
+/* Each cell = a physical card */
+.sp{
+  background:var(--sf);
+  border-radius:var(--card-r);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:visible;text-align:center;
+  padding:6px 4px;min-height:82px;
+  box-shadow:var(--shadow-card);
+  cursor:default;
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
+  transform-style:preserve-3d;
+  border:2px solid rgba(255,255,255,.8);
+}
+.sp-ico{font-size:28px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.sp-lbl{font-size:14px;line-height:1.2;margin-top:4px;font-weight:900;color:var(--tx)}
+.sp-n{display:none}
+.sp-sub{display:none}
+
+/* Card type themes */
+.sp.t-opp{background:#DCFCE7;border-color:#BBF7D0}
+.sp.t-opp .sp-lbl{color:#15803D}
+.sp.t-fate{background:#FEE2E2;border-color:#FECACA}
+.sp.t-fate .sp-lbl{color:#B91C1C}
+.sp.t-cross{background:#DBEAFE;border-color:#BFDBFE}
+.sp.t-cross .sp-lbl{color:#1D4ED8}
+.sp.t-martial{background:#FFEDD5;border-color:#FED7AA}
+.sp.t-martial .sp-lbl{color:#C2410C}
+.sp.t-bonus_all,.sp.t-holy_all{background:#FEF9C3;border-color:#FDE68A}
+.sp.t-bonus_all .sp-lbl,.sp.t-holy_all .sp-lbl{color:#B45309}
+.sp.t-curse_all{background:#FCE7F3;border-color:#FBCFE8}
+.sp.t-curse_all .sp-lbl{color:#9D174D}
+.sp.t-skip{background:#F1F5F9;border-color:#CBD5E1}
+.sp.t-skip .sp-lbl{color:#475569}
+.sp.t-move{background:#E0F2FE;border-color:#BAE6FD}
+.sp.t-move .sp-lbl{color:#0369A1}
+.sp.t-start{background:linear-gradient(135deg,#FEF3C7,#FDE68A);border:3px solid #F5A623;box-shadow:0 0 0 2px rgba(245,166,35,.3),var(--shadow-card)}
+.sp.t-start .sp-lbl{color:#92400E}
+/* Card float animation when moving */
+.sp.moving-highlight{
+  transform:translateY(-10px) scale(1.08) rotate(-1deg)!important;
+  box-shadow:var(--shadow-lift),0 0 0 3px #F5A623,0 0 16px rgba(245,166,35,.5)!important;
+  z-index:10;border-color:#F5A623!important;background:#FFFBEB!important
+}
+.sp.land-flash{animation:landAnim .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes landAnim{
+  0%{transform:translateY(-14px) scale(1.12);background:#FEF9C3}
+  60%{transform:translateY(2px) scale(.97)}
+  100%{transform:translateY(0) scale(1)}
+}
+/* Mascot tokens */
+.tkwrap{display:flex;flex-wrap:wrap;justify-content:center;gap:2px;margin-top:4px;position:relative;z-index:2}
+.tk{width:20px;height:20px;border-radius:50%;flex-shrink:0;box-shadow:0 2px 4px rgba(30,30,46,.25);border:2px solid rgba(255,255,255,.9);transition:transform .15s}
+
+/* Board center */
+.sp-ctr{
+  background:#FFFFFF;
+  display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
+  gap:0;padding:10px 12px 8px;border-radius:10px;
+  box-shadow:0 2px 8px rgba(30,30,46,.08);
+  border:2px solid #E4E8F2;
+  overflow:hidden;
+  position:relative;
+  min-height:0;height:100%;
+}
+/* Scrollable card area — grows to fill space above legend */
+.ctr-scroll{flex:1;overflow-y:auto;min-height:0;padding-bottom:4px}
+/* Legend always pinned at bottom */
+.ctr-legend-fixed{flex-shrink:0;border-top:1px solid #E4E8F2;padding-top:6px;margin-top:4px}
+.ctr-ttl{font-weight:900;font-size:14px;color:var(--tx);margin-bottom:8px}
+.ctr-type-big{font-weight:900;font-size:22px;text-align:center;padding:6px 0 4px}
+.ctr-card{width:100%;padding:8px 10px;border-radius:8px;overflow:hidden;max-height:none;overflow-y:visible;flex:1;min-height:0}
+.ctr-card-txt{font-size:14px;line-height:1.75;color:var(--tx);white-space:pre-line;text-align:left;font-weight:700}
+.ctr-wait{font-size:13px;color:var(--mu);text-align:center;padding:6px 0;line-height:1.8}
 
 /* ─── CARD POPUP ─── */
-.cpop{position:fixed;inset:0;background:rgba(0,0,20,.7);backdrop-filter:blur(8px);z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;padding:14px}
+.cpop{position:fixed;inset:0;background:rgba(30,30,46,.55);backdrop-filter:blur(10px);z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;padding:14px}
 .cpop.show{display:flex}
-.cbox{width:100%;max-width:560px;background:var(--sf);padding:20px 20px 18px;outline:3px solid var(--gold);box-shadow:5px 5px 0 var(--gold2);animation:cin .22s steps(6)}
-@keyframes cin{from{opacity:0;transform:scale(.82) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.cbadge{display:inline-flex;align-items:center;gap:5px;padding:5px 14px;font-size:12px;font-weight:800;letter-spacing:1px;margin-bottom:10px;outline:2px solid}
-.cbadge-opp{background:var(--opp-d);color:var(--opp);outline-color:var(--opp-l)}
-.cbadge-fate{background:var(--fate-d);color:var(--fate);outline-color:var(--fate-l)}
-.cbadge-cross{background:var(--cross-d);color:var(--cross);outline-color:var(--cross-l)}
-.cbadge-mart{background:var(--mart-d);color:var(--mart);outline-color:var(--mart-l)}
-.chp{font-size:22px;font-weight:900;margin-bottom:8px}
+.cbox{width:100%;max-width:560px;background:#FFFFFF;padding:20px 20px 18px;border-radius:16px;box-shadow:0 20px 50px rgba(30,30,46,.2),0 0 0 1px rgba(30,30,46,.06);animation:cin .25s cubic-bezier(.34,1.56,.64,1)}
+@keyframes cin{from{opacity:0;transform:scale(.8) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.cbadge{display:inline-flex;align-items:center;gap:5px;padding:5px 14px;font-size:12px;font-weight:800;letter-spacing:1px;border-radius:20px;margin-bottom:0}
+.cbadge-opp{background:#DCFCE7;color:#15803D}
+.cbadge-fate{background:#FEE2E2;color:#B91C1C}
+.cbadge-cross{background:#DBEAFE;color:#1D4ED8}
+.cbadge-mart{background:#FFEDD5;color:#C2410C}
+.chp{font-size:24px;font-weight:900;margin-bottom:8px}
 .chp.pos{color:var(--hp-hi)}.chp.neg{color:var(--hp-lo)}
-.ctxt{font-size:15px;line-height:1.85;white-space:pre-line;margin-bottom:12px;color:var(--tx)}
-/* Cross opts on teacher: show-only, highlight which teams picked */
-.cross-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
-.cross-opt-row{padding:10px 13px;display:flex;align-items:center;gap:10px;font-size:14px;outline:2px solid;font-family:inherit;text-align:left;background:var(--sf2)}
-.cross-opt-row.a{outline-color:var(--opp);background:#EAFFF5}
-.cross-opt-row.b{outline-color:var(--fate);background:#FFF0F0}
-.cross-opt-row.c{outline-color:var(--cross);background:#EEF3FF}
-.cross-lbl{font-family:'Press Start 2P',monospace;font-size:13px;min-width:22px}
-.cross-hp{font-size:13px;font-weight:800;margin-left:auto;white-space:nowrap}
-.cross-pickers{font-size:11px;color:var(--mu);margin-left:6px}
-.ctimer-wrap{height:7px;background:rgba(0,0,0,.1);margin-bottom:5px;overflow:hidden;outline:1px solid rgba(212,128,10,.3)}
-.ctimer-bar{height:100%;background:repeating-linear-gradient(90deg,var(--gold) 0px,var(--gold) 8px,transparent 8px,transparent 10px);transition:width 1s steps(10)}
-.ctimer-bar.w{background:repeating-linear-gradient(90deg,#CC6600 0px,#CC6600 8px,transparent 8px,transparent 10px)}
-.ctimer-bar.u{background:repeating-linear-gradient(90deg,var(--fate) 0px,var(--fate) 8px,transparent 8px,transparent 10px)}
-.ctimer-txt{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--mu);text-align:right;margin-bottom:10px}
-.cbtn-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.cbtn-row.two{grid-template-columns:1fr 1fr}
-.cbok{height:46px;outline:2px solid var(--opp);background:var(--opp-d);color:var(--opp);font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;border:none;transition:transform .08s;box-shadow:2px 2px 0 var(--opp)}
-.cbok:active{transform:translate(2px,2px);box-shadow:none}
-.cbsk{height:46px;background:rgba(0,0,0,.05);outline:2px solid rgba(0,0,0,.2);color:var(--mu);font-size:13px;cursor:pointer;font-family:inherit;border:none}
-.cbimm{height:46px;background:rgba(212,128,10,.1);outline:2px solid var(--gold);color:var(--gold2);font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;transition:transform .08s;box-shadow:2px 2px 0 var(--gold2)}
-.cbimm:active{transform:translate(2px,2px);box-shadow:none}
-.cbrev{height:46px;background:var(--cross-d);outline:2px solid var(--cross);color:var(--cross);font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;transition:transform .08s;box-shadow:2px 2px 0 var(--cross)}
-.cbblk{height:46px;background:var(--fate-d);outline:2px solid var(--fate);color:var(--fate);font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;transition:transform .08s;box-shadow:2px 2px 0 var(--fate)}
-/* Confirm cross teacher button */
-.cross-confirm-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
-.cross-confirm-btn{height:40px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;outline:2px solid;transition:transform .08s}
-.cross-confirm-btn.a{outline-color:var(--opp);color:var(--opp);background:rgba(10,138,78,.1)}
-.cross-confirm-btn.b{outline-color:var(--fate);color:var(--fate);background:rgba(204,34,34,.1)}
-.cross-confirm-btn.c{outline-color:var(--cross);color:var(--cross);background:rgba(17,85,204,.1)}
-.cross-confirm-btn:active{transform:translate(2px,2px)}
+.ctxt{font-size:15px;line-height:1.85;white-space:pre-line;margin-bottom:12px;color:#1E1E2E}
+.cross-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.cross-opt-row{padding:10px 13px;display:flex;align-items:center;gap:10px;font-size:14px;background:#F7F8FC;border-radius:8px;border:1px solid #E4E8F2}
+.cross-opt-row.chosen{box-shadow:0 0 0 2px #F5A623;background:#FFFBEB}
+.cross-lbl{font-weight:900;font-size:14px;min-width:22px;color:var(--gold)}
+.cross-hp-reveal{font-size:13px;font-weight:900;white-space:nowrap;padding:2px 8px;border-radius:12px;margin-left:4px}
+.cross-hp-reveal.pos{color:var(--opp-l);background:var(--opp-d)}
+.cross-hp-reveal.neg{color:var(--fate-l);background:var(--fate-d)}
+.cross-pickers{font-size:12px;margin-left:2px}
+.cross-wait-hint{font-size:11px;color:var(--mu);padding:4px 0 6px;width:100%}
+.cross-wait-hint.ready{color:var(--opp)}
+.cross-answer-status{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.cas-chip{padding:4px 10px;font-size:11px;font-weight:800;border-radius:12px;background:#F1F5F9;color:#475569}
+.cas-chip.answered{background:#DCFCE7}
+.cross-confirm-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.cross-confirm-btn{height:38px;padding:0 12px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:6px;transition:transform .08s,box-shadow .1s;box-shadow:0 3px 0 rgba(0,0,0,.3)}
+.cross-confirm-btn:active{transform:translateY(2px);box-shadow:none}
+.cross-confirm-btn.neutral{background:#F7F8FC;color:#1E1E2E;border:1px solid #E4E8F2}
+.cross-confirm-btn.ok{background:linear-gradient(135deg,var(--opp),#28904e);color:#fff}
+.cross-confirm-btn.imm{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#2d1b0e}
+.cross-confirm-btn.rev{background:linear-gradient(135deg,var(--cross),#2060c0);color:#fff}
+.cross-confirm-btn.blk{background:linear-gradient(135deg,var(--fate),#b03030);color:#fff}
+.ctimer-wrap{height:6px;background:#E4E8F2;border-radius:3px;margin-bottom:5px;overflow:hidden}
+.ctimer-bar{height:100%;border-radius:3px;background:#F5A623;transition:width .1s linear,background .5s}
+.ctimer-bar.w{background:#F97316}
+.ctimer-bar.u{background:#EF4444}
+.ctimer-txt{font-size:11px;color:#64748B;text-align:right;margin-bottom:10px}
+.cbtn-row{display:flex;flex-wrap:wrap;gap:8px}
+.cbtn-row.two{justify-content:stretch}
+.cbtn-row.two .cbok,.cbtn-row.two .cbsk{flex:1}
+.cbok{height:46px;padding:0 16px;background:linear-gradient(135deg,var(--opp),#28904e);color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #1a7040;transition:transform .08s,box-shadow .1s}
+.cbok:active{transform:translateY(2px);box-shadow:none}
+.cbsk{height:46px;padding:0 16px;background:var(--sf2);color:var(--mu);font-size:13px;cursor:pointer;font-family:inherit;border:none;border-radius:8px}
+.cbimm{height:46px;padding:0 14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#2d1b0e;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #8B6000;transition:transform .08s,box-shadow .1s}
+.cbimm:active{transform:translateY(2px);box-shadow:none}
+.cbrev{height:46px;padding:0 14px;background:linear-gradient(135deg,var(--cross),#2060c0);color:#fff;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #1040a0;transition:transform .08s}
+.cbblk2{height:46px;padding:0 14px;background:linear-gradient(135deg,var(--fate),#b03030);color:#fff;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #902020;transition:transform .08s}
+.popup-pause-btn{height:32px;padding:0 12px;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:6px;background:#F1F5F9;color:#64748B}
+.popup-pause-btn.paused{background:#FEE2E2;color:#DC2626}
 
 /* ─── STUDENT VIEW ─── */
-#pgStud{display:none;position:relative;z-index:1;flex-direction:column;min-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--bg)}
+#pgStud{display:none;position:relative;z-index:1;flex-direction:column;min-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#F7F8FC}
 #pgStud.on{display:flex}
-.sv-hdr{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid rgba(212,128,10,.3);flex-shrink:0;position:sticky;top:0;background:var(--bg);z-index:10}
-.sv-team{font-family:'Press Start 2P',monospace;font-size:12px;line-height:1.6}
-.sv-pill{font-size:12px;padding:5px 12px;outline:2px solid;font-weight:700}
-.sv-pill.on{background:rgba(10,138,78,.12);color:var(--opp);outline-color:var(--opp-l)}
-.sv-pill.off{background:rgba(0,0,0,.05);color:var(--mu);outline-color:rgba(0,0,0,.2)}
-
-.sv-myhp{padding:10px 14px 5px;flex-shrink:0}
-.sv-myhp-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
-.sv-myhp-lbl{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--mu);letter-spacing:1px;font-weight:700}
-.sv-myhp-val{font-family:'Press Start 2P',monospace;font-size:18px}
-.sv-myhp-bar{height:22px;background:rgba(0,0,0,.1);overflow:hidden;outline:2px solid rgba(212,128,10,.3);position:relative}
-.sv-myhp-fill{height:100%;transition:width .5s steps(10);position:relative}
-.sv-myhp-fill::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0px,transparent 10px,rgba(255,255,255,.2) 10px,rgba(255,255,255,.2) 12px)}
-
+.sv-hdr{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #E4E8F2;flex-shrink:0;position:sticky;top:0;background:#F7F8FC;z-index:10}
+.sv-team{font-size:14px;font-weight:900;line-height:1.5}
+.sv-pill{font-size:11px;padding:5px 12px;border-radius:20px;font-weight:700}
+.sv-pill.on{background:#DCFCE7;color:#15803D}
+.sv-pill.off{background:#F1F5F9;color:#64748B}
+.sv-myhp{padding:12px 14px 6px;flex-shrink:0}
+.sv-myhp-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.sv-myhp-lbl{font-size:10px;color:var(--mu);letter-spacing:1px;font-weight:700}
+.sv-myhp-val{font-size:22px;font-weight:900}
+.sv-myhp-bar{height:18px;background:#E4E8F2;border-radius:9px;overflow:hidden}
+.sv-myhp-fill{height:100%;border-radius:9px;transition:width .5s ease}
 .sv-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:6px 10px;flex-shrink:0}
-.ssc{background:var(--sf);padding:6px 4px;text-align:center;outline:2px solid transparent;transition:outline-color .2s;box-shadow:2px 2px 0 rgba(0,0,0,.08)}
-.ssc.cur{outline-color:currentColor}
-.ssc-n{font-family:'Press Start 2P',monospace;font-size:7px;color:var(--mu);margin-bottom:2px}
-.ssc-p{font-family:'Press Start 2P',monospace;font-size:13px}
-.ssc-bar{height:5px;background:rgba(0,0,0,.1);overflow:hidden;margin-top:4px}
-.ssc-fill{height:100%;transition:width .4s steps(8)}
-
-.sv-sec{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--gold2);letter-spacing:2px;padding:8px 14px 3px;text-transform:uppercase}
-
-/* Function cards */
-.sv-fcards{display:flex;gap:5px;padding:0 10px 8px;flex-shrink:0;overflow-x:auto}
-.fcard{flex:0 0 auto;width:74px;background:var(--sf);padding:8px 4px;text-align:center;outline:2px solid rgba(0,0,0,.15);box-shadow:2px 2px 0 rgba(0,0,0,.12);display:flex;flex-direction:column;gap:2px;position:relative;transition:opacity .2s,outline-color .2s}
-.fcard.active-card{outline-color:var(--gold);box-shadow:3px 3px 0 var(--gold2)}
+.ssc{background:#FFFFFF;padding:7px 5px;text-align:center;border-radius:8px;box-shadow:var(--shadow-card);transition:box-shadow .2s}
+.ssc.cur{box-shadow:0 0 0 2px currentColor,var(--shadow-card)}
+.ssc-n{font-size:9px;color:#94A3B8;margin-bottom:3px;line-height:1.3}
+.ssc-p{font-size:14px;font-weight:900}
+.ssc-bar{height:4px;background:#E4E8F2;border-radius:2px;overflow:hidden;margin-top:4px}
+.ssc-fill{height:100%;border-radius:2px;transition:width .4s ease}
+.sv-sec{font-size:10px;color:#94A3B8;letter-spacing:2px;padding:8px 14px 3px;text-transform:uppercase;font-weight:700}
+.sv-fcards{display:flex;gap:6px;padding:0 10px 8px;flex-shrink:0;overflow-x:auto}
+.fcard{flex:0 0 auto;width:76px;background:#FFFFFF;padding:10px 5px;text-align:center;border-radius:8px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:2px;transition:transform .15s,box-shadow .15s}
+.fcard.active-card{transform:translateY(-4px);box-shadow:var(--shadow-lift),0 0 0 2px var(--gold)}
 .fcard.empty{opacity:.25}
 .fcard-ico{font-size:22px}
-.fcard-name{font-family:'Press Start 2P',monospace;font-size:6px;color:var(--gold2);line-height:1.5}
+.fcard-name{font-size:9px;color:var(--gold);line-height:1.4;font-weight:700}
 .fcard-desc{font-size:9px;color:var(--mu);line-height:1.3}
-.fcard-cnt{font-family:'Press Start 2P',monospace;font-size:10px;color:var(--gold2);margin-top:2px}
-.fcard-use{margin-top:4px;height:26px;font-size:10px;font-weight:800;cursor:pointer;font-family:inherit;outline:2px solid var(--gold);color:var(--gold2);background:rgba(212,128,10,.1);border:none;transition:transform .08s;box-shadow:1px 1px 0 var(--gold2)}
-.fcard-use:active{transform:translate(1px,1px);box-shadow:none}
-.fcard-use:disabled{opacity:.25;cursor:not-allowed;box-shadow:none}
-
-/* Dice */
-.sv-dice{padding:10px 14px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0}
-.sdface-wrap{display:flex;gap:16px;justify-content:center}
-.sdface{font-size:64px;user-select:none;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.2));line-height:1;transition:transform .05s}
-.sdface.rolling{animation:diceRoll .08s steps(2) infinite}
-@keyframes diceRoll{0%{transform:scale(1.15) rotate(-8deg)}50%{transform:scale(.9) rotate(8deg)}100%{transform:scale(1.05) rotate(-3deg)}}
-.sdroll{width:100%;max-width:280px;height:56px;background:var(--gold);outline:none;border:none;box-shadow:4px 4px 0 var(--gold2);color:#fff;font-family:'Press Start 2P',monospace;font-size:11px;font-weight:900;cursor:pointer;transition:transform .08s;letter-spacing:.5px;text-shadow:1px 1px 0 rgba(0,0,0,.3)}
-.sdroll:active{transform:translate(4px,4px);box-shadow:none}
-.sdroll:disabled{opacity:.3;cursor:not-allowed;box-shadow:none;background:#ccc;color:#888;text-shadow:none}
-.sdinf{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--mu);text-align:center;min-height:18px;line-height:1.8}
-
-/* Countdown ring */
+.fcard-cnt{font-size:11px;color:var(--gold);margin-top:2px;font-weight:900}
+.fcard-use{margin-top:5px;height:26px;font-size:10px;font-weight:800;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#2d1b0e;border:none;border-radius:5px;box-shadow:0 2px 0 #8B6000;transition:transform .08s}
+.fcard-use:active{transform:translateY(1px);box-shadow:none}
+.fcard-use:disabled{opacity:.25;cursor:not-allowed;box-shadow:none;background:var(--sf2);color:var(--mu)}
 .sv-cdown{display:none;flex-direction:column;align-items:center;gap:4px;padding:6px 0;flex-shrink:0}
 .sv-cdown.show{display:flex}
-.sv-cdown-lbl{font-family:'Press Start 2P',monospace;font-size:8px;font-weight:700;color:var(--gold2);letter-spacing:2px}
-.cring{}
-
-/* Question box - student, with vote buttons for crossroads */
-.sv-qbox{margin:0 10px 12px;padding:14px;display:none;flex-shrink:0;outline:2px solid;background:var(--sf)}
-.svq-badge{font-family:'Press Start 2P',monospace;font-size:9px;font-weight:800;letter-spacing:1px;margin-bottom:7px}
+.sv-cdown-lbl{font-size:10px;font-weight:700;color:#F5A623;letter-spacing:2px}
+.sv-dice{padding:10px 14px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0}
+.sdface-wrap{display:flex;gap:16px;justify-content:center}
+.sdface{font-size:64px;user-select:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4));line-height:1;transition:transform .05s}
+.sdface.rolling{animation:diceRoll .08s steps(2) infinite}
+@keyframes diceRoll{0%{transform:scale(1.15) rotate(-8deg)}50%{transform:scale(.9) rotate(8deg)}}
+.sdroll{width:100%;max-width:280px;height:56px;background:linear-gradient(135deg,#F5A623,#D4890A);border:none;border-radius:12px;box-shadow:0 5px 0 #B8720A,var(--shadow-card);color:#FFFFFF;font-size:15px;font-weight:900;cursor:pointer;font-family:inherit;transition:transform .08s,box-shadow .1s}
+.sdroll:active{transform:translateY(4px);box-shadow:none}
+.sdroll:disabled{opacity:.3;cursor:not-allowed;box-shadow:none;background:#E4E8F2;color:#94A3B8}
+.sdinf{font-size:12px;color:#64748B;text-align:center;min-height:18px;line-height:1.8}
+.sv-qbox{margin:0 10px 14px;padding:14px;display:none;flex-shrink:0;border-radius:10px;background:#FFFFFF;box-shadow:var(--shadow-card)}
+.svq-badge{font-size:11px;font-weight:800;letter-spacing:1px;margin-bottom:8px}
 .svq-txt{font-size:15px;line-height:1.85;white-space:pre-line;color:var(--tx)}
-.svq-opts{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-/* Cross vote buttons on student */
-.svq-vote-btn{width:100%;padding:10px 14px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;border:none;outline:2px solid;text-align:left;display:flex;align-items:center;gap:10px;transition:transform .08s,box-shadow .1s;background:var(--sf)}
-.svq-vote-btn:active{transform:translate(2px,2px);box-shadow:none!important}
-.svq-vote-btn.a{outline-color:var(--opp);color:var(--opp);background:#EAFFF5;box-shadow:2px 2px 0 var(--opp)}
-.svq-vote-btn.b{outline-color:var(--fate);color:var(--fate);background:#FFF0F0;box-shadow:2px 2px 0 var(--fate)}
-.svq-vote-btn.c{outline-color:var(--cross);color:var(--cross);background:#EEF3FF;box-shadow:2px 2px 0 var(--cross)}
-.svq-vote-btn.selected{outline-width:3px;font-weight:900}
-.svq-vote-btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
-.svq-neutral{outline-color:rgba(0,0,0,.2)!important;color:var(--tx)!important;background:var(--sf2)!important;box-shadow:2px 2px 0 rgba(0,0,0,.12)!important}
-.svq-neutral.selected{outline-width:3px!important;outline-color:var(--gold)!important;background:rgba(212,128,10,.08)!important;color:var(--gold2)!important}
-.svq-vote-lbl{font-family:'Press Start 2P',monospace;font-size:13px;min-width:22px}
-.svq-pts{font-size:13px;margin-top:8px;color:var(--mu)}
+.svq-opts{display:flex;flex-direction:column;gap:7px;margin-top:10px}
+.svq-vote-btn{width:100%;padding:11px 14px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;text-align:left;display:flex;align-items:center;gap:10px;transition:transform .08s,box-shadow .1s;background:#F7F8FC;color:#1E1E2E;border:2px solid #E4E8F2;box-shadow:0 2px 0 rgba(30,30,46,.06)}
+.svq-vote-btn:active{transform:translateY(2px);box-shadow:none}
+.svq-neutral{background:#F7F8FC;color:#1E1E2E}
+.svq-neutral.selected{box-shadow:0 0 0 2px #F5A623;background:#FFFBEB;color:#92400E;border-color:#F5A623}
+.svq-vote-lbl{font-weight:900;font-size:14px;color:#F5A623;min-width:22px}
+.svq-voted-msg{font-size:11px;color:var(--opp);margin-top:8px;font-weight:700}
+.svq-pts{font-size:12px;color:var(--mu);margin-top:8px}
 .svq-pts b{color:var(--opp)}
-.svq-voted-msg{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--opp);margin-top:8px;line-height:1.8}
-/* Non-cross display opts */
-.svq-opt{padding:7px 12px;font-size:13px;outline:1px solid rgba(0,0,0,.12);background:var(--sf2);color:var(--tx);display:flex;align-items:center;gap:8px}
-.svq-opt-lbl{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--gold2)}
 
 /* ─── OVERLAYS ─── */
-.calm-ov{position:fixed;inset:0;background:rgba(200,210,255,.97);backdrop-filter:blur(10px);z-index:150;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px}
+.calm-ov,.ko-ov,.go-ov{position:fixed;inset:0;z-index:150;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;backdrop-filter:blur(12px)}
+.calm-ov{background:rgba(240,240,255,.96)}
+.ko-ov{background:rgba(255,240,240,.97);z-index:145}
+.go-ov{background:#FFFBF0;z-index:200}
 .calm-ico{font-size:72px;animation:breath 4s ease-in-out infinite}
-@keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
-.calm-ttl{font-family:'Press Start 2P',monospace;font-size:16px;color:#5533AA;margin:14px 0 8px;line-height:1.8}
-.calm-dsc{font-size:15px;color:var(--mu);line-height:1.9;margin-bottom:22px}
-.calm-btn{height:50px;width:200px;background:rgba(85,51,170,.1);outline:2px solid #5533AA;color:#5533AA;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;border:none;box-shadow:3px 3px 0 #5533AA}
-
-.ko-ov{position:fixed;inset:0;background:rgba(255,220,220,.98);backdrop-filter:blur(10px);z-index:145;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px}
-.ko-ico{font-size:80px;animation:shake .4s steps(4) infinite}
-@keyframes shake{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
-.ko-ttl{font-family:'Press Start 2P',monospace;font-size:18px;color:var(--fate);margin:12px 0 6px;line-height:1.8}
-.ko-dsc{font-size:15px;color:var(--mu);margin-bottom:20px;line-height:1.7}
-.ko-btn{height:50px;width:200px;background:rgba(204,34,34,.1);outline:2px solid var(--fate);color:var(--fate);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;border:none;box-shadow:3px 3px 0 var(--fate)}
-
-.go-ov{position:fixed;inset:0;background:#FEFDF0;z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center;padding:22px;text-align:center;background-image:radial-gradient(ellipse at center,rgba(255,230,100,.4),transparent 70%)}
-.go-trophy{font-size:68px;margin-bottom:10px;filter:drop-shadow(3px 3px 0 rgba(212,128,10,.4))}
-.go-h{font-family:'Press Start 2P',monospace;font-size:16px;color:var(--gold2);text-shadow:2px 2px 0 rgba(212,128,10,.3);margin-bottom:5px;line-height:1.8}
-.go-s{font-size:13px;color:var(--mu);margin-bottom:18px;letter-spacing:2px}
+@keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.calm-ttl{font-weight:900;font-size:22px;color:#7C3AED;margin:14px 0 8px}
+.calm-dsc{font-size:14px;color:#64748B;line-height:1.9;margin-bottom:22px}
+.calm-btn{height:50px;padding:0 32px;background:#EDE9FE;border:1px solid #7C3AED;border-radius:10px;color:#7C3AED;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.ko-ico{font-size:72px;animation:shake .4s steps(4) infinite}
+@keyframes shake{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.ko-ttl{font-weight:900;font-size:24px;color:#DC2626;margin:12px 0 6px}
+.ko-dsc{font-size:14px;color:#64748B;margin-bottom:14px;line-height:1.7}
+.ko-btn{height:50px;padding:0 28px;background:#FEE2E2;border:1px solid #EF4444;border-radius:10px;color:#DC2626;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.ko-revive-task{background:#FFFFFF;padding:12px 18px;border-radius:8px;margin:10px 0;font-size:13px;line-height:1.8;max-width:300px;text-align:left;border-left:3px solid #EF4444;box-shadow:var(--shadow-card)}
+.ko-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.ko-btn-revive{height:50px;padding:0 24px;background:#DCFCE7;border:1px solid #22C55E;border-radius:10px;color:#15803D;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.go-trophy{font-size:64px;margin-bottom:10px;filter:drop-shadow(0 0 20px rgba(240,192,80,.5))}
+.go-h{font-weight:900;font-size:26px;color:#92400E;margin-bottom:5px}
+.go-s{font-size:13px;color:#64748B;margin-bottom:18px;letter-spacing:2px}
 .go-rows{width:100%;max-width:320px;display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
-.go-row{display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--sf);outline:2px solid rgba(0,0,0,.1);box-shadow:2px 2px 0 rgba(0,0,0,.08)}
-.go-row.w{background:#FFF8D0;outline-color:var(--gold);box-shadow:3px 3px 0 var(--gold2)}
-.go-rk{font-family:'Press Start 2P',monospace;font-size:16px;min-width:28px}
+.go-row{display:flex;align-items:center;gap:10px;padding:12px 15px;background:#FFFFFF;border-radius:10px;box-shadow:var(--shadow-card)}
+.go-row.w{background:#FFFBEB;box-shadow:0 0 0 2px #F5A623,var(--shadow-card)}
+.go-rk{font-size:18px;min-width:30px}
 .go-nm{flex:1;text-align:left;font-size:14px;font-weight:700}
-.go-hp{font-family:'Press Start 2P',monospace;font-size:14px}
-.go-hpbar{height:5px;background:rgba(0,0,0,.1);overflow:hidden;margin-top:3px}
-.go-hpfill{height:100%}
-
-/* Float points */
-.fpt{position:fixed;font-family:'Press Start 2P',monospace;font-size:14px;pointer-events:none;z-index:250;animation:fup 1.3s steps(12) forwards;transform:translateX(-50%)}
-@keyframes fup{0%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}100%{opacity:0;transform:translateX(-50%) translateY(-65px) scale(.8)}}
-.fpt.pos{color:var(--hp-hi);text-shadow:2px 2px 0 rgba(10,138,78,.3)}
-.fpt.neg{color:var(--hp-lo);text-shadow:2px 2px 0 rgba(204,34,34,.3)}
+.go-hp{font-size:14px;font-weight:900}
+.go-hpbar{height:4px;background:#E4E8F2;border-radius:2px;overflow:hidden;margin-top:3px}
+.go-hpfill{height:100%;border-radius:2px}
+.fpt{position:fixed;font-size:16px;font-weight:900;pointer-events:none;z-index:250;animation:fup 1.3s ease-out forwards;transform:translateX(-50%)}
+@keyframes fup{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(-70px)}}
+.fpt.pos{color:#15803D;text-shadow:0 1px 3px rgba(22,163,74,.3)}
+.fpt.neg{color:#DC2626;text-shadow:0 1px 3px rgba(220,38,38,.3)}
+/* teach-dice-face */
+.teach-dice-face{font-size:44px;line-height:1;filter:drop-shadow(1px 2px 3px rgba(30,30,46,.2))}
+.teach-dice-face.spin-anim{animation:diceSpin .08s steps(2) infinite}
+@keyframes diceSpin{0%{transform:scale(1.15) rotate(-8deg)}50%{transform:scale(.9) rotate(8deg)}}
+.teach-move-trail{display:flex;gap:3px;justify-content:center;flex-wrap:wrap;min-height:14px}
+.trail-dot{width:8px;height:8px;border-radius:50%;background:#CBD5E1}
+.trail-dot.active{background:#F5A623;transform:scale(1.5)}
+.trail-dot.done{background:#22C55E}
+/* Move-to overlay */
+.moveto-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px;max-height:220px;overflow-y:auto}
+.moveto-btn{height:40px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;border:none;border-radius:6px;background:#F7F8FC;color:#1E1E2E;border:1px solid #E4E8F2;transition:transform .08s}
+.moveto-btn:hover{background:#E4E8F2}
+.moveto-btn:active{transform:scale(.95)}
 </style>
 </head>
 <body>
-<div class="stars" id="stars"></div>
 
 <!-- ① ROLE -->
 <div class="pg on" id="pgRole">
-  <div class="logo">⚔️</div>
-  <div class="rune">SEL RPG BOARD GAME v3</div>
+  <div class="logo">🎴</div>
   <div class="pg-title">情緒領航員</div>
-  <div class="pg-sub">情緒 SEL 大富翁 — 選擇你的身份</div>
+  <div class="pg-sub">SEL 情緒大冒險 — 選擇你的身份</div>
   <div class="cw">
     <button class="btn btn-gold" onclick="goTeacher()">👩‍🏫 老師（地圖主控）</button>
     <button class="btn btn-opp" onclick="showPg('pgJoin')">🎓 同學（手機加入）</button>
   </div>
-  <div class="infobox"><b>老師</b>：開啟地圖投影，取得遊戲代碼，告訴同學。<br><b>同學</b>：輸入代碼 → 選組別 → 加入遊戲。</div>
+  <div class="infobox"><b>老師</b>：開啟後投影，取得遊戲代碼。<br><b>同學</b>：輸入代碼 → 選組別 → 加入。</div>
 </div>
 
 <!-- ② LOBBY -->
 <div class="pg" id="pgLobby">
-  <div class="logo" style="font-size:44px">👩‍🏫</div>
-  <div class="pg-title" style="font-size:16px">老師大廳</div>
+  <div class="logo">👩‍🏫</div>
+  <div class="pg-title" style="font-size:24px">老師大廳</div>
   <div class="cw">
     <div class="codebox">
-      <div class="codebox-lbl">📡 遊戲代碼</div>
+      <div class="codebox-lbl">遊戲代碼</div>
       <div class="codebox-num" id="lobbyCode">------</div>
-      <div class="codebox-hint">同學在手機上開同一個 HTML 檔案後輸入</div>
+      <div class="codebox-hint">同學開啟同一個 HTML 後輸入</div>
     </div>
     <div class="lobby-st" id="lobbySt">建立連線中…</div>
     <div class="team-grid" id="teamGrid"></div>
-    <button class="btn btn-gold" onclick="startGame()">⚔️ 開始征途！</button>
+    <button class="btn btn-gold" onclick="startGame()">⚔️ 開始遊戲！</button>
   </div>
 </div>
 
 <!-- ③ JOIN -->
 <div class="pg" id="pgJoin">
   <div class="logo" style="font-size:44px">🎓</div>
-  <div class="pg-title" style="font-size:16px">加入遊戲</div>
+  <div class="pg-title" style="font-size:24px">加入遊戲</div>
   <div class="pg-sub">輸入老師畫面上的遊戲代碼</div>
   <div class="cw">
-    <input class="cinput" id="codeIn" type="text" placeholder="輸入代碼…" maxlength="10"
+    <input class="cinput" id="codeIn" type="text" placeholder="代碼…" maxlength="10"
       autocomplete="off" autocorrect="off" spellcheck="false"
       oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')">
-    <div class="pg-sub" style="margin-top:2px">選擇你的組別</div>
+    <div class="pg-sub">選擇你的組別</div>
     <div class="btn-2g">
-      <button class="btn btn-t0" onclick="joinGame(0)">🟦 第一組</button>
-      <button class="btn btn-t1" onclick="joinGame(1)">🟥 第二組</button>
-      <button class="btn btn-t2" onclick="joinGame(2)">🟩 第三組</button>
-      <button class="btn btn-t3" onclick="joinGame(3)">🟨 第四組</button>
+      <button class="btn btn-t0" onclick="joinGame(0)">第一組</button>
+      <button class="btn btn-t1" onclick="joinGame(1)">第二組</button>
+      <button class="btn btn-t2" onclick="joinGame(2)">第三組</button>
+      <button class="btn btn-t3" onclick="joinGame(3)">第四組</button>
     </div>
   </div>
 </div>
@@ -409,7 +391,7 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);co
 <!-- ⑤ TEACHER BOARD -->
 <div id="pgTeach">
   <div class="tv-hdr">
-    <span class="tv-ttl">⚔️ 情緒領航員</span>
+    <span class="tv-ttl">🎴 情緒領航員</span>
     <span class="tv-rnd" id="tvRnd">第1回合</span>
     <button class="tv-end" onclick="endGame()">結束遊戲</button>
   </div>
@@ -422,12 +404,42 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);co
       <div class="tbar-ph" id="tPh">等待擲骰</div>
     </div>
     <div class="tbar-dir cw" id="tDir">▶ 順時針</div>
-    <button class="pause-btn" id="pauseBtn" onclick="teachPause()">⏸ 暫停</button>
-    <button class="dbtn dbtn-opp" style="height:38px;font-size:11px;padding:0 10px" onclick="teachManualRoll()">🎲 手動擲骰</button>
+    <button class="dbtn dbtn-opp" style="font-size:11px" onclick="teachManualRoll()">🎲 手動擲骰</button>
   </div>
 </div>
 
+<!-- CARD POPUP (teacher) -->
+<div class="cpop" id="cpop">
+  <div class="cbox">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div class="cbadge" id="cbadge"></div>
+      <button class="popup-pause-btn" id="popupPauseBtn" onclick="togglePopupPause()">⏸ 暫停</button>
+    </div>
+    <div class="chp" id="chp"></div>
+    <div class="pwr-notif" id="pwrNotif"></div>
+    <div class="ctxt" id="ctxt"></div>
+    <div id="crossSection" style="display:none">
+      <div class="cross-opts" id="crossOpts"></div>
+      <div class="cross-answer-status" id="crossAnswerStatus"></div>
+      <div class="cross-confirm-row" id="crossConfirmRow"></div>
+    </div>
+    <div class="ctimer-wrap"><div class="ctimer-bar" id="ctimerBar"></div></div>
+    <div class="ctimer-txt" id="ctimerTxt">30 秒</div>
+    <div class="cbtn-row two" id="cbtnRow">
+      <button class="cbok" onclick="resolveCard(true)">✓ 完成</button>
+      <button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>
+    </div>
+  </div>
+</div>
 
+<!-- MOVE-TO POPUP -->
+<div class="cpop" id="moveTopop">
+  <div class="cbox" style="max-width:420px">
+    <div style="font-size:15px;font-weight:800;color:var(--gold);margin-bottom:12px">📍 移動到哪一格？</div>
+    <div class="moveto-grid" id="moveToGrid"></div>
+    <button class="cbsk" style="width:100%;border-radius:8px" onclick="closeMoveTop()">取消</button>
+  </div>
+</div>
 
 <!-- ⑥ STUDENT -->
 <div id="pgStud">
@@ -435,27 +447,26 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);co
     <div class="sv-team" id="svTeam">—</div>
     <div class="sv-pill" id="svPill">等待中</div>
   </div>
-  <div class="sv-myhp" id="svMyHp">
+  <div class="sv-myhp">
     <div class="sv-myhp-top">
       <span class="sv-myhp-lbl">❤️ HP</span>
       <span class="sv-myhp-val" id="svMyHpVal">500</span>
     </div>
-    <div class="sv-myhp-bar"><div class="sv-myhp-fill" id="svMyHpFill" style="width:50%;background:linear-gradient(90deg,#0A6E3E,#0BBE6A)"></div></div>
+    <div class="sv-myhp-bar"><div class="sv-myhp-fill" id="svMyHpFill"></div></div>
   </div>
   <div class="sv-scores" id="svScores"></div>
   <div class="sv-sec">⚔️ 功能牌</div>
   <div class="sv-fcards" id="svFcards"></div>
   <div class="sv-cdown" id="svCdown">
     <div class="sv-cdown-lbl">⏱ 作答倒數</div>
-    <svg class="cring" width="110" height="110" viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(212,128,10,.2)" stroke-width="8"/>
-      <circle id="svRing" cx="60" cy="60" r="50" fill="none" stroke="#D4800A"
+    <svg width="110" height="110" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(240,192,80,.2)" stroke-width="8"/>
+      <circle id="svRing" cx="60" cy="60" r="50" fill="none" stroke="#f0c050"
         stroke-width="8" stroke-dasharray="314.2" stroke-dashoffset="0"
-        stroke-linecap="square" transform="rotate(-90 60 60)"
+        stroke-linecap="round" transform="rotate(-90 60 60)"
         style="transition:stroke-dashoffset .2s linear,stroke .25s"/>
-      <text x="60" y="68" text-anchor="middle" fill="#111122"
-        font-size="36" font-weight="900" font-family="'Press Start 2P',monospace"
-        id="svRingNum">30</text>
+      <text x="60" y="68" text-anchor="middle" fill="#f5e8c8"
+        font-size="34" font-weight="900" font-family="inherit" id="svRingNum">30</text>
     </svg>
   </div>
   <div class="sv-sec">🎲 擲骰子</div>
@@ -471,41 +482,27 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);co
   <div class="sv-qbox" id="svQBox"></div>
 </div>
 
-<!-- CARD POPUP (teacher) -->
-<div class="cpop" id="cpop">
-  <div class="cbox">
-    <div class="cbadge" id="cbadge"></div>
-    <div class="chp" id="chp"></div>
-    <div class="pwr-notif" id="pwrNotif"></div>
-    <div class="ctxt" id="ctxt"></div>
-    <!-- Cross: show choices read-only + team answer status -->
-    <div id="crossSection" style="display:none">
-      <div class="cross-opts" id="crossOpts"></div>
-      <div class="cross-answer-status" id="crossAnswerStatus"></div>
-      <div class="cross-confirm-row" id="crossConfirmRow"></div>
-    </div>
-    <div class="ctimer-wrap"><div class="ctimer-bar" id="ctimerBar"></div></div>
-    <div class="ctimer-txt" id="ctimerTxt">30 秒</div>
-    <div class="cbtn-row two" id="cbtnRow">
-      <button class="cbok" id="cbOk" onclick="resolveCard(true)">✓ 完成</button>
-      <button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>
-    </div>
-  </div>
-</div>
-
-<!-- CALM OVERLAY -->
+<!-- CALM -->
 <div class="calm-ov" id="calmOv">
   <div class="calm-ico">🧘</div>
   <div class="calm-ttl">冷靜角</div>
   <div class="calm-dsc">跟著圖示慢慢吸氣——吐氣<br>深呼吸三次，讓心情沉澱</div>
   <button class="calm-btn" onclick="dismissCalm()">準備好了 ✓</button>
 </div>
-<!-- KO OVERLAY -->
+<!-- KO -->
 <div class="ko-ov" id="koOv">
   <div class="ko-ico">💀</div>
   <div class="ko-ttl" id="koTtl">陣亡！</div>
-  <div class="ko-dsc">血量歸零！本回合跳過，恢復 100 點血量重新出發。</div>
-  <button class="ko-btn" onclick="dismissKO()">繼續征途</button>
+  <div class="ko-dsc">血量歸零！是否啟動復活機制？</div>
+  <div id="koReviveTask" class="ko-revive-task">
+    <b style="color:var(--fate-l)">💖 復活條件（每組限一次）：</b><br>
+    全組說出「如果我是你，我的感受是…」並描述三個情緒詞，老師確認後復活，回復 200 HP。
+  </div>
+  <div id="koSkipMsg" style="display:none;font-size:13px;color:var(--mu);margin:8px 0">已使用過復活機會，本回合跳過。</div>
+  <div class="ko-btns">
+    <button id="koReviveBtn" class="ko-btn-revive" onclick="reviveTeam()">💖 復活！</button>
+    <button class="ko-btn" onclick="dismissKO()">跳過本回合</button>
+  </div>
 </div>
 <!-- GAMEOVER -->
 <div class="go-ov" id="goOv">
@@ -517,54 +514,56 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);co
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // CONSTANTS
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 const CARD_SECS=30;
 const CIRC=314.2;
 const MAX_HP=1000;
 const INIT_HP=500;
 
+// 吉祥物 mascot icons per team
 const TDEFS=[
-  {name:'第一組',short:'第一組',color:'#0066CC',emoji:'🟦',av:'🔵'},
-  {name:'第二組',short:'第二組',color:'#CC2222',emoji:'🟥',av:'🔴'},
-  {name:'第三組',short:'第三組',color:'#0A8A4E',emoji:'🟩',av:'🟢'},
-  {name:'第四組',short:'第四組',color:'#CC8800',emoji:'🟨',av:'🟡'},
+  {name:'第一組',short:'第一組',color:'#3B82F6'},
+  {name:'第二組',short:'第二組',color:'#EF4444'},
+  {name:'第三組',short:'第三組',color:'#22C55E'},
+  {name:'第四組',short:'第四組',color:'#F5A623'},
 ];
+// Helper: colored dot HTML for a team
+function teamDot(t,size=12){return`<span style="display:inline-block;width:${size}px;height:${size}px;border-radius:50%;background:${t.color};vertical-align:middle;border:1.5px solid rgba(255,255,255,.8);box-shadow:0 1px 3px rgba(0,0,0,.15)"></span>`;}
 
 const BOARD=[
-  {id:0,  lbl:'起點',   sub:'路過+100', ico:'⚔️',  t:'start'},
-  {id:1,  lbl:'機會',   sub:'+血量',    ico:'✨',   t:'opp'},
-  {id:2,  lbl:'命運',   sub:'-血量',    ico:'💀',   t:'fate'},
-  {id:3,  lbl:'十字路口',sub:'做選擇',   ico:'🔀',   t:'cross'},
-  {id:4,  lbl:'機會',   sub:'+血量',    ico:'✨',   t:'opp'},
-  {id:5,  lbl:'武功秘笈',sub:'得金牌',   ico:'📖',   t:'martial'},
-  {id:6,  lbl:'命運',   sub:'-血量',    ico:'💀',   t:'fate'},
-  {id:7,  lbl:'機會',   sub:'+血量',    ico:'✨',   t:'opp'},
-  {id:8,  lbl:'幸運祭壇',sub:'全+100',  ico:'💫',   t:'bonus_all'},
-  {id:9,  lbl:'十字路口',sub:'做選擇',   ico:'🔀',   t:'cross'},
-  {id:10, lbl:'命運',   sub:'-血量',    ico:'💀',   t:'fate'},
-  {id:11, lbl:'機會',   sub:'+血量',    ico:'✨',   t:'opp'},
-  {id:12, lbl:'詛咒之地',sub:'全-100',  ico:'☠️',   t:'curse_all'},
-  {id:13, lbl:'十字路口',sub:'做選擇',   ico:'🔀',   t:'cross'},
-  {id:14, lbl:'命運',   sub:'-血量',    ico:'💀',   t:'fate'},
-  {id:15, lbl:'機會',   sub:'+血量',    ico:'✨',   t:'opp'},
-  {id:16, lbl:'武功秘笈',sub:'得金牌',   ico:'📖',   t:'martial'},
-  {id:17, lbl:'命運',   sub:'-血量',    ico:'💀',   t:'fate'},
-  {id:18, lbl:'十字路口',sub:'做選擇',   ico:'🔀',   t:'cross'},
-  {id:19, lbl:'神聖聖地',sub:'全+150',  ico:'🌟',   t:'holy_all'},
-  {id:20, lbl:'機會',   sub:'+血量',    ico:'✨',   t:'opp'},
-  {id:21, lbl:'命運',   sub:'-血量',    ico:'💀',   t:'fate'},
-  {id:22, lbl:'武功秘笈',sub:'得金牌',   ico:'📖',   t:'martial'},
-  {id:23, lbl:'十字路口',sub:'做選擇',   ico:'🔀',   t:'cross'},
-  {id:24, lbl:'機會',   sub:'+血量',    ico:'✨',   t:'opp'},
-  {id:25, lbl:'詛咒之地',sub:'全-100',  ico:'☠️',   t:'curse_all'},
-  {id:26, lbl:'命運',   sub:'-血量',    ico:'💀',   t:'fate'},
-  {id:27, lbl:'十字路口',sub:'做選擇',   ico:'🔀',   t:'cross'},
-  {id:28, lbl:'幸運祭壇',sub:'全+100',  ico:'💫',   t:'bonus_all'},
-  {id:29, lbl:'機會',   sub:'+血量',    ico:'✨',   t:'opp'},
+  {id:0,  lbl:'起點',    ico:'⚔️',  t:'start'},
+  {id:1,  lbl:'機會',    ico:'✨',   t:'opp'},
+  {id:2,  lbl:'命運',    ico:'💀',   t:'fate'},
+  {id:3,  lbl:'十字路口', ico:'🔀',   t:'cross'},
+  {id:4,  lbl:'機會',    ico:'✨',   t:'opp'},
+  {id:5,  lbl:'武功秘笈', ico:'📖',   t:'martial'},
+  {id:6,  lbl:'十字路口', ico:'🔀',   t:'cross'},
+  {id:7,  lbl:'機會',    ico:'✨',   t:'opp'},
+  {id:8,  lbl:'幸運祭壇', ico:'💫',   t:'bonus_all'},
+  {id:9,  lbl:'十字路口', ico:'🔀',   t:'cross'},
+  {id:10, lbl:'命運',    ico:'💀',   t:'fate'},
+  {id:11, lbl:'機會',    ico:'✨',   t:'opp'},
+  {id:12, lbl:'十字路口', ico:'🔀',   t:'cross'},
+  {id:13, lbl:'暫停一回合',ico:'⏸',   t:'skip'},
+  {id:14, lbl:'命運',    ico:'💀',   t:'fate'},
+  {id:15, lbl:'機會',    ico:'✨',   t:'opp'},
+  {id:16, lbl:'武功秘笈', ico:'📖',   t:'martial'},
+  {id:17, lbl:'詛咒之地', ico:'☠️',   t:'curse_all'},
+  {id:18, lbl:'十字路口', ico:'🔀',   t:'cross'},
+  {id:19, lbl:'移動到任意格',ico:'🌀', t:'move'},
+  {id:20, lbl:'機會',    ico:'✨',   t:'opp'},
+  {id:21, lbl:'命運',    ico:'💀',   t:'fate'},
+  {id:22, lbl:'武功秘笈', ico:'📖',   t:'martial'},
+  {id:23, lbl:'十字路口', ico:'🔀',   t:'cross'},
+  {id:24, lbl:'機會',    ico:'✨',   t:'opp'},
+  {id:25, lbl:'神聖聖地', ico:'🌟',   t:'holy_all'},
+  {id:26, lbl:'命運',    ico:'💀',   t:'fate'},
+  {id:27, lbl:'十字路口', ico:'🔀',   t:'cross'},
+  {id:28, lbl:'暫停一回合',ico:'⏸',   t:'skip'},
+  {id:29, lbl:'機會',    ico:'✨',   t:'opp'},
 ];
-// 10-col × 7-row perimeter: top(0-9), right(10-14), bottom(15-24 rtl), left(25-29 up)
 const GPOS=[
   [1,1],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9],[1,10],
   [2,10],[3,10],[4,10],[5,10],[6,10],
@@ -573,144 +572,105 @@ const GPOS=[
 ];
 
 const PWRD={
-  immunity:{n:'免死金牌',ico:'🛡️',desc:'免除一次扣血'},
-  medpack: {n:'醫藥包',  ico:'💊',desc:'回血 100 點'},
-  reverse: {n:'迴轉牌',  ico:'🔄',desc:'下回合擲骰改為逆時針'},
-  block:   {n:'禁止牌',  ico:'🚫',desc:'下一個擲骰組暫停一次'},
+  immunity: {n:'免死金牌',ico:'🛡️',desc:'免除一次扣血'},
+  medpack:  {n:'醫藥包',  ico:'💊',desc:'回血 100 點'},
+  reverse:  {n:'迴轉牌',  ico:'🔄',desc:'本回合結束後改變順序'},
+  block:    {n:'禁止牌',  ico:'🚫',desc:'讓下一組暫停一次'},
   extradice:{n:'多一骰',  ico:'🎲',desc:'擲兩顆骰取總和'},
 };
 
 const POWER_CHANCE_CARDS=[
-  {t:'🎉 幸運！積極態度感染所有人！\n🛡️ 獲得「免死金牌」一張！', hp:80, power:'immunity'},
-  {t:'💊 你協助了受傷的組員，展現同理心！\n💊 獲得「醫藥包」一張！', hp:60, power:'medpack'},
-  {t:'🔄 機智的你找到了逆轉局面的方法！\n🔄 獲得「迴轉牌」一張！', hp:60, power:'reverse'},
-  {t:'🚫 你成功識破了對手的策略！\n🚫 獲得「禁止牌」一張！', hp:60, power:'block'},
-  {t:'🎲 你的幸運讓骰子為你服務！\n🎲 獲得「多一骰」一張！', hp:60, power:'extradice'},
+  {t:'🎉 積極態度感染所有人！\n🛡️ 獲得「免死金牌」！', hp:70,  power:'immunity'},
+  {t:'💊 你展現了絕佳同理心！\n💊 獲得「醫藥包」！',   hp:50,  power:'medpack'},
+  {t:'🔄 你找到逆轉局面的方法！\n🔄 獲得「迴轉牌」！', hp:40,  power:'reverse'},
+  {t:'🚫 你識破了對手策略！\n🚫 獲得「禁止牌」！',     hp:40,  power:'block'},
+  {t:'🎲 幸運讓骰子為你服務！\n🎲 獲得「多一骰」！',   hp:40,  power:'extradice'},
 ];
 
 const OPPS=[
-  {t:'說出一件最近讓你感到驕傲的事，並分享你當時的心情。',hp:150},
-  {t:'給在場某位同學一句真心的鼓勵，說說你為什麼欣賞他。',hp:150},
-  {t:'全組一起站起來伸展雙手 10 秒！完成即回血！',hp:100},
-  {t:'說出你最近做過最貼心的一件事，對方有什麼反應？',hp:150},
-  {t:'分享一個讓你感到幸福的小事，說說那時候的感受。',hp:100},
-  {t:'小組輪流說：此刻我的情緒如果是一種動物，是什麼？為什麼？',hp:200},
-  {t:'說出你最近感謝某人的一件事，並說明原因。',hp:100},
-  {t:'全組深呼吸 3 次——吸氣 4 秒，吐氣 6 秒——完成回血！',hp:150},
-  {t:'分享你最近幫助過別人的一件事，說說當時的感受。',hp:150},
-  {t:'給右手邊那組一句發自內心的鼓勵，讓他們感受到你們的溫暖！',hp:200},
+  {t:'說出一件最近讓你感到驕傲的事，分享你當時的心情。',hp:80},
+  {t:'給在場某位同學一句真心的鼓勵，說說你為什麼欣賞他。',hp:120},
+  {t:'全組一起站起來伸展雙手 10 秒！完成即回血！',hp:60},
+  {t:'說出你最近做過最貼心的一件事，對方有什麼反應？',hp:90},
+  {t:'分享一個讓你感到幸福的小事，說說那時候的感受。',hp:70},
+  {t:'小組輪流說：此刻的情緒如果是一種動物，是什麼？為什麼？',hp:140},
+  {t:'說出你最近感謝某人的一件事，並說明原因。',hp:80},
+  {t:'全組深呼吸 3 次——吸氣 4 秒，吐氣 6 秒——完成回血！',hp:50},
+  {t:'分享你最近幫助過別人的一件事，說說當時的感受。',hp:110},
+  {t:'給右手邊那組一句發自內心的鼓勵，說說你看見對方哪些優點！',hp:160},
 ];
-
 const FATES=[
-  {t:'你努力準備的發表，觀眾反應冷淡，讓你感到失落。',hp:-100},
-  {t:'好朋友不小心把你的秘密說給別人聽了，你感到很受傷。',hp:-150},
-  {t:'你被臨時通知要上台，感到非常緊張，表現失常。',hp:-100},
-  {t:'組員不配合，讓你們的小組作業品質打了折扣。',hp:-150},
-  {t:'班上開始流傳一個關於你的謠言，讓你很委屈。',hp:-200},
-  {t:'你的好意被誤解，對方還生氣地說你多管閒事。',hp:-150},
-  {t:'比賽輸了，有組員開始把責任推到你身上。',hp:-200},
-  {t:'考試成績比預期差很多，受到打擊，情緒很低落。',hp:-100},
-  {t:'你因心情不好說了一句重話傷了朋友，後來非常後悔。',hp:-150},
-  {t:'你被好朋友臨時放鴿子，期待已久的計畫全部泡湯。',hp:-100},
+  {t:'你努力準備的發表，觀眾反應冷淡，讓你感到失落。',hp:-70},
+  {t:'好朋友不小心把你的秘密說給別人聽，你感到很受傷。',hp:-130},
+  {t:'你被臨時通知要上台，感到非常緊張，表現失常。',hp:-60},
+  {t:'組員不配合，讓你們的小組作業品質打了折扣。',hp:-90},
+  {t:'班上開始流傳一個關於你的謠言，讓你很委屈。',hp:-180},
+  {t:'你的好意被誤解，對方還生氣地說你多管閒事。',hp:-110},
+  {t:'比賽輸了，有組員開始把責任推到你身上。',hp:-160},
+  {t:'考試成績比預期差很多，受到打擊，情緒很低落。',hp:-80},
+  {t:'你因心情不好說了一句重話傷了朋友，後來非常後悔。',hp:-120},
+  {t:'你被好朋友臨時放鴿子，期待已久的計畫全部泡湯。',hp:-50},
 ];
-
 const CROSS=[
-  {t:'好朋友考試不及格，在角落默默哭泣。你會…',opts:[
-    {l:'A',txt:'走過去問他需不需要幫助',hp:150},
-    {l:'B',txt:'假裝沒看到，不想打擾他',hp:-50},
-    {l:'C',txt:'叫另一個共同的朋友去陪他',hp:100}]},
-  {t:'小組作業時，組員一直滑手機不做事。你會…',opts:[
-    {l:'A',txt:'直接說出感受，請他一起參與',hp:150},
-    {l:'B',txt:'自己多做，但心裡很不舒服',hp:-50},
-    {l:'C',txt:'叫組長去處理',hp:100}]},
-  {t:'你看到班上同學被另一群人孤立欺負。你會…',opts:[
-    {l:'A',txt:'立刻走過去，站在那位同學旁邊',hp:200},
-    {l:'B',txt:'觀望情況，看看其他人怎麼做',hp:-50},
-    {l:'C',txt:'課後偷偷問那位同學還好嗎',hp:100}]},
-  {t:'你和好朋友吵架，對方三天沒理你。你會…',opts:[
-    {l:'A',txt:'主動道歉並說明自己的感受',hp:200},
-    {l:'B',txt:'等他先開口，認為自己沒有錯',hp:-50},
-    {l:'C',txt:'請共同朋友幫忙說和',hp:100}]},
-  {t:'眾人面前發表時，有人嘲笑你。你當下會…',opts:[
-    {l:'A',txt:'深呼吸讓自己冷靜，繼續完成發表',hp:200},
-    {l:'B',txt:'停下來，緊張到說不出話',hp:-100},
-    {l:'C',txt:'直接回嘴反擊那個人',hp:-50}]},
-  {t:'壓力非常大、快要崩潰的時候，你通常會…',opts:[
-    {l:'A',txt:'找信任的朋友或家人聊聊',hp:150},
-    {l:'B',txt:'一個人悶在房間不說話',hp:-100},
-    {l:'C',txt:'去運動或做喜歡的事轉換心情',hp:200}]},
-  {t:'你發現朋友最近情緒低落，但他說沒事。你會…',opts:[
-    {l:'A',txt:'告訴他你注意到了，讓他知道你在',hp:200},
-    {l:'B',txt:'相信他說的沒事，就不追問',hp:-50},
-    {l:'C',txt:'持續關心他，等他準備好再說',hp:150}]},
-  {t:'組員說了一句無心的話傷害了你的感受。你會…',opts:[
-    {l:'A',txt:'告訴他那句話讓你不舒服',hp:200},
-    {l:'B',txt:'忍下來，心裡默默難受',hp:-100},
-    {l:'C',txt:'用開玩笑的方式暗示他',hp:50}]},
+  {t:'好朋友考試不及格，在角落默默哭泣。你會…',opts:[{l:'A',txt:'走過去問他需不需要幫助',hp:120},{l:'B',txt:'假裝沒看到，不想打擾他',hp:-30},{l:'C',txt:'叫另一個共同的朋友去陪他',hp:70}]},
+  {t:'小組作業時，組員一直滑手機不做事。你會…',opts:[{l:'A',txt:'直接說出感受，請他一起參與',hp:130},{l:'B',txt:'自己多做，但心裡很不舒服',hp:-40},{l:'C',txt:'叫組長去處理',hp:60}]},
+  {t:'你看到班上同學被孤立欺負。你會…',opts:[{l:'A',txt:'立刻走過去，站在那位同學旁邊',hp:180},{l:'B',txt:'觀望情況，看看其他人怎麼做',hp:-20},{l:'C',txt:'課後偷偷問那位同學還好嗎',hp:90}]},
+  {t:'你和好朋友吵架，對方三天沒理你。你會…',opts:[{l:'A',txt:'主動道歉並說明自己的感受',hp:160},{l:'B',txt:'等他先開口，認為自己沒有錯',hp:-30},{l:'C',txt:'請共同朋友幫忙說和',hp:80}]},
+  {t:'眾人面前發表時，有人嘲笑你。你當下會…',opts:[{l:'A',txt:'深呼吸讓自己冷靜，繼續完成發表',hp:170},{l:'B',txt:'停下來，緊張到說不出話',hp:-80},{l:'C',txt:'直接回嘴反擊那個人',hp:-40}]},
+  {t:'壓力非常大、快要崩潰的時候，你會…',opts:[{l:'A',txt:'找信任的朋友或家人聊聊',hp:130},{l:'B',txt:'一個人悶在房間不說話',hp:-70},{l:'C',txt:'去運動或做喜歡的事轉換心情',hp:160}]},
+  {t:'你發現朋友情緒低落，但他說沒事。你會…',opts:[{l:'A',txt:'告訴他你注意到了，讓他知道你在',hp:150},{l:'B',txt:'相信他說的沒事，就不追問',hp:-20},{l:'C',txt:'持續關心他，等他準備好再說',hp:110}]},
+  {t:'組員說了一句無心的話傷害了你的感受。你會…',opts:[{l:'A',txt:'告訴他那句話讓你不舒服',hp:140},{l:'B',txt:'忍下來，心裡默默難受',hp:-90},{l:'C',txt:'用開玩笑的方式暗示他',hp:40}]},
 ];
-
 const MARTIALS=[
-  {t:'說出最近讓你有負面情緒的一件事，以及你如何一步步調適自己的心情。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'描述一次你察覺到自己情緒變化的時刻，你的身體有什麼具體反應？\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'說出三種你認為有效調節情緒的方法，並各解釋一個理由。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'分享一次你成功控制情緒的經驗，當時你用了什麼方法？\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'如果你的朋友情緒很差，你會用什麼方法幫助他？說出具體的三個步驟。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'什麼是「情緒覺察」？說說你在日常生活中如何練習察覺自己的情緒。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'描述一個讓你非常生氣的情境，以及你是如何讓自己不失控的。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'帶領全組進行一次「正念呼吸」——吸氣 4 秒、屏氣 2 秒、吐氣 6 秒，做三次。\n（完成練習可得 🛡️ 免死金牌！）'},
+  {t:'說出最近讓你有負面情緒的一件事，以及你如何一步步調適心情。\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'描述一次你察覺到情緒變化的時刻，你的身體有什麼具體反應？\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'說出三種有效調節情緒的方法，並各解釋一個理由。\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'分享一次成功控制情緒的經驗，當時你用了什麼方法？\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'如果朋友情緒很差，你會用什麼方法幫助他？說出具體三步驟。\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'什麼是「情緒覺察」？說說你在日常生活中如何練習。\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'描述一個讓你非常生氣的情境，以及你如何讓自己不失控。\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'帶領全組進行「正念呼吸」——吸氣 4 秒、屏氣 2 秒、吐氣 6 秒，做三次。\n（完成練習可得 🛡️ 免死金牌！）'},
 ];
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // STATE
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 function mkState(){
   return{
     phase:'roll',cur:0,round:1,
-    direction:1, // 1=順時針(+1), -1=逆時針(-1)
-    reverseUsed:false, // flag for one-round reverse
+    direction:1,
+    pendingReverse:false,
+    paused:false,pausedAt:0,
     card:null,cardType:null,cardHp:0,cardTs:0,cardPower:null,
     pendingPow:null,
     skipNext:[false,false,false,false],
-    crossVotes:{}, // {teamIndex: 'A'|'B'|'C'}
-    crossRevealed:false, // whether cross HP has been revealed
-    paused:false,
-    teams:TDEFS.map(d=>({...d,hp:INIT_HP,pos:0,powers:{immunity:0,medpack:0,reverse:0,block:0,extradice:0}})),
+    crossVotes:{},
+    crossRevealed:false,
+    teams:TDEFS.map(d=>({...d,hp:INIT_HP,pos:0,powers:{immunity:0,medpack:0,reverse:0,block:0,extradice:0},reviveUsed:false})),
     ts:0
   };
 }
 let S=mkState();
 let myRole=null;
 let oDk,fDk,cDk,mDk,pwDk;
-let teachTimer=null,studTimer=null;
-let diceOverlayTimer=null;
+let teachTimer=null,studTimer=null,diceOverlayTimer=null;
 
 function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]]}return b}
 function fDeck(dk,fb){if(!dk.length)dk.push(...shuf([...fb]));return dk.shift()}
 function initDecks(){oDk=shuf([...OPPS]);fDk=shuf([...FATES]);cDk=shuf([...CROSS]);mDk=shuf([...MARTIALS]);pwDk=shuf([...POWER_CHANCE_CARDS]);}
 function clampHp(v){return Math.max(0,Math.min(MAX_HP,v))}
-function hpColor(hp){const p=hp/MAX_HP;return p>.55?'linear-gradient(90deg,#0A6E3E,#0BBE6A)':p>.3?'linear-gradient(90deg,#CC6600,#EE9900)':'linear-gradient(90deg,#AA1111,#EE3333)'}
+function hpColor(hp){const p=hp/MAX_HP;return p>.55?'linear-gradient(90deg,#1a6b3a,#3ab86a)':p>.3?'linear-gradient(90deg,#8b5500,#d08030)':'linear-gradient(90deg,#8b1a1a,#e04040)'}
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // PEERJS
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 let peer=null,tcConns=[null,null,null,null],scConn=null,cFlags=[false,false,false,false],gCode='';
-
-function loadPeer(){
-  return new Promise((res,rej)=>{
-    if(window.Peer){res();return;}
-    const s=document.createElement('script');
-    s.src='https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js';
-    s.onload=res;s.onerror=()=>{const s2=document.createElement('script');s2.src='https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js';s2.onload=res;s2.onerror=rej;document.head.appendChild(s2);};
-    document.head.appendChild(s);
-  });
-}
+function loadPeer(){return new Promise((res,rej)=>{if(window.Peer){res();return;}const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js';s.onload=res;s.onerror=()=>{const s2=document.createElement('script');s2.src='https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js';s2.onload=res;s2.onerror=rej;document.head.appendChild(s2);};document.head.appendChild(s);});}
 function genCode(){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';return Array.from({length:6},()=>c[0|Math.random()*c.length]).join('');}
 
 async function goTeacher(){
   showPg('pgLobby');
-  document.getElementById('lobbyCode').textContent='載入…';
-  document.getElementById('lobbySt').textContent='載入連線模組…';
-  try{await loadPeer();}catch(e){document.getElementById('lobbySt').textContent='❌ 無法載入 PeerJS，請確認網路';return;}
+  try{await loadPeer();}catch(e){document.getElementById('lobbySt').textContent='❌ 無法載入';return;}
   gCode=genCode();initDecks();renderTeamGrid();
   peer=new Peer('SELRPG-'+gCode,{debug:0});
   peer.on('open',()=>{document.getElementById('lobbyCode').textContent=gCode;document.getElementById('lobbySt').textContent='等待同學連線…';});
@@ -721,54 +681,45 @@ async function goTeacher(){
     conn.on('data',async d=>{await handleAct(d);broadcast();});
     conn.on('close',()=>{cFlags[ti]=false;tcConns[ti]=null;renderTeamGrid();});
   });
-  peer.on('error',err=>{if(err.type==='unavailable-id'){peer.destroy();setTimeout(goTeacher,400);}else document.getElementById('lobbySt').textContent='錯誤:'+err.message;});
+  peer.on('error',err=>{if(err.type==='unavailable-id'){peer.destroy();setTimeout(goTeacher,400);}});
 }
-
 function broadcast(){const m={type:'state',state:S};tcConns.forEach(c=>{if(c&&c.open)c.send(m);});}
 function renderTeamGrid(){
-  const cnt=cFlags.filter(Boolean).length;
-  document.getElementById('lobbySt').textContent=`已連線 ${cnt}/4 組`;
-  document.getElementById('teamGrid').innerHTML=TDEFS.map((t,i)=>`<div class="tslot${cFlags[i]?' ok':''}"><span class="tslot-ico">${t.emoji}</span><span>${t.short}</span><span class="tslot-st">${cFlags[i]?'✓ 已連線':'待連線'}</span></div>`).join('');
+  document.getElementById('lobbySt').textContent=`已連線 ${cFlags.filter(Boolean).length}/4 組`;
+  document.getElementById('teamGrid').innerHTML=TDEFS.map((t,i)=>`<div class="tslot${cFlags[i]?' ok':''}"><span class="tslot-ico">${teamDot(t,16)}</span><span style="color:${t.color};font-weight:800">${t.short}</span><span class="tslot-st">${cFlags[i]?'✓ 已連線':'待連線'}</span></div>`).join('');
 }
-
 async function joinGame(ti){
   const code=document.getElementById('codeIn').value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
   if(code.length<4){alert('請輸入正確的遊戲代碼');return;}
   myRole=ti;showPg('pgConn');
-  document.getElementById('cMsg').textContent='載入連線模組…';
-  document.getElementById('cSub').textContent='';
   document.getElementById('cRetry').style.display='none';
   try{await loadPeer();}catch(e){connErr('❌ 無法載入連線模組');return;}
-  document.getElementById('cMsg').textContent=`連線到 ${code}…`;
-  document.getElementById('cSub').textContent='最多等待 12 秒';
-  const to=setTimeout(()=>connErr('⚠️ 逾時，請確認代碼是否正確'),12000);
+  const to=setTimeout(()=>connErr('⚠️ 逾時'),12000);
   peer=new Peer({debug:0});
   peer.on('open',()=>{
     scConn=peer.connect('SELRPG-'+code,{metadata:{team:ti},reliable:true});
     scConn.on('open',()=>{clearTimeout(to);initDecks();document.getElementById('cMsg').textContent='✅ 連線成功！';setTimeout(showStudView,900);});
     scConn.on('data',d=>{if(d.type==='state'){S=d.state;renderStud();}});
-    scConn.on('close',()=>{if(document.getElementById('sdInf'))document.getElementById('sdInf').textContent='連線中斷，請重新整理頁面';});
+    scConn.on('close',()=>{if(document.getElementById('sdInf'))document.getElementById('sdInf').textContent='連線中斷';});
     scConn.on('error',e=>{clearTimeout(to);connErr('❌ '+e.message);});
   });
-  peer.on('error',e=>{clearTimeout(to);connErr(e.type==='peer-unavailable'?'❌ 找不到代碼，請確認老師是否已開啟':'❌ '+e.message);});
+  peer.on('error',e=>{clearTimeout(to);connErr(e.type==='peer-unavailable'?'❌ 找不到代碼':'❌ '+e.message);});
 }
-function connErr(m){document.getElementById('cMsg').textContent=m;document.getElementById('cSub').textContent='';document.getElementById('cRetry').style.display='inline-flex';}
+function connErr(m){document.getElementById('cMsg').textContent=m;document.getElementById('cRetry').style.display='inline-flex';}
 function sendAct(a){if(scConn&&scConn.open)scConn.send({...a,team:myRole});}
 
-// ═══════════════════════════════════════════════
-// TEACHER GAME LOGIC
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// TEACHER GAME
+// ═══════════════════════════════════════════════════════
 function startGame(){
-  myRole='teacher';
-  showPg('pgTeach');
+  myRole='teacher';showPg('pgTeach');
   buildBoard();S.phase='roll';S.ts=Date.now();
   broadcast();renderTeach();
 }
-
 function buildBoard(){
   const b=document.getElementById('boardEl');b.innerHTML='';
   b.style.gridTemplateColumns='repeat(10,1fr)';
-  b.style.gridTemplateRows='repeat(7,minmax(78px,auto))';
+  b.style.gridTemplateRows='repeat(7,minmax(82px,auto))';
   BOARD.forEach(sp=>{
     const[r,c]=GPOS[sp.id];
     const d=document.createElement('div');
@@ -781,147 +732,249 @@ function buildBoard(){
   b.appendChild(ctr);
   updBoard();
 }
-
+// Button style helper for board center card buttons
+function btnSty(bg,col){return`height:30px;padding:0 12px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:${bg};color:${col}`;}
 function updBoard(){
   BOARD.forEach(sp=>{
     const d=document.getElementById(`bsp${sp.id}`);if(!d)return;
     const here=S.teams.filter(t=>t.pos===sp.id);
-    const tks=here.map(t=>`<div class="tk" style="background:${t.color};color:#fff;border-radius:3px">${t.emoji}</div>`).join('');
-    d.innerHTML=`<span class="sp-n">${sp.id}</span><span class="sp-ico">${sp.ico}</span><span class="sp-lbl">${sp.lbl}</span><span class="sp-sub">${sp.sub}</span>${tks?`<div class="tkwrap">${tks}</div>`:''}`;
+    const tks=here.map(t=>`<div class="tk" style="background:${t.color}"></div>`).join('');
+    d.innerHTML=`<span class="sp-ico">${sp.ico}</span><span class="sp-lbl">${sp.lbl}</span>${tks?`<div class="tkwrap">${tks}</div>`:''}`;
   });
   document.getElementById('hpGrid').innerHTML=S.teams.map((t,i)=>{
-    const p=t.hp/MAX_HP;
-    const isCur=S.cur===i;
+    const p=t.hp/MAX_HP;const isCur=S.cur===i;
     return`<div class="hp-team-mini${isCur?' cur-team':''}" style="${isCur?`color:${t.color}`:''}">
       <div class="hptm-name" style="color:${t.color}">${t.emoji} ${t.short}</div>
-      <div class="hptm-val" style="color:${t.color}">${t.hp}<span style="font-size:10px;opacity:.5">/${MAX_HP}</span></div>
+      <div class="hptm-val" style="color:${t.color}">${t.hp}<span style="font-size:10px;opacity:.4">/${MAX_HP}</span></div>
       <div class="hpbar-wrap"><div class="hpbar" style="width:${p*100}%;background:${hpColor(t.hp)}"></div></div>
     </div>`;
   }).join('');
+  // Board center
   const ctr=document.getElementById('bCtr');if(!ctr)return;
-  // Board center: dice animation zone + card type big label + question text + manual roll
-  const bmap2={opp:{bg:'#DFFFF0',cl:'var(--opp)',ico:'✨',lbl:'機會'},fate:{bg:'#FFE0E0',cl:'var(--fate)',ico:'💀',lbl:'命運'},cross:{bg:'#E0EAFF',cl:'var(--cross)',ico:'🔀',lbl:'十字路口'},mart:{bg:'#FFF0D8',cl:'var(--mart)',ico:'📖',lbl:'武功秘笈'}};
-  let ctrHtml='';
+  const bmap2={opp:{bg:'rgba(58,184,106,.12)',cl:'var(--opp-l)',ico:'✨',lbl:'機會'},fate:{bg:'rgba(224,64,64,.12)',cl:'var(--fate-l)',ico:'💀',lbl:'命運'},cross:{bg:'rgba(64,128,224,.12)',cl:'var(--cross-l)',ico:'🔀',lbl:'十字路口'},mart:{bg:'rgba(208,128,48,.12)',cl:'var(--mart-l)',ico:'📖',lbl:'武功秘笈'}};
+  let html='';
+  // Legend items always shown
+  const LEGEND=[
+    {ico:'✨',lbl:'機會',desc:'完成任務回血',col:'#15803D',bg:'#DCFCE7'},
+    {ico:'💀',lbl:'命運',desc:'遭遇困境扣血',col:'#B91C1C',bg:'#FEE2E2'},
+    {ico:'🔀',lbl:'十字路口',desc:'討論情境，作答加血',col:'#1D4ED8',bg:'#DBEAFE'},
+    {ico:'📖',lbl:'武功秘笈',desc:'回答成功得免死金牌',col:'#C2410C',bg:'#FFEDD5'},
+    {ico:'💫',lbl:'幸運祭壇',desc:'全體 +100 HP',col:'#B45309',bg:'#FEF9C3'},
+    {ico:'🌟',lbl:'神聖聖地',desc:'全體 +150 HP',col:'#92400E',bg:'#FEF3C7'},
+    {ico:'☠️',lbl:'詛咒之地',desc:'全體 -100 HP',col:'#9D174D',bg:'#FCE7F3'},
+    {ico:'🌀',lbl:'傳送門',desc:'移動到任意格',col:'#0369A1',bg:'#E0F2FE'},
+    {ico:'⏸',lbl:'暫停一回合',desc:'下回合跳過',col:'#475569',bg:'#F1F5F9'},
+    {ico:'⚔️',lbl:'起點',desc:'路過回血 +100',col:'#92400E',bg:'#FEF9C3'},
+  ];
+  const legendHtml=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%">
+    ${LEGEND.map(l=>`<div style="display:flex;align-items:center;gap:3px;background:${l.bg};border-radius:5px;padding:3px 6px;min-width:0">
+      <span style="font-size:12px;flex-shrink:0">${l.ico}</span>
+      <span style="font-size:9px;color:${l.col};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">
+        <b style="font-weight:900">${l.lbl}</b>
+        <span style="font-weight:400;opacity:.75"> ${l.desc}</span>
+      </span>
+    </div>`).join('')}
+  </div>`;
+
   if(S.phase==='moving'){
-    // Show dice animation + move trail
-    ctrHtml=`<div id="ctrDiceArea" style="display:flex;flex-direction:column;align-items:center;gap:6px;width:100%">
-      <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:var(--gold2)" id="ctrDiceTeam"></div>
+    html=`<div style="font-size:11px;font-weight:800;color:#64748B;margin-bottom:4px">🎲 擲骰移動</div>
+    <div id="ctrDiceArea" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:100%">
+      <div style="font-size:12px;color:#F5A623;font-weight:800" id="ctrDiceTeam"></div>
       <div style="display:flex;gap:10px;justify-content:center" id="ctrDiceRow"></div>
-      <div style="font-family:'Press Start 2P',monospace;font-size:14px;color:var(--gold2)" id="ctrDiceResult"></div>
-      <div style="font-size:11px;color:var(--mu);font-weight:700" id="ctrDiceSteps">移動中…</div>
+      <div style="font-size:14px;font-weight:800;color:#F5A623" id="ctrDiceResult"></div>
+      <div style="font-size:11px;color:#94A3B8" id="ctrDiceSteps"></div>
       <div class="teach-move-trail" id="teachMoveTrail"></div>
     </div>`;
-  }else if(S.phase==='card'&&S.card){
-    const m=bmap2[S.cardType]||{bg:'#F5F5FF',cl:'var(--tx)',ico:'',lbl:''};
-    ctrHtml=`<div class="ctr-card" style="background:${m.bg};border:3px solid ${m.cl};width:100%">
-      <div class="ctr-type-big" style="color:${m.cl}">${m.ico} ${m.lbl}</div>
-      <div class="ctr-card-txt">${S.card.t||''}</div>
+  }else if(S.phase==='card'&&S.card&&S.cardType==='cross'){
+    // Cross: FULL UI inside board center — no popup
+    const m={bg:'#DBEAFE',cl:'#1D4ED8',ico:'🔀',lbl:'十字路口'};
+    const votes=S.crossVotes||{};
+    const revealed=S.crossRevealed;
+    const cur=S.teams[S.cur];
+    const votedCount=Object.keys(votes).length;
+
+    // Option rows
+    const optRows=S.card.opts?S.card.opts.map(o=>{
+      const pickers=TDEFS.filter((_,i)=>votes[i]===o.l).map(t=>
+        `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${t.color};margin-left:2px;border:1.5px solid #fff;vertical-align:middle"></span>`
+      ).join('');
+      const chosen=revealed&&votes[S.cur]===o.l;
+      const hpTag=revealed?`<span style="font-size:11px;font-weight:900;padding:1px 6px;border-radius:8px;background:${o.hp>0?'#DCFCE7':'#FEE2E2'};color:${o.hp>0?'#15803D':'#B91C1C'}">${o.hp>0?'+':''}${o.hp}</span>`:'';
+      return`<div style="display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:8px;background:${chosen?'#DBEAFE':'#F7F8FC'};border:2px solid ${chosen?m.cl:'#E4E8F2'}">
+        <b style="color:${m.cl};font-size:13px;min-width:18px">${o.l}</b>
+        <span style="flex:1;font-size:11px;color:#1E1E2E;font-weight:700;line-height:1.3">${o.txt}</span>
+        ${hpTag}<span>${pickers}</span>
+      </div>`;
+    }).join(''):'';
+
+    // Vote status chips
+    const chips=TDEFS.map((t,i)=>{
+      const v=votes[i];
+      return`<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:800;background:${v?'#DBEAFE':'#F1F5F9'};color:${v?m.cl:'#94A3B8'}">${teamDot(t,8)} ${t.short}${v?' → '+v:''}</span>`;
+    }).join('');
+
+    // Action buttons
+    const hasImm=cur.powers.immunity>0;
+    let actionBtns='';
+    if(!revealed){
+      const waiting=4-votedCount;
+      const hintTxt=waiting>0?`⏳ 還有 ${waiting} 組未選擇`:`✅ 各組已選完`;
+      actionBtns=`<div style="font-size:10px;color:#94A3B8;margin-bottom:4px">${hintTxt}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          ${S.card.opts.map(o=>`<button onclick="revealCross(${o.hp},'${o.l}')" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#DBEAFE;color:${m.cl}">公布 ${o.l}</button>`).join('')}
+          ${hasImm?`<button onclick="applyImmunity()" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#FEF9C3;color:#92400E">🛡️</button>`:''}
+        </div>`;
+    }else{
+      const immBtn=hasImm&&S.cardHp<0?`<button onclick="applyImmunity()" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#FEF9C3;color:#92400E">🛡️ 免死金牌</button>`:'';
+      const revBtn=cur.powers.reverse>0?`<button onclick="useReverse()" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#DBEAFE;color:#1D4ED8">🔄 迴轉</button>`:'';
+      const blkBtn=cur.powers.block>0?`<button onclick="useBlock()" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#FEE2E2;color:#B91C1C">🚫 禁止</button>`:'';
+      actionBtns=`<div style="display:flex;flex-wrap:wrap;gap:5px">
+        <button onclick="confirmCross()" style="height:30px;padding:0 14px;font-size:11px;font-weight:900;cursor:pointer;border:none;border-radius:6px;background:#22C55E;color:#fff">✓ 繼續</button>
+        ${immBtn}${revBtn}${blkBtn}
+      </div>`;
+    }
+
+    // Timer bar (read from state)
+    const elapsed=S.cardTs?Math.min((Date.now()-S.cardTs)/1000,30):0;
+    const timerPct=Math.max(0,100-elapsed/30*100);
+    const timerCol=timerPct>50?'#F5A623':timerPct>25?'#F97316':'#EF4444';
+
+    html=`<div style="width:100%;display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:16px">${m.ico}</span>
+        <span style="font-size:13px;font-weight:900;color:${m.cl}">${m.lbl}</span>
+        <button onclick="toggleCrossTimer()" id="ctrTimerBtn" style="margin-left:auto;height:24px;padding:0 8px;font-size:10px;font-weight:800;cursor:pointer;border:none;border-radius:5px;background:#F1F5F9;color:#64748B">${S.paused?'▶ 繼續':'⏸ 暫停'}</button>
+      </div>
+      <div style="height:4px;background:#E4E8F2;border-radius:2px;overflow:hidden">
+        <div style="height:100%;width:${timerPct}%;background:${timerCol};border-radius:2px;transition:width .2s linear"></div>
+      </div>
+      <div style="background:#EFF6FF;border-radius:8px;border-left:4px solid ${m.cl};padding:7px 9px"><div style="font-size:10px;font-weight:900;color:${m.cl};margin-bottom:3px">🔀 十字路口</div><div style="font-size:12px;font-weight:700;color:#1E1E2E;line-height:1.65">${S.card.t||''}</div></div>
+      <div style="display:flex;flex-direction:column;gap:3px">${optRows}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px">${chips}</div>
+      ${actionBtns}
+    </div>`;
+  }else if(S.phase==='card'&&S.card&&S.cardType!=='cross'){
+    const type=S.cardType,hp=S.cardHp,pp=S.cardPower;
+    const CMAP={opp:{cl:'#15803D',bg:'#DCFCE7',ico:'✨',lbl:'機會'},fate:{cl:'#B91C1C',bg:'#FEE2E2',ico:'💀',lbl:'命運'},mart:{cl:'#C2410C',bg:'#FFEDD5',ico:'📖',lbl:'武功秘笈'}};
+    const m=CMAP[type]||{cl:'#1E1E2E',bg:'#F7F8FC',ico:'',lbl:type};
+    const cur=S.teams[S.cur];
+    const hasImm=cur.powers.immunity>0,hasRev=cur.powers.reverse>0,hasBlk=cur.powers.block>0;
+    const hpBadge=pp
+      ?`<span style="font-size:11px;font-weight:800;padding:2px 8px;border-radius:8px;background:#FEF9C3;color:#92400E">${PWRD[pp].ico} 獲得功能牌！</span>`
+      :hp!==0?`<span style="font-size:12px;font-weight:900;padding:2px 8px;border-radius:8px;background:${hp>0?'#DCFCE7':'#FEE2E2'};color:${hp>0?'#15803D':'#B91C1C'}">${hp>0?'+':''}${hp} HP</span>`:'';
+    const elapsed2=S.cardTs?Math.min((Date.now()-S.cardTs)/1000,30):0;
+    const timerPct2=Math.max(0,100-elapsed2/30*100);
+    const timerCol2=timerPct2>50?'#F5A623':timerPct2>25?'#F97316':'#EF4444';
+    const timerLeft2=Math.max(0,30-elapsed2);
+    const timerTxt2=timerLeft2>0?Math.ceil(timerLeft2)+' 秒':'⏰ 繼續討論…';
+    const B=(bg,col,fn,txt)=>`<button onclick="${fn}" style="${btnSty(bg,col)}">${txt}</button>`;
+    let ab='';
+    if(type==='fate'){
+      ab=B('#DCFCE7','#15803D',"resolveCard(true)",'✓ 確認扣血')
+        +(hasImm?B('#FEF9C3','#92400E',"applyImmunity()",'🛡️ 免死金牌'):'')
+        +(hasRev?B('#DBEAFE','#1D4ED8',"useReverse()",'🔄 迴轉'):'')
+        +(hasBlk?B('#FEE2E2','#B91C1C',"useBlock()",'🚫 禁止'):'')
+        +B('#F1F5F9','#64748B',"resolveCard(false)",'✕ 跳過');
+    }else if(type==='opp'&&pp){
+      ab=B('#FEF9C3','#92400E',`resolvePowerCard('${pp}')`,'✓ 獲得 '+PWRD[pp].ico)
+        +B('#F1F5F9','#64748B',"resolveCard(false)",'✕ 跳過');
+    }else if(type==='opp'){
+      ab=B('#DCFCE7','#15803D',"resolveCard(true)",`✓ 完成 +${hp}HP`)
+        +(hasRev?B('#DBEAFE','#1D4ED8',"useReverse()",'🔄 迴轉'):'')
+        +(hasBlk?B('#FEE2E2','#B91C1C',"useBlock()",'🚫 禁止'):'')
+        +B('#F1F5F9','#64748B',"resolveCard(false)",'✕ 跳過');
+    }else if(type==='mart'){
+      ab=B('#DCFCE7','#15803D',"martSuccess()",'🛡️ 成功得免死金牌')
+        +B('#F1F5F9','#64748B',"resolveCard(false)",'✕ 跳過');
+    }else{
+      ab=B('#DCFCE7','#15803D',"resolveCard(true)",'✓ 完成')
+        +B('#F1F5F9','#64748B',"resolveCard(false)",'✕ 跳過');
+    }
+    html=`<div style="width:100%;display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="font-size:16px">${m.ico}</span>
+        <span style="font-size:13px;font-weight:900;color:${m.cl}">${m.lbl}</span>
+        ${hpBadge}
+        <button onclick="toggleCrossTimer()" style="margin-left:auto;${btnSty('#F1F5F9','#64748B')}">${S.paused?'▶ 繼續':'⏸ 暫停'}</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div style="flex:1;height:5px;background:#E4E8F2;border-radius:3px;overflow:hidden"><div style="height:100%;width:${timerPct2}%;background:${timerCol2};border-radius:3px;transition:width .3s linear"></div></div>
+        <span style="font-size:10px;font-weight:700;color:#64748B;white-space:nowrap">${timerTxt2}</span>
+      </div>
+      <div style="background:${m.bg};border-radius:8px;border-left:4px solid ${m.cl};padding:8px 10px"><div style="font-size:10px;font-weight:900;color:${m.cl};margin-bottom:4px;letter-spacing:.5px">${m.ico} ${m.lbl}</div><div style="font-size:13px;font-weight:700;color:#1E1E2E;line-height:1.75">${S.card.t||''}</div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px">${ab}</div>
     </div>`;
   }else{
     const curT=S.teams[S.cur];
-    ctrHtml=`<div class="ctr-ttl">⚔️ 情緒領航員</div>
-    <div class="ctr-wait" style="color:${curT.color}">${curT.emoji} ${curT.short} 等待擲骰</div>
-    <button class="dbtn dbtn-opp" style="margin-top:8px;width:90%" onclick="teachManualRoll()">🎲 老師代為擲骰</button>`;
+    html=`<div class="ctr-wait" style="color:${curT.color};display:flex;align-items:center;justify-content:center;gap:6px">${teamDot(curT,12)} ${curT.short} 等待擲骰</div>`;
   }
-  ctr.innerHTML=ctrHtml;
+  ctr.innerHTML=`<div class="ctr-scroll">${html}</div><div class="ctr-legend-fixed">${legendHtml}</div>`;
 }
-
 function renderTeach(){
   const t=S.teams[S.cur];
-  const el=document.getElementById('tName');el.textContent=`${t.emoji} ${t.short}`;el.style.color=t.color;
-  const pm={roll:'等待擲骰',moving:'移動中…',card:'作答中',calm:'冷靜角',gameover:'遊戲結束'};
+  const el=document.getElementById('tName');el.innerHTML=`${teamDot(t,14)} <span style="vertical-align:middle">${t.short}</span>`;el.style.color=t.color;
+  const pm={roll:'等待擲骰',moving:'移動中…',card:'作答中',gameover:'遊戲結束'};
   document.getElementById('tPh').textContent=pm[S.phase]||S.phase;
   document.getElementById('tvRnd').textContent=`第${S.round}回合`;
   const dirEl=document.getElementById('tDir');
-  if(S.direction===1){dirEl.textContent='▶ 順時針';dirEl.className='tbar-dir cw';}
-  else{dirEl.textContent='◀ 逆時針';dirEl.className='tbar-dir ccw';}
+  dirEl.textContent=S.direction===1?'▶ 順時針':'◀ 逆時針';
+  dirEl.className='tbar-dir '+(S.direction===1?'cw':'ccw');
   updBoard();
   if(S.phase==='gameover')showGo();
 }
 
-// ─── DICE ANIMATION inside board center ───
-function showTeachDiceOverlay(diceArr, steps, teamName, teamColor, totalCells){
-  clearTimeout(diceOverlayTimer);
-  // Trigger board re-render in moving phase so the dice area appears
-  updBoard();
+// ─── Dice in board center ───
+function showTeachDiceOverlay(diceArr,steps,teamName,teamColor,totalCells){
+  clearTimeout(diceOverlayTimer);updBoard();
+  const rowEl=document.getElementById('ctrDiceRow');if(!rowEl)return;
   const teamEl=document.getElementById('ctrDiceTeam');
-  const rowEl=document.getElementById('ctrDiceRow');
   const resultEl=document.getElementById('ctrDiceResult');
   const stepsEl=document.getElementById('ctrDiceSteps');
   const trailEl=document.getElementById('teachMoveTrail');
-  if(!rowEl)return; // board not built yet
   const FACES=['⚀','⚁','⚂','⚃','⚄','⚅'];
   if(teamEl){teamEl.textContent=`${teamName} 擲骰！`;teamEl.style.color=teamColor;}
-  if(resultEl)resultEl.textContent='';
-  if(stepsEl)stepsEl.textContent='擲骰中…';
+  if(resultEl)resultEl.textContent='';if(stepsEl)stepsEl.textContent='擲骰中…';
   if(trailEl)trailEl.innerHTML='';
   rowEl.innerHTML=diceArr.map(()=>`<span class="teach-dice-face spin-anim">🎲</span>`).join('');
   let cnt=0;
   const anim=setInterval(()=>{
-    if(!document.getElementById('ctrDiceRow')){clearInterval(anim);return;}
-    document.getElementById('ctrDiceRow').innerHTML=diceArr.map(()=>`<span class="teach-dice-face spin-anim">${FACES[0|Math.random()*6]}</span>`).join('');
+    const r=document.getElementById('ctrDiceRow');if(!r){clearInterval(anim);return;}
+    r.innerHTML=diceArr.map(()=>`<span class="teach-dice-face spin-anim">${FACES[0|Math.random()*6]}</span>`).join('');
     cnt++;
     if(cnt>16){
       clearInterval(anim);
-      const r=document.getElementById('ctrDiceRow');
-      if(r) r.innerHTML=diceArr.map(f=>`<span class="teach-dice-face">${FACES[f-1]}</span>`).join('');
+      const r2=document.getElementById('ctrDiceRow');
+      if(r2)r2.innerHTML=diceArr.map(f=>`<span class="teach-dice-face">${FACES[f-1]}</span>`).join('');
       const res=document.getElementById('ctrDiceResult');
-      if(res) res.textContent=diceArr.length>1?diceArr.join('+')+' = '+steps+' 步':'擲出 '+steps+' 步！';
+      if(res)res.textContent=diceArr.length>1?diceArr.join('+')+' = '+steps+' 步':'擲出 '+steps+' 步！';
       const st=document.getElementById('ctrDiceSteps');
-      if(st) st.textContent='棋子移動中…';
+      if(st)st.textContent='移動中…';
       const trl=document.getElementById('teachMoveTrail');
-      if(trl) trl.innerHTML=Array.from({length:totalCells},(_,i)=>`<span class="trail-dot" id="td${i}"></span>`).join('');
+      if(trl)trl.innerHTML=Array.from({length:totalCells},(_,i)=>`<span class="trail-dot" id="td${i}"></span>`).join('');
     }
   },75);
 }
-
-function updateTrailDot(idx, totalCells){
-  for(let i=0;i<totalCells;i++){
-    const d=document.getElementById('td'+i);if(!d)continue;
-    if(i<idx)d.className='trail-dot done';
-    else if(i===idx)d.className='trail-dot active';
-    else d.className='trail-dot';
-  }
+function updateTrailDot(idx,totalCells){
+  for(let i=0;i<totalCells;i++){const d=document.getElementById('td'+i);if(!d)continue;if(i<idx)d.className='trail-dot done';else if(i===idx)d.className='trail-dot active';else d.className='trail-dot';}
 }
+function hideTeachDiceOverlay(){}
 
-function hideTeachDiceOverlay(){
-  clearTimeout(diceOverlayTimer);
-  // Board will re-render to card or roll state naturally
-}
-
-// ─── ANIMATED STEP MOVE ───
-async function animateMove(ti, oldPos, steps){
-  const totalCells=steps;
+async function animateMove(ti,oldPos,steps){
   return new Promise(resolve=>{
-    let cur=oldPos;
-    let stepCount=0;
+    let cur=oldPos;let stepCount=0;
     function step(){
-      // Clear previous highlight
-      const prev=document.getElementById(`bsp${cur}`);
-      if(prev){prev.classList.remove('moving-highlight');}
-      cur=(cur+1)%BOARD.length;
-      stepCount++;
-      const el=document.getElementById(`bsp${cur}`);
-      if(el){
-        el.classList.add('moving-highlight');
-      }
-      updateTrailDot(stepCount-1, totalCells);
-      // Update token position in state temporarily for rendering
-      S.teams[ti].pos=cur;
-      updBoard();
-      // Re-add highlight after updBoard (which replaces innerHTML)
+      const prev=document.getElementById(`bsp${cur}`);if(prev)prev.classList.remove('moving-highlight');
+      cur=(cur+1)%BOARD.length;stepCount++;
+      S.teams[ti].pos=cur;updBoard();
       const el2=document.getElementById(`bsp${cur}`);
-      if(el2) el2.classList.add('moving-highlight');
+      if(el2){el2.classList.add('moving-highlight');}
+      updateTrailDot(stepCount-1,steps);
       if(stepCount===steps){
         setTimeout(()=>{
-          if(el2)el2.classList.remove('moving-highlight');
-          if(el2)el2.classList.add('land-flash');
-          setTimeout(()=>{if(el2)el2.classList.remove('land-flash');},400);
+          if(el2){el2.classList.remove('moving-highlight');el2.classList.add('land-flash');setTimeout(()=>el2.classList.remove('land-flash'),500);}
           resolve();
         },200);
-      }else{
-        setTimeout(step,220);
-      }
+      }else{setTimeout(step,220);}
     }
     step();
   });
@@ -932,79 +985,50 @@ async function handleAct(a){
   switch(a.type){
     case'roll':
       if(S.phase!=='roll'||ti!==S.cur)return;
-      await doMove(ti,a.result,a.diceArr||[a.result]); break;
+      await doMove(ti,a.result,a.diceArr||[a.result]);break;
     case'crossVote':{
-      // Student voted on crossroads
       if(!S.crossVotes)S.crossVotes={};
       S.crossVotes[ti]=a.choice;
       S.ts=Date.now();broadcast();renderTeach();
-      // Update popup if open
       updateCrossAnswerStatus();
+      if(S.phase==='card'&&S.cardType==='cross')renderCrossOpts();
       break;
     }
     case'usePow':{
-      const pk=a.power; const tm=S.teams[ti];
+      const pk=a.power;const tm=S.teams[ti];
       if(tm.powers[pk]<=0)return;
       if(pk==='medpack'&&ti===S.cur&&S.phase==='roll'){
         tm.powers.medpack--;tm.hp=clampHp(tm.hp+100);
-        S.ts=Date.now();broadcast();renderTeach();
-        floatPt(ti,100,'💊+100');
+        S.ts=Date.now();broadcast();renderTeach();floatPt(ti,100,'💊+100');
       }else if(pk==='reverse'&&ti===S.cur){
-        // Reverse: usable during card phase to flip direction
-        tm.powers.reverse--;
-        S.direction*=-1;
-        S.ts=Date.now();broadcast();renderTeach();
-        floatPt(ti,0,'🔄 順序逆轉！');
-        showPendingNotif(ti,'reverse');
+        tm.powers.reverse--;S.pendingReverse=true;
+        S.ts=Date.now();broadcast();renderTeach();floatPt(ti,0,'🔄 回合後逆轉！');showPendingNotif(ti,'reverse');
       }else if(pk==='block'&&ti===S.cur){
-        // Block: skip next team
-        tm.powers.block--;
-        const nextTeam=getNextTeam();
-        S.skipNext[nextTeam]=true;
-        S.ts=Date.now();broadcast();renderTeach();
-        floatPt(nextTeam,0,`🚫 ${S.teams[nextTeam].short} 被禁止！`);
-        showPendingNotif(ti,'block');
+        tm.powers.block--;const nextTeam=getNextTeam();S.skipNext[nextTeam]=true;
+        S.ts=Date.now();broadcast();renderTeach();floatPt(nextTeam,0,`🚫 ${S.teams[nextTeam].short} 被禁止！`);showPendingNotif(ti,'block');
       }else if(pk==='immunity'&&ti===S.cur){
-        // Immediately apply immunity
-        if(tm.powers.immunity>0) tm.powers.immunity--;
-        S.ts=Date.now();broadcast();renderTeach();
-        floatPt(ti,0,'🛡️ 免死金牌送出！');
-        showPendingNotif(ti,'immunity');
+        if(tm.powers.immunity>0)tm.powers.immunity--;
+        S.ts=Date.now();broadcast();renderTeach();floatPt(ti,0,'🛡️ 免死金牌！');showPendingNotif(ti,'immunity');
       }else if(pk==='extradice'&&ti===S.cur){
-        tm.powers.extradice--;
-        S.ts=Date.now();broadcast();
+        tm.powers.extradice--;S.ts=Date.now();broadcast();
       }
       break;
     }
   }
 }
+function getNextTeam(){return(S.cur+S.direction+4)%4;}
 
-function getNextTeam(){
-  let n=(S.cur+S.direction+4)%4;
-  // Skip already-skipped?  Return raw next
-  return n;
-}
-
-async function doMove(ti, steps, diceArr){
+async function doMove(ti,steps,diceArr){
   const oldPos=S.teams[ti].pos;
-  const newPos=(oldPos+steps)%BOARD.length;
   S.phase='moving';S.ts=Date.now();broadcast();renderTeach();
-  // Show big centered dice overlay
-  showTeachDiceOverlay(diceArr, steps, S.teams[ti].short, S.teams[ti].color, steps);
-  // Wait for dice animation to show result
+  showTeachDiceOverlay(diceArr,steps,S.teams[ti].short,S.teams[ti].color,steps);
   await new Promise(r=>setTimeout(r,1400));
-  // Animate step-by-step move
-  await animateMove(ti, oldPos, steps);
-  S.teams[ti].pos=newPos;
-  // Passing start check
-  if(newPos<oldPos&&oldPos>0){
-    S.teams[ti].hp=clampHp(S.teams[ti].hp+100);floatPt(ti,100,'⚔️起點+100');
-  }
-  // Hide overlay after short pause
-  diceOverlayTimer=setTimeout(hideTeachDiceOverlay, 800);
-  S.ts=Date.now();broadcast();renderTeach();
-  await new Promise(r=>setTimeout(r,500));
-  await procSpace(ti,BOARD[S.teams[ti].pos]);
+  await animateMove(ti,oldPos,steps);
+  const newPos=S.teams[ti].pos;
+  if(newPos<oldPos&&oldPos>0){S.teams[ti].hp=clampHp(S.teams[ti].hp+100);floatPt(ti,100,'⚔️起點+100');}
+  hideTeachDiceOverlay();S.ts=Date.now();broadcast();renderTeach();
+  await new Promise(r=>setTimeout(r,400));
+  await procSpace(ti,BOARD[newPos]);
 }
 
 async function procSpace(ti,sp){
@@ -1014,542 +1038,364 @@ async function procSpace(ti,sp){
     case'fate':await drawCard('fate');break;
     case'cross':await drawCard('cross');break;
     case'martial':await drawCard('mart');break;
-    case'bonus_all':S.teams.forEach(x=>x.hp=clampHp(x.hp+100));floatPt(null,100,'💫全體+100');await nextTurn();break;
-    case'curse_all':S.teams.forEach(x=>x.hp=clampHp(x.hp-100));floatPt(null,-100,'☠️全體-100');await nextTurn();break;
-    case'holy_all':S.teams.forEach(x=>x.hp=clampHp(x.hp+150));floatPt(null,150,'🌟全體+150');await nextTurn();break;
+    case'bonus_all':S.teams.forEach(x=>x.hp=clampHp(x.hp+100));floatPt(null,100,'💫全體+100');S.ts=Date.now();broadcast();renderTeach();await nextTurn();break;
+    case'curse_all':S.teams.forEach(x=>x.hp=clampHp(x.hp-100));floatPt(null,-100,'☠️全體-100');S.ts=Date.now();broadcast();renderTeach();await nextTurn();break;
+    case'holy_all':S.teams.forEach(x=>x.hp=clampHp(x.hp+150));floatPt(null,150,'🌟全體+150');S.ts=Date.now();broadcast();renderTeach();await nextTurn();break;
+    case'skip':S.skipNext[ti]=true;floatPt(ti,0,'⏸ 暫停一回合！');S.ts=Date.now();broadcast();renderTeach();await nextTurn();break;
+    case'move':showMoveTo();break;// teacher picks destination
   }
 }
 
+// Move-to mechanic
+function showMoveTo(){
+  if(S.phase!=='roll'&&S.phase!=='moving'&&!(S.phase==='card'||BOARD[S.teams[S.cur].pos]?.t==='move'))return;
+  const grid=document.getElementById('moveToGrid');
+  grid.innerHTML=BOARD.map((sp,i)=>`<button class="moveto-btn" style="border-left:3px solid ${getBoardColor(sp.t)}" onclick="applyMoveTo(${i})">${sp.ico} ${i}: ${sp.lbl}</button>`).join('');
+  document.getElementById('moveTopop').classList.add('show');
+}
+function getBoardColor(t){const m={opp:'#3ab86a',fate:'#e04040',cross:'#4080e0',martial:'#d08030',bonus_all:'#f0c050',holy_all:'#f0c050',curse_all:'#c06080',skip:'#808080',move:'#80d0f0',start:'#f0c050'};return m[t]||'#888';}
+function closeMoveTop(){document.getElementById('moveTopop').classList.remove('show');}
+async function applyMoveTo(idx){
+  closeMoveTop();
+  const ti=S.cur;const oldPos=S.teams[ti].pos;
+  // animate movement
+  S.phase='moving';S.ts=Date.now();broadcast();renderTeach();
+  const steps=(idx-oldPos+BOARD.length)%BOARD.length||BOARD.length;
+  showTeachDiceOverlay([6],steps,S.teams[ti].short,S.teams[ti].color,steps);
+  await new Promise(r=>setTimeout(r,1000));
+  await animateMove(ti,oldPos,steps);
+  S.teams[ti].pos=idx;
+  hideTeachDiceOverlay();S.ts=Date.now();broadcast();renderTeach();
+  await new Promise(r=>setTimeout(r,400));
+  await procSpace(ti,BOARD[idx]);
+}
+
 async function drawCard(type){
+  S.crossVotes={};S.crossRevealed=false;
   let card,hp=0;
-  S.crossVotes={};
   if(type==='opp'){
     if(pwDk.length>0&&Math.random()<0.5){
-      card=fDeck(pwDk,POWER_CHANCE_CARDS);
-      hp=card.hp||0;
+      card=fDeck(pwDk,POWER_CHANCE_CARDS);hp=card.hp||0;
       S.card={...card};S.cardType='opp';S.cardHp=hp;S.cardTs=Date.now();S.phase='card';S.pendingPow=null;S.cardPower=card.power;
-      S.ts=Date.now();broadcast();
-      showCardPopup(card,'opp',hp,card.power);return;
+      S.ts=Date.now();broadcast();showCardPopup(card,'opp',hp,card.power);return;
     }
     card=fDeck(oDk,OPPS);hp=card.hp;
   }else if(type==='fate'){card=fDeck(fDk,FATES);hp=card.hp;}
   else if(type==='cross'){card=fDeck(cDk,CROSS);hp=0;}
   else{card=fDeck(mDk,MARTIALS);hp=0;}
   S.card={...card};S.cardType=type;S.cardHp=hp;S.cardTs=Date.now();S.phase='card';S.pendingPow=null;S.cardPower=null;
-  S.ts=Date.now();broadcast();
-  showCardPopup(card,type,hp,null);
+  S.ts=Date.now();broadcast();showCardPopup(card,type,hp,null);
 }
-function teachDraw(type){drawCard(type);}
 
 function showCardPopup(card,type,hp,pendingPower){
-  const bmap={opp:['cbadge-opp','✨ 機會'],fate:['cbadge-fate','💀 命運'],cross:['cbadge-cross','🔀 十字路口'],mart:['cbadge-mart','📖 武功秘笈']};
-  const[bcls,blbl]=bmap[type];
-  document.getElementById('cbadge').className='cbadge '+bcls;document.getElementById('cbadge').textContent=blbl;
-  const hpEl=document.getElementById('chp');
-  if(hp!==0&&type!=='cross'){hpEl.textContent=(hp>0?'+':'')+hp+' HP';hpEl.className='chp '+(hp>0?'pos':'neg');}
-  else if(pendingPower){hpEl.textContent=PWRD[pendingPower].ico+' 獲得功能牌！';hpEl.className='chp pos';}
-  else{hpEl.textContent='';hpEl.className='chp';}
-  document.getElementById('ctxt').textContent=card.t||'';
-  document.getElementById('pwrNotif').className='pwr-notif';
-  const crossSec=document.getElementById('crossSection');
-  const btnRow=document.getElementById('cbtnRow');
-
-  if(type==='cross'&&card.opts){
-    S.crossRevealed=false;
-    crossSec.style.display='block';
-    renderCrossOpts();
-    updateCrossAnswerStatus();
-    btnRow.style.display='none';
-  }else{
-    crossSec.style.display='none';
-    btnRow.style.display='grid';
-    renderCardBtns(type,hp,pendingPower);
-  }
-  document.getElementById('cpop').classList.add('show');
+  // ALL types: handled in board center, never open popup
+  if(type==='cross') S.crossRevealed=false;
+  updBoard();
   startTeachTimer();
 }
 
 function renderCrossOpts(){
-  if(!S.card||!S.card.opts)return;
-  const revealed=S.crossRevealed;
-  // All options same neutral style; after reveal show HP beside each
-  document.getElementById('crossOpts').innerHTML=S.card.opts.map(o=>{
-    const hpTag=revealed
-      ?`<span class="cross-hp-reveal ${o.hp>0?'pos':'neg'}">${o.hp>0?'+':''}${o.hp} HP</span>`
-      :'';
-    return`<div class="cross-opt-row neutral">
-      <span class="cross-lbl">${o.l}</span>
-      <span style="flex:1">${o.txt}</span>
-      ${hpTag}
-      <span class="cross-pickers" id="pickers-${o.l}"></span>
-    </div>`;
-  }).join('');
-  // Confirm / reveal buttons
-  const cur=S.teams[S.cur];
-  const hasImm=cur.powers.immunity>0;
-  if(!revealed){
-    document.getElementById('crossConfirmRow').innerHTML=
-      S.card.opts.map(o=>`<button class="cross-confirm-btn neutral" onclick="revealCross(${o.hp},'${o.l}')">選 ${o.l}</button>`).join('')+
-      (hasImm?`<button class="cross-confirm-btn imm" onclick="applyImmunity()">🛡️</button>`:'');
-  }else{
-    // After reveal: show HP result and action buttons
-    const pendingHp=S.cardHp;
-    const immBtn=hasImm&&pendingHp<0?`<button class="cross-confirm-btn imm" onclick="applyImmunity()">🛡️ 免死金牌</button>`:'';
-    const revBtn=cur.powers.reverse>0?`<button class="cross-confirm-btn rev" onclick="useReverse()">🔄 迴轉</button>`:'';
-    const blkBtn=cur.powers.block>0?`<button class="cross-confirm-btn blk" onclick="useBlock()">🚫 禁止</button>`:'';
-    document.getElementById('crossConfirmRow').innerHTML=
-      `<button class="cross-confirm-btn ok" onclick="confirmCross()">✓ 繼續</button>${immBtn}${revBtn}${blkBtn}`;
-  }
+  // Cross is rendered entirely inside the board center via updBoard()
+  updBoard();
 }
 
-function revealCross(hp, label){
-  // Record chosen option's HP, reveal HP values
-  S.cardHp=hp; S.crossRevealed=true;
-  S.ts=Date.now(); broadcast();
-  renderCrossOpts();
-  updateCrossAnswerStatus();
-  clearInterval(teachTimer); // pause timer while showing result
-}
+function revealCross(hp,label){S.cardHp=hp;S.crossRevealed=true;S.ts=Date.now();broadcast();renderCrossOpts();updateCrossAnswerStatus();clearInterval(teachTimer);updBoard();}
 
 async function confirmCross(){
   clearInterval(teachTimer);
-  document.getElementById('cpop').classList.remove('show');
-  S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);
-  floatPt(S.cur,S.cardHp,'');
-  S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;
+  // cross never opened popup, no need to remove it
+  if(S.crossRevealed&&S.cardHp!==0){S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);floatPt(S.cur,S.cardHp,'');}
+  S.crossVotes={};S.crossRevealed=false;S.cardHp=0;S.card=null;S.cardTs=0;S.paused=false;S.pausedAt=0;
   await checkKO();
 }
 
 function renderCardBtns(type,hp,pendingPower){
   const btnRow=document.getElementById('cbtnRow');
-  const cur=S.teams[S.cur];
-  const hasImm=cur.powers.immunity>0;
-  const hasRev=cur.powers.reverse>0;
-  const hasBlk=cur.powers.block>0;
-  // After-resolve power buttons (reverse, block usable after opp/fate result)
+  const cur=S.teams[S.cur];const hasImm=cur.powers.immunity>0;const hasRev=cur.powers.reverse>0;const hasBlk=cur.powers.block>0;
   if(type==='fate'){
     const immBtn=hasImm?`<button class="cbimm" onclick="applyImmunity()">🛡️ 免死金牌</button>`:'';
     const revBtn=hasRev?`<button class="cbrev" onclick="useReverse()">🔄 迴轉</button>`:'';
     const blkBtn=hasBlk?`<button class="cbblk2" onclick="useBlock()">🚫 禁止</button>`:'';
-    btnRow.className='cbtn-row';
-    btnRow.innerHTML=`
-      <button class="cbok" onclick="resolveCard(true)">✓ 確認扣血</button>
-      ${immBtn}${revBtn}${blkBtn}
-      <button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
+    btnRow.innerHTML=`<button class="cbok" onclick="resolveCard(true)">✓ 確認扣血</button>${immBtn}${revBtn}${blkBtn}<button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }else if(type==='opp'&&pendingPower){
-    btnRow.className='cbtn-row two';
-    btnRow.innerHTML=`
-      <button class="cbok" onclick="resolvePowerCard('${pendingPower}')">✓ 獲得 ${PWRD[pendingPower].ico}</button>
-      <button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
+    btnRow.innerHTML=`<button class="cbok" onclick="resolvePowerCard('${pendingPower}')">✓ 獲得 ${PWRD[pendingPower].ico}</button><button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }else if(type==='opp'){
     const revBtn=hasRev?`<button class="cbrev" onclick="useReverse()">🔄 迴轉</button>`:'';
     const blkBtn=hasBlk?`<button class="cbblk2" onclick="useBlock()">🚫 禁止</button>`:'';
-    btnRow.className='cbtn-row';
-    btnRow.innerHTML=`
-      <button class="cbok" onclick="resolveCard(true)">✓ 完成 +${hp}HP</button>
-      ${revBtn}${blkBtn}
-      <button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
+    btnRow.innerHTML=`<button class="cbok" onclick="resolveCard(true)">✓ 完成 +${hp}HP</button>${revBtn}${blkBtn}<button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }else if(type==='mart'){
-    btnRow.className='cbtn-row two';
-    btnRow.innerHTML=`
-      <button class="cbok" onclick="martSuccess()">🛡️ 成功 → 得免死金牌</button>
-      <button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
+    btnRow.innerHTML=`<button class="cbok" onclick="martSuccess()">🛡️ 成功得免死金牌</button><button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }else{
-    btnRow.className='cbtn-row two';
     btnRow.innerHTML=`<button class="cbok" onclick="resolveCard(true)">✓ 完成</button><button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }
 }
 
 function updateCrossAnswerStatus(){
   if(!S.card||S.cardType!=='cross')return;
-  const statusEl=document.getElementById('crossAnswerStatus');if(!statusEl)return;
-  statusEl.innerHTML=TDEFS.map((t,i)=>{
-    const v=S.crossVotes?S.crossVotes[i]:null;
-    return`<div class="cas-chip ${v?'answered':'waiting'}" style="${v?`color:${t.color};outline-color:${t.color}`:''}">
-      ${t.emoji} ${t.short} ${v?'→ '+v:'⏳'}
-    </div>`;
-  }).join('');
-  // Update pickers on options
-  if(S.card&&S.card.opts){
-    S.card.opts.forEach(o=>{
-      const el=document.getElementById('pickers-'+o.l);if(!el)return;
-      const pickers=TDEFS.filter((_,i)=>S.crossVotes&&S.crossVotes[i]===o.l).map(t=>t.emoji).join('');
-      el.textContent=pickers;
-    });
-  }
+  updBoard(); // board center handles all cross UI
 }
+function showPendingNotif(ti,p){updBoard();}
 
-function showPendingNotif(ti,p){
-  const t=S.teams[ti];
-  const n=document.getElementById('pwrNotif');
-  n.textContent=`⚡ ${t.short} 使用了 ${PWRD[p].ico} ${PWRD[p].n}！`;
-  n.className='pwr-notif show';
-}
-
+// ─── Timer: timestamp-based (not local counter) ───
+// Both teacher and students use cardTs for timing — this way pause/resume stays in sync.
+// Teacher timer is purely visual (bar + text); students independently compute elapsed from cardTs.
 function startTeachTimer(){
   clearInterval(teachTimer);
-  let left=CARD_SECS;
   const bar=document.getElementById('ctimerBar'),txt=document.getElementById('ctimerTxt');
-  bar.style.width='100%';bar.className='ctimer-bar';txt.textContent=left+' 秒';
+  if(bar){bar.style.width='100%';bar.className='ctimer-bar';}
   teachTimer=setInterval(()=>{
-    left--;const p=left/CARD_SECS*100;
-    bar.style.width=p+'%';txt.textContent=left+' 秒';
-    if(p<=25)bar.className='ctimer-bar u';else if(p<=55)bar.className='ctimer-bar w';
-    if(left<=0){clearInterval(teachTimer);resolveCard(false);}
-  },1000);
+    const elapsed=(Date.now()-(S.cardTs||Date.now()))/1000;
+    const left=Math.max(0,CARD_SECS-elapsed);
+    const p=left/CARD_SECS*100;
+    // Update popup timer bar if visible
+    if(bar){bar.style.width=p+'%';if(p<=25)bar.className='ctimer-bar u';else if(p<=55)bar.className='ctimer-bar w';else bar.className='ctimer-bar';}
+    if(txt){txt.textContent=Math.ceil(left)+' 秒';}
+    // Refresh board center for all card types
+    if(S.phase==='card') updBoard();
+    if(left<=0){
+      clearInterval(teachTimer);
+      if(txt)txt.textContent='⏰ 時間到！';
+      const b=document.getElementById('popupPauseBtn');if(b)b.style.display='none';
+    }
+  },500);
+}
+function toggleCrossTimer(){
+  // Pause/resume for cross (no popup, timer lives in board center)
+  if(S.paused){
+    const dur=Date.now()-S.pausedAt;
+    S.cardTs+=dur;S.paused=false;S.pausedAt=0;
+    startTeachTimer();
+  }else{
+    S.paused=true;S.pausedAt=Date.now();
+    clearInterval(teachTimer);
+  }
+  S.ts=Date.now();broadcast();updBoard();
+}
+function togglePopupPause(){
+  const btn=document.getElementById('popupPauseBtn');if(!btn)return;
+  if(S.paused){
+    // Resume: shift cardTs forward by paused duration
+    const dur=Date.now()-S.pausedAt;
+    S.cardTs+=dur;S.paused=false;S.pausedAt=0;
+    btn.textContent='⏸ 暫停';btn.className='popup-pause-btn';
+    startTeachTimer();
+  }else{
+    S.paused=true;S.pausedAt=Date.now();
+    clearInterval(teachTimer);
+    btn.textContent='▶ 繼續';btn.className='popup-pause-btn paused';
+  }
+  S.ts=Date.now();broadcast();
 }
 
 async function resolveCard(ok){
   clearInterval(teachTimer);
-  document.getElementById('cpop').classList.remove('show');
   if(ok&&S.cardType==='opp'){S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);floatPt(S.cur,S.cardHp,'');}
   else if(ok&&S.cardType==='fate'){S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);floatPt(S.cur,S.cardHp,'');}
-  S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;S.cardPower=null;
+  S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;S.cardPower=null;S.paused=false;S.pausedAt=0;
   await checkKO();
 }
-
-// pickCross now handled by revealCross+confirmCross
-
 async function resolvePowerCard(pk){
   clearInterval(teachTimer);
-  document.getElementById('cpop').classList.remove('show');
   if(S.cardHp>0){S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);floatPt(S.cur,S.cardHp,'');}
-  S.teams[S.cur].powers[pk]++;
-  floatPt(S.cur,0,`${PWRD[pk].ico} +1 ${PWRD[pk].n}！`);
-  S.crossVotes={};S.card=null;S.cardTs=0;S.cardPower=null;
+  S.teams[S.cur].powers[pk]++;floatPt(S.cur,0,`${PWRD[pk].ico} +1！`);
+  S.crossVotes={};S.card=null;S.cardTs=0;S.cardPower=null;S.paused=false;S.pausedAt=0;
   await checkKO();
 }
-
 async function martSuccess(){
   clearInterval(teachTimer);
-  document.getElementById('cpop').classList.remove('show');
-  S.teams[S.cur].powers.immunity++;
-  floatPt(S.cur,0,'🛡️+1 免死金牌！');
-  S.crossVotes={};S.card=null;S.cardTs=0;
-  await nextTurn();
+  S.teams[S.cur].powers.immunity++;floatPt(S.cur,0,'🛡️+1 免死金牌！');
+  S.crossVotes={};S.card=null;S.cardTs=0;S.paused=false;S.pausedAt=0;await nextTurn();
 }
-
 async function applyImmunity(){
-  const ti=S.cur;
-  if(S.teams[ti].powers.immunity>0){S.teams[ti].powers.immunity--;}
+  const ti=S.cur;if(S.teams[ti].powers.immunity>0)S.teams[ti].powers.immunity--;
   clearInterval(teachTimer);
-  document.getElementById('cpop').classList.remove('show');
+  if(S.cardType!=='cross') document.getElementById('cpop').classList.remove('show');
   floatPt(ti,0,'🛡️ 免除扣血！');
-  S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;
-  await nextTurn();
+  S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;S.paused=false;S.pausedAt=0;await nextTurn();
 }
-
-async function applyBlock(){
-  const nextTeam=getNextTeam();
-  S.skipNext[nextTeam]=true;
-  floatPt(nextTeam,0,`🚫 ${S.teams[nextTeam].short} 被禁止！`);
-  clearInterval(teachTimer);
-  document.getElementById('cpop').classList.remove('show');
-  S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;
-  await nextTurn();
-}
-
-// useBlock/useReverse: use during card resolution (opp/fate/cross after reveal)
 function useReverse(){
-  const ti=S.cur; const tm=S.teams[ti];
-  if(tm.powers.reverse<=0)return;
-  tm.powers.reverse--;
-  S.direction*=-1;
-  S.ts=Date.now();broadcast();renderTeach();
-  floatPt(ti,0,'🔄 順序逆轉！');
-  showPendingNotif(ti,'reverse');
-  // Re-render buttons to reflect consumed card
-  if(S.cardType==='cross') renderCrossOpts();
-  else renderCardBtns(S.cardType,S.cardHp,S.cardPower);
+  const ti=S.cur;const tm=S.teams[ti];if(tm.powers.reverse<=0)return;
+  tm.powers.reverse--;S.pendingReverse=true;S.ts=Date.now();broadcast();renderTeach();
+  floatPt(ti,0,'🔄 回合後逆轉！');updBoard();
 }
 function useBlock(){
-  const ti=S.cur; const tm=S.teams[ti];
-  if(tm.powers.block<=0)return;
-  tm.powers.block--;
-  const nextTeam=getNextTeam();
-  S.skipNext[nextTeam]=true;
-  S.ts=Date.now();broadcast();renderTeach();
-  floatPt(nextTeam,0,`🚫 ${S.teams[nextTeam].short} 被禁止！`);
-  showPendingNotif(ti,'block');
-  if(S.cardType==='cross') renderCrossOpts();
-  else renderCardBtns(S.cardType,S.cardHp,S.cardPower);
+  const ti=S.cur;const tm=S.teams[ti];if(tm.powers.block<=0)return;
+  tm.powers.block--;const nextTeam=getNextTeam();S.skipNext[nextTeam]=true;
+  S.ts=Date.now();broadcast();renderTeach();floatPt(nextTeam,0,`🚫 ${S.teams[nextTeam].short} 被禁止！`);updBoard();
 }
-
 async function checkKO(){
   const koTeam=S.teams.findIndex(t=>t.hp<=0);
-  if(koTeam>=0){
-    S.teams[koTeam].hp=100;S.skipNext[koTeam]=true;
-    S.crossVotes={};S.ts=Date.now();broadcast();
-    document.getElementById('koOv').style.display='flex';
-    const ko=document.getElementById('koTtl');ko.textContent=`${S.teams[koTeam].emoji} ${S.teams[koTeam].short} 陣亡！`;
-  }else{await nextTurn();}
+  if(koTeam>=0){S.crossVotes={};S.ts=Date.now();broadcast();showKOOverlay(koTeam);}
+  else{await nextTurn();}
 }
-
-async function dismissKO(){document.getElementById('koOv').style.display='none';await nextTurn();}
-
+function showKOOverlay(ti){
+  const t=S.teams[ti];document.getElementById('koTtl').innerHTML=`${teamDot(t,16)} <span style="vertical-align:middle">${t.short} 陣亡！</span>`;
+  document.getElementById('koReviveBtn').style.display=t.reviveUsed?'none':'inline-flex';
+  document.getElementById('koReviveTask').style.display=t.reviveUsed?'none':'block';
+  document.getElementById('koSkipMsg').style.display=t.reviveUsed?'block':'none';
+  document.getElementById('koOv').style.display='flex';document.getElementById('koOv').dataset.team=ti;
+}
+async function dismissKO(){
+  const ti=parseInt(document.getElementById('koOv').dataset.team||'0');
+  S.teams[ti].hp=50;S.skipNext[ti]=true;S.crossVotes={};
+  document.getElementById('koOv').style.display='none';await nextTurn();
+}
+async function reviveTeam(){
+  const ti=parseInt(document.getElementById('koOv').dataset.team||'0');
+  S.teams[ti].hp=200;S.teams[ti].reviveUsed=true;S.crossVotes={};
+  document.getElementById('koOv').style.display='none';floatPt(ti,200,'💖 復活！');
+  S.ts=Date.now();broadcast();renderTeach();await nextTurn();
+}
 async function nextTurn(){
   if(S.phase==='gameover')return;
+  if(S.pendingReverse){S.direction*=-1;S.pendingReverse=false;}
   let n=(S.cur+S.direction+4)%4;
-  if(n===0||(S.direction===-1&&n===3&&S.cur===0))S.round++;
-  if(n<S.cur&&S.direction===1)S.round++;
-  if(n>S.cur&&S.direction===-1)S.round++;
-  // Simple round count: just track when we pass team 0
-  // More reliable:
-  S.round=S.round; // keep as-is; already incremented above may double... let's just not auto-increment
   if(S.skipNext[n]){S.skipNext[n]=false;n=(n+S.direction+4)%4;}
-  S.cur=n;S.phase='roll';S.crossVotes={};S.card=null;S.cardTs=0;S.pendingPow=null;S.cardPower=null;
+  S.cur=n;S.phase='roll';S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;S.pendingPow=null;S.cardPower=null;S.paused=false;S.pausedAt=0;
   S.ts=Date.now();broadcast();renderTeach();
 }
-
 async function dismissCalm(){document.getElementById('calmOv').style.display='none';await nextTurn();}
 function endGame(){S.phase='gameover';S.ts=Date.now();broadcast();showGo();}
-
 function showGo(){
   const sorted=[...S.teams].sort((a,b)=>b.hp-a.hp);const medals=['🥇','🥈','🥉','🏅'];
-  document.getElementById('goH').textContent=`${sorted[0].emoji} ${sorted[0].short} 勝利！`;
-  document.getElementById('goRows').innerHTML=sorted.map((t,i)=>{
-    const p=t.hp/MAX_HP;
-    return`<div class="go-row${i===0?' w':''}"><span class="go-rk">${medals[i]}</span><span class="go-nm" style="color:${t.color}">${t.emoji} ${t.name}</span><div style="flex:1"><div class="go-hp" style="color:${t.color}">${t.hp}</div><div class="go-hpbar"><div class="go-hpfill" style="width:${p*100}%;background:${hpColor(t.hp)}"></div></div></div></div>`;
-  }).join('');
+  document.getElementById('goH').innerHTML=`${teamDot(sorted[0],18)} <span style="vertical-align:middle">${sorted[0].short} 勝利！</span>`;
+  document.getElementById('goRows').innerHTML=sorted.map((t,i)=>{const p=t.hp/MAX_HP;return`<div class="go-row${i===0?' w':''}"><span class="go-rk">${medals[i]}</span><span class="go-nm" style="color:${t.color};display:flex;align-items:center;gap:6px">${teamDot(t,14)} ${t.name}</span><div style="flex:1"><div class="go-hp" style="color:${t.color}">${t.hp}</div><div class="go-hpbar"><div class="go-hpfill" style="width:${p*100}%;background:${hpColor(t.hp)}"></div></div></div></div>`;}).join('');
   document.getElementById('goOv').style.display='flex';
 }
-
 function floatPt(ti,pts,lbl){
-  const el=document.createElement('div');
-  el.className='fpt '+(pts>0?'pos':pts<0?'neg':'pos');
+  const el=document.createElement('div');el.className='fpt '+(pts>0?'pos':pts<0?'neg':'pos');
   el.textContent=(pts>0?'+':pts<0?'':'')+( pts!==0?pts:'')+' '+lbl;
-  if(ti!=null){
-    const cs=document.querySelectorAll('.hp-team-mini');const c=cs[ti];
-    if(c){const r=c.getBoundingClientRect();el.style.left=(r.left+r.width/2)+'px';el.style.top=r.top+'px';}
-    else{el.style.left='50%';el.style.top='30%';}
-  }else{el.style.left='50%';el.style.top='30%';}
+  if(ti!=null){const cs=document.querySelectorAll('.hp-team-mini');const c=cs[ti];if(c){const r=c.getBoundingClientRect();el.style.left=(r.left+r.width/2)+'px';el.style.top=r.top+'px';}else{el.style.left='50%';el.style.top='30%';}}else{el.style.left='50%';el.style.top='30%';}
   document.body.appendChild(el);setTimeout(()=>el.remove(),1500);
 }
+function teachManualRoll(){if(S.phase!=='roll')return;const r=(0|Math.random()*6)+1;doMove(S.cur,r,[r]);broadcast();}
 
-
-// Teacher pause / resume
-function teachPause(){
-  S.paused=!S.paused;
-  const btn=document.getElementById('pauseBtn');
-  if(btn){btn.textContent=S.paused?'▶ 繼續':'⏸ 暫停';btn.className=S.paused?'pause-btn paused':'pause-btn';}
-  if(S.paused) clearInterval(teachTimer);
-  else if(S.phase==='card') startTeachTimer();
-  S.ts=Date.now();broadcast();
-}
-// Teacher manual roll — rolls a random dice for current team
-function teachManualRoll(){
-  if(S.phase!=='roll')return;
-  const r1=(0|Math.random()*6)+1;
-  doMove(S.cur, r1, [r1]);
-  broadcast();
-}
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // STUDENT VIEW
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 function showStudView(){hidePgs();document.getElementById('pgStud').classList.add('on');renderStud();}
-
 function renderStud(){
   if(myRole===null||myRole==='teacher')return;
   const ti=myRole;const t=S.teams[ti];
   const isMine=S.cur===ti;const canRoll=isMine&&S.phase==='roll';
   const hasExtraDice=t.powers.extradice>0;
-
-  document.getElementById('svTeam').textContent=`${t.emoji} ${t.short}`;document.getElementById('svTeam').style.color=t.color;
+  document.getElementById('svTeam').innerHTML=`${teamDot(t,14)} <span style="vertical-align:middle">${t.short}</span>`;document.getElementById('svTeam').style.color=t.color;
   const pill=document.getElementById('svPill');
   pill.textContent=isMine?(S.phase==='roll'?'⚔️ 你的回合！':'進行中…'):'等待中';
   pill.className='sv-pill '+(isMine&&S.phase==='roll'?'on':'off');
-
   const p=t.hp/MAX_HP;
   document.getElementById('svMyHpVal').textContent=t.hp;document.getElementById('svMyHpVal').style.color=t.color;
-  document.getElementById('svMyHpFill').style.width=(p*100)+'%';
-  document.getElementById('svMyHpFill').style.background=hpColor(t.hp);
-
-  document.getElementById('svScores').innerHTML=S.teams.map((tm,i)=>{
-    const pp=tm.hp/MAX_HP;
-    return`<div class="ssc${S.cur===i?' cur':''}" style="color:${tm.color}">
-      <div class="ssc-n">${tm.emoji} ${tm.short}</div>
-      <div class="ssc-p">${tm.hp}</div>
-      <div class="ssc-bar"><div class="ssc-fill" style="width:${pp*100}%;background:${hpColor(tm.hp)}"></div></div>
-    </div>`;
-  }).join('');
-
-  const showTwo=isMine&&S.phase==='roll'&&hasExtraDice;
-  document.getElementById('sdFace2').style.display=showTwo?'inline-block':'none';
-
+  document.getElementById('svMyHpFill').style.width=(p*100)+'%';document.getElementById('svMyHpFill').style.background=hpColor(t.hp);
+  document.getElementById('svScores').innerHTML=S.teams.map((tm,i)=>{const pp=tm.hp/MAX_HP;return`<div class="ssc${S.cur===i?' cur':''}" style="color:${tm.color}"><div class="ssc-n" style="display:flex;align-items:center;justify-content:center;gap:3px">${teamDot(tm,8)} ${tm.short}</div><div class="ssc-p">${tm.hp}</div><div class="ssc-bar"><div class="ssc-fill" style="width:${pp*100}%;background:${hpColor(tm.hp)}"></div></div></div>`;}).join('');
+  document.getElementById('sdFace2').style.display=isMine&&S.phase==='roll'&&hasExtraDice?'inline-block':'none';
   const fkeys=['immunity','medpack','reverse','block','extradice'];
   document.getElementById('svFcards').innerHTML=fkeys.map(pk=>{
     const pd=PWRD[pk];const cnt=t.powers[pk];
-    const crossNegAfterReveal=S.crossRevealed&&S.cardHp<0;
+    const crossNeg=S.crossRevealed&&S.cardHp<0;
     const canUse=cnt>0&&(
-      pk==='immunity'?(isMine&&S.phase==='card'&&(S.cardType==='fate'||(S.cardType==='cross'&&crossNegAfterReveal))):
+      pk==='immunity'?(isMine&&S.phase==='card'&&(S.cardType==='fate'||(S.cardType==='cross'&&crossNeg))):
       pk==='medpack'?(isMine&&S.phase==='roll'):
       pk==='reverse'?(isMine&&S.phase==='card'&&(S.cardType==='opp'||S.cardType==='fate'||(S.cardType==='cross'&&S.crossRevealed))):
       pk==='block'?(isMine&&S.phase==='card'&&(S.cardType==='opp'||S.cardType==='fate'||(S.cardType==='cross'&&S.crossRevealed))):
       pk==='extradice'?(isMine&&S.phase==='roll'):false
     );
     return`<div class="fcard${cnt<=0?' empty':''}${canUse?' active-card':''}">
-      <div class="fcard-ico">${pd.ico}</div>
-      <div class="fcard-name">${pd.n}</div>
-      <div class="fcard-desc">${pd.desc}</div>
-      <div class="fcard-cnt">×${cnt}</div>
+      <div class="fcard-ico">${pd.ico}</div><div class="fcard-name">${pd.n}</div>
+      <div class="fcard-desc">${pd.desc}</div><div class="fcard-cnt">×${cnt}</div>
       <button class="fcard-use" onclick="studPow('${pk}')" ${canUse?'':'disabled'}>使用</button>
     </div>`;
   }).join('');
-
   const btn=document.getElementById('sdRoll');const inf=document.getElementById('sdInf');
   if(canRoll){btn.disabled=false;btn.textContent=hasExtraDice?'🎲🎲 擲兩骰！':'🎲 擲骰子！';inf.textContent='';}
   else{btn.disabled=true;btn.textContent=isMine?'處理中…':'等待你的回合…';inf.textContent='';}
-
+  // Countdown — use cardTs from state (shared timestamp)
   const cdown=document.getElementById('svCdown');
-  if(S.phase==='card'&&S.cardTs>0){cdown.classList.add('show');startStudTimer();}
+  if(S.phase==='card'&&S.cardTs>0&&!S.paused){cdown.classList.add('show');startStudTimer();}
+  else if(S.paused){cdown.classList.add('show');updRing();}// show frozen ring
   else{cdown.classList.remove('show');clearInterval(studTimer);}
-
   const qb=document.getElementById('svQBox');
   if(S.card&&S.phase==='card'){
-    const bm={
-      opp:['rgba(10,138,78,.08)','#0A8A4E','✨ 機會'],
-      fate:['rgba(204,34,34,.08)','#CC2222','💀 命運'],
-      cross:['rgba(17,85,204,.08)','#1155CC','🔀 十字路口'],
-      mart:['rgba(170,85,0,.08)','#AA5500','📖 武功秘笈']
-    };
+    const bm={opp:['rgba(58,184,106,.12)','#5ad88a','✨ 機會'],fate:['rgba(224,64,64,.12)','#f06060','💀 命運'],cross:['rgba(64,128,224,.12)','#60a0f0','🔀 十字路口'],mart:['rgba(208,128,48,.12)','#e09840','📖 武功秘笈']};
     const[bg,cl,bl]=bm[S.cardType]||['','',''];
-    qb.style.display='block';qb.style.background=bg;qb.style.outlineColor=cl;
+    qb.style.display='block';qb.style.background=bg;qb.style.boxShadow=`0 0 0 2px ${cl}`;
     let html=`<div class="svq-badge" style="color:${cl}">${bl}</div><div class="svq-txt">${S.card.t}</div>`;
-
     if(S.cardType==='cross'&&S.card.opts){
-      // Student can vote on their answer
       const myVote=S.crossVotes&&S.crossVotes[ti];
       if(myVote){
-        html+=`<div class="svq-opts">${S.card.opts.map(o=>{
-          const sel=myVote===o.l;
-          return`<div class="svq-vote-btn svq-neutral${sel?' selected':''}">
-            <span class="svq-vote-lbl">${o.l}</span><span>${o.txt}</span>
-          </div>`;
-        }).join('')}</div>`;
-        html+=`<div class="svq-voted-msg">✓ 已選擇 ${myVote}，等待老師確認結果</div>`;
+        html+=`<div class="svq-opts">${S.card.opts.map(o=>`<div class="svq-vote-btn svq-neutral${myVote===o.l?' selected':''}"><span class="svq-vote-lbl">${o.l}</span><span>${o.txt}</span></div>`).join('')}</div>`;
+        html+=`<div class="svq-voted-msg">✓ 已選擇 ${myVote}，等待老師公布</div>`;
       }else{
-        html+=`<div class="svq-opts">${S.card.opts.map(o=>`
-          <button class="svq-vote-btn svq-neutral" onclick="castVote('${o.l}')">
-            <span class="svq-vote-lbl">${o.l}</span><span style="color:var(--tx);font-weight:700">${o.txt}</span>
-          </button>`).join('')}</div>`;
-        const activeTeam=S.teams[S.cur];
-        const isActive=S.cur===ti;
-        const activeNote=isActive
-          ?`<div class="svq-pts" style="color:${cl}">你的組別作答，選擇會影響本組血量</div>`
-          :`<div class="svq-pts" style="color:var(--mu)">🎙 ${activeTeam.emoji} ${activeTeam.short} 作答中，你可分享意見</div>`;
-        html+=activeNote;
+        html+=`<div class="svq-opts">${S.card.opts.map(o=>`<button class="svq-vote-btn svq-neutral" onclick="castVote('${o.l}')"><span class="svq-vote-lbl">${o.l}</span><span>${o.txt}</span></button>`).join('')}</div>`;
+        const activeTeam=S.teams[S.cur];const isActive=S.cur===ti;
+        html+=isActive?`<div class="svq-pts" style="color:${cl}">點選你的選擇送出給老師</div>`:`<div class="svq-pts" style="color:var(--mu)">🎙 ${teamDot(activeTeam,10)} ${activeTeam.short} 作答中</div>`;
       }
     }else if(S.cardHp!==0){
-      html+=`<div class="svq-pts">${S.cardHp>0?'成功可得':'踩到命運！'} <b style="color:${S.cardHp>0?'#0A8A4E':'#CC2222'}">${S.cardHp>0?'+':''}${S.cardHp} HP</b></div>`;
+      html+=`<div class="svq-pts">${S.cardHp>0?'成功可得':'踩到命運！'} <b style="color:${S.cardHp>0?'#5ad88a':'#f06060'}">${S.cardHp>0?'+':''}${S.cardHp} HP</b></div>`;
     }else if(S.cardType==='mart'){
-      html+=`<div class="svq-pts">成功作答可得 <b style="color:var(--gold2)">🛡️ 免死金牌 ×1</b></div>`;
+      html+=`<div class="svq-pts">成功作答可得 <b style="color:var(--gold)">🛡️ 免死金牌 ×1</b></div>`;
     }else if(S.cardPower){
-      html+=`<div class="svq-pts">完成即獲得 <b style="color:var(--gold2)">${PWRD[S.cardPower].ico} ${PWRD[S.cardPower].n} ×1</b></div>`;
+      html+=`<div class="svq-pts">完成即獲得 <b style="color:var(--gold)">${PWRD[S.cardPower].ico} ${PWRD[S.cardPower].n} ×1</b></div>`;
     }
     qb.innerHTML=html;
   }else qb.style.display='none';
-
   if(S.phase==='gameover')showGo();
 }
-
-function castVote(choice){
-  // Student votes on crossroads choice
-  sendAct({type:'crossVote',choice:choice});
-  // Optimistic update
-  if(!S.crossVotes)S.crossVotes={};
-  S.crossVotes[myRole]=choice;
-  renderStud();
-}
-
+function castVote(choice){sendAct({type:'crossVote',choice:choice});if(!S.crossVotes)S.crossVotes={};S.crossVotes[myRole]=choice;renderStud();}
 function startStudTimer(){
-  clearInterval(studTimer);
-  updRing();
-  studTimer=setInterval(()=>{if(!S.cardTs)return;updRing();},200);
+  clearInterval(studTimer);updRing();
+  studTimer=setInterval(()=>{if(!S.cardTs||S.paused)return;updRing();},200);
 }
 function updRing(){
-  const elapsed=(Date.now()-S.cardTs)/1000;const left=Math.max(0,CARD_SECS-elapsed);
+  // Use shared cardTs for elapsed calculation — in sync with teacher
+  let left;
+  if(S.paused&&S.pausedAt>0){
+    // Frozen at the moment paused
+    left=Math.max(0,CARD_SECS-(S.pausedAt-S.cardTs)/1000);
+  }else{
+    left=Math.max(0,CARD_SECS-(Date.now()-S.cardTs)/1000);
+  }
   const pct=left/CARD_SECS;const offset=(1-pct)*CIRC;
   const ring=document.getElementById('svRing');const num=document.getElementById('svRingNum');if(!ring)return;
   ring.style.strokeDashoffset=offset;
   const secs=Math.ceil(left);num.textContent=secs;
-  const col=left>10?'#D4800A':left>5?'#CC6600':'#CC2222';
+  const col=left>10?'#f0c050':left>5?'#d08030':'#e04040';
   ring.setAttribute('stroke',col);num.setAttribute('fill',col);
   if(left<=0)clearInterval(studTimer);
 }
-
-function doRoll(){
+function studPow(pk){
   if(typeof myRole!=='number')return;
-  if(S.cur!==myRole||S.phase!=='roll')return;
-  const t=S.teams[myRole];
-  const useExtra=t.powers.extradice>0;
+  const t=S.teams[myRole];if(t.powers[pk]<=0)return;
+  if(pk==='extradice'){document.getElementById('sdFace2').style.display='inline-block';document.getElementById('sdRoll').textContent='🎲🎲 擲兩骰！';document.getElementById('sdInf').textContent='多一骰已啟動！';return;}
+  sendAct({type:'usePow',power:pk});document.getElementById('sdInf').textContent=`${PWRD[pk].ico} 已送出！`;
+}
+function doRoll(){
+  if(typeof myRole!=='number')return;if(S.cur!==myRole||S.phase!=='roll')return;
+  const t=S.teams[myRole];const useExtra=t.powers.extradice>0;
   const faces=['⚀','⚁','⚂','⚃','⚄','⚅'];
-  const face1=document.getElementById('sdFace');
-  const face2=document.getElementById('sdFace2');
-  document.getElementById('sdRoll').disabled=true;
-  if(navigator.vibrate)navigator.vibrate([40,30,40]);
-  face1.classList.add('rolling');
-  if(useExtra)face2.classList.add('rolling');
+  const f1=document.getElementById('sdFace'),f2=document.getElementById('sdFace2');
+  document.getElementById('sdRoll').disabled=true;if(navigator.vibrate)navigator.vibrate([40,30,40]);
+  f1.classList.add('rolling');if(useExtra)f2.classList.add('rolling');
   document.getElementById('sdInf').textContent='🎲 擲骰中…';
-  let c=0;
+  let cnt=0;
   const anim=setInterval(()=>{
-    face1.textContent=faces[0|Math.random()*6];
-    if(useExtra)face2.textContent=faces[0|Math.random()*6];
-    c++;
-    if(c>18){
-      clearInterval(anim);
-      face1.classList.remove('rolling');face2.classList.remove('rolling');
-      const r1=(0|Math.random()*6)+1;
-      const r2=useExtra?(0|Math.random()*6)+1:0;
-      face1.textContent=faces[r1-1];
-      const total=r1+(useExtra?r2:0);
-      if(useExtra){
-        face2.textContent=faces[r2-1];
-        document.getElementById('sdInf').textContent=`${r1}+${r2}=${total} 步！`;
-      }else{
-        document.getElementById('sdInf').textContent=`擲出 ${r1}！等待老師處理…`;
-      }
+    f1.textContent=faces[0|Math.random()*6];if(useExtra)f2.textContent=faces[0|Math.random()*6];cnt++;
+    if(cnt>18){
+      clearInterval(anim);f1.classList.remove('rolling');f2.classList.remove('rolling');
+      const r1=(0|Math.random()*6)+1;const r2=useExtra?(0|Math.random()*6)+1:0;
+      f1.textContent=faces[r1-1];const total=r1+(useExtra?r2:0);
+      if(useExtra){f2.textContent=faces[r2-1];document.getElementById('sdInf').textContent=`${r1}+${r2}=${total} 步！`;}
+      else document.getElementById('sdInf').textContent=`擲出 ${r1}！`;
       const diceArr=useExtra?[r1,r2]:[r1];
-      if(useExtra) sendAct({type:'usePow',power:'extradice'});
+      if(useExtra)sendAct({type:'usePow',power:'extradice'});
       sendAct({type:'roll',result:total,diceArr:diceArr});
     }
   },70);
 }
 
-function studPow(pk){
-  if(typeof myRole!=='number')return;
-  const t=S.teams[myRole];
-  if(t.powers[pk]<=0)return;
-  // extradice handled specially (visual only — actual consume on roll)
-  if(pk==='extradice'){
-    document.getElementById('sdFace2').style.display='inline-block';
-    document.getElementById('sdRoll').textContent='🎲🎲 擲兩骰！';
-    document.getElementById('sdInf').textContent='🎲 多一骰已啟動，擲骰時送出';
-    return;
-  }
-  sendAct({type:'usePow',power:pk});
-  document.getElementById('sdInf').textContent=`${PWRD[pk].ico} ${PWRD[pk].n} 已送出！`;
-}
-
-// ═══════════════════════════════════════════════
-// SCREEN MANAGEMENT
-// ═══════════════════════════════════════════════
+// Screen management
 const PGS=['pgRole','pgLobby','pgJoin','pgConn'];
 function hidePgs(){PGS.forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('on');});['pgTeach','pgStud'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('on');});}
 function showPg(id){hidePgs();const el=document.getElementById(id);if(el)el.classList.add('on');}
-
-// Stars
-function createStars(){
-  const c=document.getElementById('stars');if(c.children.length)return;
-  const colors=['#D4800A','#0A8A4E','#1155CC','#CC2222','#CC8800'];
-  for(let i=0;i<50;i++){
-    const s=document.createElement('div');s.className='star';
-    const sz=(Math.random()<0.3?5:2.5);
-    const col=colors[0|Math.random()*colors.length];
-    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${Math.random()*5+4}s;animation-delay:${Math.random()*6}s;background:${col};opacity:.15`;
-    c.appendChild(s);
-  }
-}
-createStars();
 </script>
 </body>
 </html>
