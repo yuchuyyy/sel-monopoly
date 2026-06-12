@@ -8,18 +8,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#F7F8FC;--sf:#FFFFFF;--sf2:#F0F2F8;--sf3:#E4E8F2;
-  --gold:#F5A623;--gold2:#D4890A;--gold-d:rgba(245,166,35,.15);
-  --opp:#22C55E;--opp-l:#16A34A;--opp-d:rgba(34,197,94,.13);
-  --fate:#EF4444;--fate-l:#DC2626;--fate-d:rgba(239,68,68,.13);
-  --cross:#3B82F6;--cross-l:#2563EB;--cross-d:rgba(59,130,246,.13);
-  --mart:#F97316;--mart-l:#EA580C;--mart-d:rgba(249,115,22,.13);
-  --hp-hi:#22C55E;--hp-mid:#F97316;--hp-lo:#EF4444;
-  --tx:#1E1E2E;--mu:rgba(30,30,46,.45);
-  --c1:#3B82F6;--c2:#EF4444;--c3:#22C55E;--c4:#F5A623;
+  --bg:#F5F9FA;--sf:#FFFFFF;--sf2:#EEF4F6;--sf3:#DDE9ED;
+  --gold:#f3d86d;--gold2:#c9a730;--gold-d:rgba(243,216,109,.2);
+  --opp:#5a9a2a;--opp-l:#4a7a1a;--opp-d:rgba(90,154,42,.15);
+  --fate:#f7aaa1;--fate-l:#d96b60;--fate-d:rgba(247,170,161,.25);
+  --cross:#a7d7d3;--cross-l:#4e92b7;--cross-d:rgba(167,215,211,.25);
+  --mart:#4e92b7;--mart-l:#3e5a75;--mart-d:rgba(78,146,183,.18);
+  --hp-hi:#4a7a1a;--hp-mid:#f3d86d;--hp-lo:#f7aaa1;
+  --tx:#3e5a75;--mu:rgba(62,90,117,.5);
+  --c1:#4e92b7;--c2:#f7aaa1;--c3:#a7d7d3;--c4:#f3d86d;
   --card-r:12px;
-  --shadow-card:0 2px 8px rgba(30,30,46,.1),0 1px 2px rgba(30,30,46,.06);
-  --shadow-lift:0 8px 24px rgba(30,30,46,.18),0 2px 6px rgba(30,30,46,.1);
+  --shadow-card:0 2px 8px rgba(62,90,117,.1),0 1px 2px rgba(62,90,117,.06);
+  --shadow-lift:0 8px 24px rgba(62,90,117,.18),0 2px 6px rgba(62,90,117,.1);
 }
 html,body{height:100%}
 body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);color:var(--tx);min-height:100dvh}
@@ -29,14 +29,14 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);co
 .pg.on{display:flex}
 .logo{font-size:60px;animation:bob 2s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.pg-title{font-weight:900;font-size:32px;color:#F5A623;letter-spacing:4px}
+.pg-title{font-weight:900;font-size:32px;color:#3e5a75;letter-spacing:4px}
 .pg-sub{font-size:13px;color:#64748B;line-height:1.9;max-width:320px}
 .cw{width:100%;max-width:360px;display:flex;flex-direction:column;gap:10px}
 .btn{height:52px;border-radius:var(--card-r);border:none;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;transition:transform .1s,box-shadow .1s}
 .btn:active{transform:translateY(2px);box-shadow:none!important}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#2d1b0e;box-shadow:0 4px 0 #8B6000,var(--shadow-card)}
-.btn-opp{background:linear-gradient(135deg,var(--opp),#28904e);color:#fff;box-shadow:0 4px 0 #1a7040,var(--shadow-card)}
-.btn-fate{background:linear-gradient(135deg,var(--fate),#b03030);color:#fff;box-shadow:0 4px 0 #902020,var(--shadow-card)}
+.btn-gold{background:linear-gradient(135deg,#f3d86d,#c9a730);color:#3e5a75;box-shadow:0 4px 0 #a08020,var(--shadow-card)}
+.btn-opp{background:linear-gradient(135deg,#5a9a2a,#4a7a1a);color:#fff;box-shadow:0 4px 0 #2a5010,var(--shadow-card)}
+.btn-fate{background:linear-gradient(135deg,#f7aaa1,#d96b60);color:#3e5a75;box-shadow:0 4px 0 #b85050,var(--shadow-card)}
 .btn-t0{background:linear-gradient(135deg,#4080e0,#2060c0);color:#fff;box-shadow:0 4px 0 #1040a0,var(--shadow-card)}
 .btn-t1{background:linear-gradient(135deg,#e04040,#b02020);color:#fff;box-shadow:0 4px 0 #902020,var(--shadow-card)}
 .btn-t2{background:linear-gradient(135deg,#3ab86a,#28904e);color:#fff;box-shadow:0 4px 0 #1a7040,var(--shadow-card)}
@@ -45,11 +45,11 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);co
 .btn-2g .btn{height:52px}
 .infobox{background:#FFFFFF;border-radius:var(--card-r);padding:14px 18px;font-size:13px;color:#64748B;line-height:1.9;width:100%;max-width:360px;box-shadow:var(--shadow-card)}
 .infobox b{color:#F5A623}
-.cinput{width:100%;height:60px;background:#F7F8FC;border:2px solid #E4E8F2;border-radius:var(--card-r);color:#1E1E2E;font-size:28px;font-weight:900;letter-spacing:8px;text-align:center;font-family:inherit;box-shadow:var(--shadow-card);outline:2px solid transparent;transition:outline-color .2s}
+.cinput{width:100%;height:60px;background:#F7F8FC;border:2px solid #DDE9ED;border-radius:var(--card-r);color:#1E1E2E;font-size:28px;font-weight:900;letter-spacing:8px;text-align:center;font-family:inherit;box-shadow:var(--shadow-card);outline:2px solid transparent;transition:outline-color .2s}
 .cinput:focus{outline-color:var(--gold)}
 .codebox{background:var(--sf);border-radius:var(--card-r);padding:20px 24px;width:100%;box-shadow:0 6px 0 rgba(240,192,80,.3),var(--shadow-card)}
 .codebox-lbl{font-size:11px;color:#94A3B8;margin-bottom:8px;letter-spacing:3px}
-.codebox-num{font-size:40px;font-weight:900;color:var(--gold);letter-spacing:10px;text-shadow:0 0 20px rgba(240,192,80,.4)}
+.codebox-num{font-size:40px;font-weight:900;color:#3e5a75;letter-spacing:10px}
 .codebox-hint{font-size:11px;color:#94A3B8;margin-top:6px}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
 tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;box-shadow:var(--shadow-card);transition:all .2s}
@@ -60,7 +60,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .lobby-st{font-size:13px;color:#64748B}
 .spin{font-size:48px;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-.cmsg{font-size:16px;color:#F5A623;font-weight:800}
+.cmsg{font-size:16px;color:#3e5a75;font-weight:800}
 .csub{font-size:13px;color:#64748B}
 
 /* ─── TEACHER BOARD ─── */
@@ -75,7 +75,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .hp-team-mini.cur-team{box-shadow:0 0 0 2px currentColor,var(--shadow-card)}
 .hptm-name{font-size:11px;color:#64748B;margin-bottom:3px;font-weight:700}
 .hptm-val{font-size:18px;font-weight:900;margin-bottom:3px}
-.hpbar-wrap{height:8px;background:#E4E8F2;border-radius:4px;overflow:hidden}
+.hpbar-wrap{height:8px;background:#DDE9ED;border-radius:4px;overflow:hidden}
 .hpbar{height:100%;border-radius:4px;transition:width .5s ease,background .5s}
 .tbar{width:100%;max-width:1000px;display:flex;align-items:center;gap:7px;padding:2px 4px}
 .tbar-box{flex:1;background:#FFFFFF;padding:8px 13px;border-radius:8px;box-shadow:var(--shadow-card)}
@@ -83,21 +83,21 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .tbar-name{font-size:20px;font-weight:900}
 .tbar-ph{font-size:12px;color:#94A3B8;margin-top:1px}
 .tbar-dir{font-size:11px;padding:5px 10px;border-radius:6px;font-weight:700}
-.tbar-dir.cw{background:#DCFCE7;color:#15803D}
-.tbar-dir.ccw{background:#DBEAFE;color:#1D4ED8}
+.tbar-dir.cw{background:#f0f7e0;color:#4a7a1a}
+.tbar-dir.ccw{background:#e4f3f2;color:#4e92b7}
 .dbtn{height:36px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:6px;transition:transform .08s,box-shadow .1s;display:flex;align-items:center;justify-content:center;gap:3px;padding:0 12px}
 .dbtn:active{transform:translateY(2px);box-shadow:none!important}
 .dbtn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
-.dbtn-opp{background:linear-gradient(135deg,var(--opp),#28904e);color:#fff;box-shadow:0 3px 0 #1a7040}
-.dbtn-fate{background:linear-gradient(135deg,var(--fate),#b03030);color:#fff;box-shadow:0 3px 0 #902020}
-.dbtn-cross{background:linear-gradient(135deg,var(--cross),#2860c0);color:#fff;box-shadow:0 3px 0 #1040a0}
-.dbtn-mart{background:linear-gradient(135deg,var(--mart),#b06020);color:#fff;box-shadow:0 3px 0 #904010}
+.dbtn-opp{background:linear-gradient(135deg,#5a9a2a,#4a7a1a);color:#fff;box-shadow:0 3px 0 #2a5010}
+.dbtn-fate{background:linear-gradient(135deg,#f7aaa1,#d96b60);color:#3e5a75;box-shadow:0 3px 0 #b85050}
+.dbtn-cross{background:linear-gradient(135deg,#a7d7d3,#4e92b7);color:#3e5a75;box-shadow:0 3px 0 #3a6e8a}
+.dbtn-mart{background:linear-gradient(135deg,#4e92b7,#3e5a75);color:#fff;box-shadow:0 3px 0 #2d4560}
 .pwr-notif{display:none;padding:6px 12px;font-size:13px;font-weight:700;background:#FFFBEB;border-radius:6px;color:#92400E;margin-bottom:8px;text-align:center;border:1px solid #FDE68A}
 .pwr-notif.show{display:block}
 
 /* ─── CARD GRID BOARD ─── */
 .bwrap{width:min(1000px,99vw);flex-shrink:0}
-.board{display:grid;width:100%;gap:3px;padding:4px;background:#E4E8F2;border-radius:14px;box-shadow:0 4px 20px rgba(30,30,46,.12)}
+.board{display:grid;width:100%;gap:3px;padding:4px;background:#DDE9ED;border-radius:14px;box-shadow:0 4px 20px rgba(62,90,117,.12)}
 
 /* Each cell = a physical card */
 .sp{
@@ -118,29 +118,32 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .sp-sub{display:none}
 
 /* Card type themes */
-.sp.t-opp{background:#DCFCE7;border-color:#BBF7D0}
-.sp.t-opp .sp-lbl{color:#15803D}
-.sp.t-fate{background:#FEE2E2;border-color:#FECACA}
-.sp.t-fate .sp-lbl{color:#B91C1C}
-.sp.t-cross{background:#DBEAFE;border-color:#BFDBFE}
-.sp.t-cross .sp-lbl{color:#1D4ED8}
-.sp.t-martial{background:#FFEDD5;border-color:#FED7AA}
-.sp.t-martial .sp-lbl{color:#C2410C}
-.sp.t-bonus_all,.sp.t-holy_all{background:#FEF9C3;border-color:#FDE68A}
-.sp.t-bonus_all .sp-lbl,.sp.t-holy_all .sp-lbl{color:#B45309}
-.sp.t-curse_all{background:#FCE7F3;border-color:#FBCFE8}
-.sp.t-curse_all .sp-lbl{color:#9D174D}
-.sp.t-skip{background:#F1F5F9;border-color:#CBD5E1}
-.sp.t-skip .sp-lbl{color:#475569}
-.sp.t-move{background:#E0F2FE;border-color:#BAE6FD}
-.sp.t-move .sp-lbl{color:#0369A1}
-.sp.t-start{background:linear-gradient(135deg,#FEF3C7,#FDE68A);border:3px solid #F5A623;box-shadow:0 0 0 2px rgba(245,166,35,.3),var(--shadow-card)}
-.sp.t-start .sp-lbl{color:#92400E}
+.sp.t-opp{background:#f0f7e0;border-color:#b8d98a}
+.sp.t-opp .sp-lbl{color:#4a7a1a}
+.sp.t-fate{background:#fde8e6;border-color:#f7aaa1}
+.sp.t-fate .sp-lbl{color:#d96b60}
+.sp.t-cross{background:#e4f3f2;border-color:#a7d7d3}
+.sp.t-cross .sp-lbl{color:#4e92b7}
+.sp.t-martial{background:#e0f5f3;border-color:#2d8a82}
+.sp.t-martial .sp-lbl{color:#2d8a82}
+.sp.t-bonus_all,.sp.t-holy_all{background:#fef7d6;border-color:#f3d86d}
+.sp.t-bonus_all .sp-lbl,.sp.t-holy_all .sp-lbl{color:#c9a730}
+.sp.t-curse_all{background:#fde8e6;border-color:#f7aaa1}
+.sp.t-curse_all .sp-lbl{color:#d96b60}
+.sp.t-skip{background:#EEF4F6;border-color:#DDE9ED}
+.sp.t-skip .sp-lbl{color:#3e5a75}
+.sp.t-move{background:#e4f3f2;border-color:#a7d7d3}
+.sp.t-move .sp-lbl{color:#4e92b7}
+.sp.t-interact{background:#ede8f7;border-color:#b8a0d8}
+.sp.t-interact .sp-lbl{color:#7a5ca0}
+.sp.t-start{background:linear-gradient(135deg,#fef7d6,#f3d86d);border:3px solid #f3d86d;box-shadow:0 0 0 2px rgba(243,216,109,.35),var(--shadow-card)}
+.sp.t-start .sp-lbl{color:#3e5a75}
 /* Card float animation when moving */
+.sp.landed{outline:3px solid #f3d86d!important;box-shadow:0 0 0 3px rgba(243,216,109,.35),var(--shadow-card)!important;z-index:2}
 .sp.moving-highlight{
   transform:translateY(-10px) scale(1.08) rotate(-1deg)!important;
-  box-shadow:var(--shadow-lift),0 0 0 3px #F5A623,0 0 16px rgba(245,166,35,.5)!important;
-  z-index:10;border-color:#F5A623!important;background:#FFFBEB!important
+  box-shadow:var(--shadow-lift),0 0 0 3px #f3d86d,0 0 16px rgba(243,216,109,.5)!important;
+  z-index:10;border-color:#f3d86d!important;background:#fef7d6!important
 }
 .sp.land-flash{animation:landAnim .5s cubic-bezier(.34,1.56,.64,1)}
 @keyframes landAnim{
@@ -158,7 +161,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
   display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
   gap:0;padding:10px 12px 8px;border-radius:10px;
   box-shadow:0 2px 8px rgba(30,30,46,.08);
-  border:2px solid #E4E8F2;
+  border:2px solid #DDE9ED;
   overflow:hidden;
   position:relative;
   min-height:0;height:100%;
@@ -166,7 +169,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 /* Scrollable card area — grows to fill space above legend */
 .ctr-scroll{flex:1;overflow-y:auto;min-height:0;padding-bottom:4px}
 /* Legend always pinned at bottom */
-.ctr-legend-fixed{flex-shrink:0;border-top:1px solid #E4E8F2;padding-top:6px;margin-top:4px}
+.ctr-legend-fixed{flex-shrink:0;border-top:1px solid #DDE9ED;padding-top:6px;margin-top:4px}
 .ctr-ttl{font-weight:900;font-size:14px;color:var(--tx);margin-bottom:8px}
 .ctr-type-big{font-weight:900;font-size:22px;text-align:center;padding:6px 0 4px}
 .ctr-card{width:100%;padding:8px 10px;border-radius:8px;overflow:hidden;max-height:none;overflow-y:visible;flex:1;min-height:0}
@@ -179,16 +182,16 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .cbox{width:100%;max-width:560px;background:#FFFFFF;padding:20px 20px 18px;border-radius:16px;box-shadow:0 20px 50px rgba(30,30,46,.2),0 0 0 1px rgba(30,30,46,.06);animation:cin .25s cubic-bezier(.34,1.56,.64,1)}
 @keyframes cin{from{opacity:0;transform:scale(.8) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .cbadge{display:inline-flex;align-items:center;gap:5px;padding:5px 14px;font-size:12px;font-weight:800;letter-spacing:1px;border-radius:20px;margin-bottom:0}
-.cbadge-opp{background:#DCFCE7;color:#15803D}
-.cbadge-fate{background:#FEE2E2;color:#B91C1C}
-.cbadge-cross{background:#DBEAFE;color:#1D4ED8}
-.cbadge-mart{background:#FFEDD5;color:#C2410C}
+.cbadge-opp{background:#f0f7e0;color:#4a7a1a}
+.cbadge-fate{background:#fde8e6;color:#d96b60}
+.cbadge-cross{background:#e4f3f2;color:#1D4ED8}
+.cbadge-mart{background:#e0f5f3;color:#2d8a82}
 .chp{font-size:24px;font-weight:900;margin-bottom:8px}
 .chp.pos{color:var(--hp-hi)}.chp.neg{color:var(--hp-lo)}
 .ctxt{font-size:15px;line-height:1.85;white-space:pre-line;margin-bottom:12px;color:#1E1E2E}
 .cross-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
 .cross-opt-row{padding:10px 13px;display:flex;align-items:center;gap:10px;font-size:14px;background:#F7F8FC;border-radius:8px;border:1px solid #E4E8F2}
-.cross-opt-row.chosen{box-shadow:0 0 0 2px #F5A623;background:#FFFBEB}
+.cross-opt-row.chosen{box-shadow:0 0 0 2px #f3d86d;background:#fef7d6}
 .cross-lbl{font-weight:900;font-size:14px;min-width:22px;color:var(--gold)}
 .cross-hp-reveal{font-size:13px;font-weight:900;white-space:nowrap;padding:2px 8px;border-radius:12px;margin-left:4px}
 .cross-hp-reveal.pos{color:var(--opp-l);background:var(--opp-d)}
@@ -203,70 +206,70 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .cross-confirm-btn{height:38px;padding:0 12px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:6px;transition:transform .08s,box-shadow .1s;box-shadow:0 3px 0 rgba(0,0,0,.3)}
 .cross-confirm-btn:active{transform:translateY(2px);box-shadow:none}
 .cross-confirm-btn.neutral{background:#F7F8FC;color:#1E1E2E;border:1px solid #E4E8F2}
-.cross-confirm-btn.ok{background:linear-gradient(135deg,var(--opp),#28904e);color:#fff}
-.cross-confirm-btn.imm{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#2d1b0e}
-.cross-confirm-btn.rev{background:linear-gradient(135deg,var(--cross),#2060c0);color:#fff}
-.cross-confirm-btn.blk{background:linear-gradient(135deg,var(--fate),#b03030);color:#fff}
-.ctimer-wrap{height:6px;background:#E4E8F2;border-radius:3px;margin-bottom:5px;overflow:hidden}
-.ctimer-bar{height:100%;border-radius:3px;background:#F5A623;transition:width .1s linear,background .5s}
-.ctimer-bar.w{background:#F97316}
-.ctimer-bar.u{background:#EF4444}
+.cross-confirm-btn.ok{background:linear-gradient(135deg,#5a9a2a,#4a7a1a);color:#fff}
+.cross-confirm-btn.imm{background:linear-gradient(135deg,#f3d86d,#c9a730);color:#3e5a75}
+.cross-confirm-btn.rev{background:linear-gradient(135deg,#a7d7d3,#4e92b7);color:#3e5a75}
+.cross-confirm-btn.blk{background:linear-gradient(135deg,#f7aaa1,#d96b60);color:#3e5a75}
+.ctimer-wrap{height:6px;background:#DDE9ED;border-radius:3px;margin-bottom:5px;overflow:hidden}
+.ctimer-bar{height:100%;border-radius:3px;background:#f3d86d;transition:width .1s linear,background .5s}
+.ctimer-bar.w{background:#f7aaa1}
+.ctimer-bar.u{background:#d96b60}
 .ctimer-txt{font-size:11px;color:#64748B;text-align:right;margin-bottom:10px}
 .cbtn-row{display:flex;flex-wrap:wrap;gap:8px}
 .cbtn-row.two{justify-content:stretch}
 .cbtn-row.two .cbok,.cbtn-row.two .cbsk{flex:1}
-.cbok{height:46px;padding:0 16px;background:linear-gradient(135deg,var(--opp),#28904e);color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #1a7040;transition:transform .08s,box-shadow .1s}
+.cbok{height:46px;padding:0 16px;background:linear-gradient(135deg,#5a9a2a,#4a7a1a);color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #1a7040;transition:transform .08s,box-shadow .1s}
 .cbok:active{transform:translateY(2px);box-shadow:none}
 .cbsk{height:46px;padding:0 16px;background:var(--sf2);color:var(--mu);font-size:13px;cursor:pointer;font-family:inherit;border:none;border-radius:8px}
-.cbimm{height:46px;padding:0 14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#2d1b0e;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #8B6000;transition:transform .08s,box-shadow .1s}
+.cbimm{height:46px;padding:0 14px;background:linear-gradient(135deg,#f3d86d,#c9a730);color:#3e5a75;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #8B6000;transition:transform .08s,box-shadow .1s}
 .cbimm:active{transform:translateY(2px);box-shadow:none}
-.cbrev{height:46px;padding:0 14px;background:linear-gradient(135deg,var(--cross),#2060c0);color:#fff;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #1040a0;transition:transform .08s}
-.cbblk2{height:46px;padding:0 14px;background:linear-gradient(135deg,var(--fate),#b03030);color:#fff;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #902020;transition:transform .08s}
+.cbrev{height:46px;padding:0 14px;background:linear-gradient(135deg,#a7d7d3,#4e92b7);color:#3e5a75;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #1040a0;transition:transform .08s}
+.cbblk2{height:46px;padding:0 14px;background:linear-gradient(135deg,#f7aaa1,#d96b60);color:#3e5a75;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;box-shadow:0 4px 0 #902020;transition:transform .08s}
 .popup-pause-btn{height:32px;padding:0 12px;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:6px;background:#F1F5F9;color:#64748B}
-.popup-pause-btn.paused{background:#FEE2E2;color:#DC2626}
+.popup-pause-btn.paused{background:#fde8e6;color:#d96b60}
 
 /* ─── STUDENT VIEW ─── */
 #pgStud{display:none;position:relative;z-index:1;flex-direction:column;min-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#F7F8FC}
 #pgStud.on{display:flex}
-.sv-hdr{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #E4E8F2;flex-shrink:0;position:sticky;top:0;background:#F7F8FC;z-index:10}
+.sv-hdr{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #DDE9ED;flex-shrink:0;position:sticky;top:0;background:#F7F8FC;z-index:10}
 .sv-team{font-size:14px;font-weight:900;line-height:1.5}
 .sv-pill{font-size:11px;padding:5px 12px;border-radius:20px;font-weight:700}
-.sv-pill.on{background:#DCFCE7;color:#15803D}
+.sv-pill.on{background:#f0f7e0;color:#4a7a1a}
 .sv-pill.off{background:#F1F5F9;color:#64748B}
 .sv-myhp{padding:12px 14px 6px;flex-shrink:0}
 .sv-myhp-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
 .sv-myhp-lbl{font-size:10px;color:var(--mu);letter-spacing:1px;font-weight:700}
 .sv-myhp-val{font-size:22px;font-weight:900}
-.sv-myhp-bar{height:18px;background:#E4E8F2;border-radius:9px;overflow:hidden}
+.sv-myhp-bar{height:18px;background:#DDE9ED;border-radius:9px;overflow:hidden}
 .sv-myhp-fill{height:100%;border-radius:9px;transition:width .5s ease}
 .sv-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:6px 10px;flex-shrink:0}
 .ssc{background:#FFFFFF;padding:7px 5px;text-align:center;border-radius:8px;box-shadow:var(--shadow-card);transition:box-shadow .2s}
 .ssc.cur{box-shadow:0 0 0 2px currentColor,var(--shadow-card)}
 .ssc-n{font-size:9px;color:#94A3B8;margin-bottom:3px;line-height:1.3}
 .ssc-p{font-size:14px;font-weight:900}
-.ssc-bar{height:4px;background:#E4E8F2;border-radius:2px;overflow:hidden;margin-top:4px}
+.ssc-bar{height:4px;background:#DDE9ED;border-radius:2px;overflow:hidden;margin-top:4px}
 .ssc-fill{height:100%;border-radius:2px;transition:width .4s ease}
-.sv-sec{font-size:10px;color:#94A3B8;letter-spacing:2px;padding:8px 14px 3px;text-transform:uppercase;font-weight:700}
+.sv-sec{font-size:10px;color:#4e92b7;letter-spacing:2px;padding:8px 14px 3px;text-transform:uppercase;font-weight:700}
 .sv-fcards{display:flex;gap:6px;padding:0 10px 8px;flex-shrink:0;overflow-x:auto}
 .fcard{flex:0 0 auto;width:76px;background:#FFFFFF;padding:10px 5px;text-align:center;border-radius:8px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:2px;transition:transform .15s,box-shadow .15s}
 .fcard.active-card{transform:translateY(-4px);box-shadow:var(--shadow-lift),0 0 0 2px var(--gold)}
 .fcard.empty{opacity:.25}
 .fcard-ico{font-size:22px}
-.fcard-name{font-size:9px;color:var(--gold);line-height:1.4;font-weight:700}
+.fcard-name{font-size:9px;color:#c9a730;line-height:1.4;font-weight:700}
 .fcard-desc{font-size:9px;color:var(--mu);line-height:1.3}
-.fcard-cnt{font-size:11px;color:var(--gold);margin-top:2px;font-weight:900}
-.fcard-use{margin-top:5px;height:26px;font-size:10px;font-weight:800;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#2d1b0e;border:none;border-radius:5px;box-shadow:0 2px 0 #8B6000;transition:transform .08s}
+.fcard-cnt{font-size:11px;color:#c9a730;margin-top:2px;font-weight:900}
+.fcard-use{margin-top:5px;height:26px;font-size:10px;font-weight:800;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,#f3d86d,#c9a730);color:#3e5a75;border:none;border-radius:5px;box-shadow:0 2px 0 #8B6000;transition:transform .08s}
 .fcard-use:active{transform:translateY(1px);box-shadow:none}
 .fcard-use:disabled{opacity:.25;cursor:not-allowed;box-shadow:none;background:var(--sf2);color:var(--mu)}
 .sv-cdown{display:none;flex-direction:column;align-items:center;gap:4px;padding:6px 0;flex-shrink:0}
 .sv-cdown.show{display:flex}
-.sv-cdown-lbl{font-size:10px;font-weight:700;color:#F5A623;letter-spacing:2px}
+.sv-cdown-lbl{font-size:10px;font-weight:700;color:#c9a730;letter-spacing:2px}
 .sv-dice{padding:10px 14px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0}
 .sdface-wrap{display:flex;gap:16px;justify-content:center}
 .sdface{font-size:64px;user-select:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4));line-height:1;transition:transform .05s}
 .sdface.rolling{animation:diceRoll .08s steps(2) infinite}
 @keyframes diceRoll{0%{transform:scale(1.15) rotate(-8deg)}50%{transform:scale(.9) rotate(8deg)}}
-.sdroll{width:100%;max-width:280px;height:56px;background:linear-gradient(135deg,#F5A623,#D4890A);border:none;border-radius:12px;box-shadow:0 5px 0 #B8720A,var(--shadow-card);color:#FFFFFF;font-size:15px;font-weight:900;cursor:pointer;font-family:inherit;transition:transform .08s,box-shadow .1s}
+.sdroll{width:100%;max-width:280px;height:56px;background:linear-gradient(135deg,#f3d86d,#c9a730);border:none;border-radius:12px;box-shadow:0 5px 0 #a08020,var(--shadow-card);color:#3e5a75;font-size:15px;font-weight:900;cursor:pointer;font-family:inherit;transition:transform .08s,box-shadow .1s}
 .sdroll:active{transform:translateY(4px);box-shadow:none}
 .sdroll:disabled{opacity:.3;cursor:not-allowed;box-shadow:none;background:#E4E8F2;color:#94A3B8}
 .sdinf{font-size:12px;color:#64748B;text-align:center;min-height:18px;line-height:1.8}
@@ -274,11 +277,11 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .svq-badge{font-size:11px;font-weight:800;letter-spacing:1px;margin-bottom:8px}
 .svq-txt{font-size:15px;line-height:1.85;white-space:pre-line;color:var(--tx)}
 .svq-opts{display:flex;flex-direction:column;gap:7px;margin-top:10px}
-.svq-vote-btn{width:100%;padding:11px 14px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;text-align:left;display:flex;align-items:center;gap:10px;transition:transform .08s,box-shadow .1s;background:#F7F8FC;color:#1E1E2E;border:2px solid #E4E8F2;box-shadow:0 2px 0 rgba(30,30,46,.06)}
+.svq-vote-btn{width:100%;padding:11px 14px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;border:none;border-radius:8px;text-align:left;display:flex;align-items:center;gap:10px;transition:transform .08s,box-shadow .1s;background:#F7F8FC;color:#1E1E2E;border:2px solid #DDE9ED;box-shadow:0 2px 0 rgba(30,30,46,.06)}
 .svq-vote-btn:active{transform:translateY(2px);box-shadow:none}
 .svq-neutral{background:#F7F8FC;color:#1E1E2E}
-.svq-neutral.selected{box-shadow:0 0 0 2px #F5A623;background:#FFFBEB;color:#92400E;border-color:#F5A623}
-.svq-vote-lbl{font-weight:900;font-size:14px;color:#F5A623;min-width:22px}
+.svq-neutral.selected{box-shadow:0 0 0 2px #f3d86d;background:#fef7d6;color:#3e5a75;border-color:#f3d86d}
+.svq-vote-lbl{font-weight:900;font-size:14px;color:#c9a730;min-width:22px}
 .svq-voted-msg{font-size:11px;color:var(--opp);margin-top:8px;font-weight:700}
 .svq-pts{font-size:12px;color:var(--mu);margin-top:8px}
 .svq-pts b{color:var(--opp)}
@@ -297,16 +300,16 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 @keyframes shake{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
 .ko-ttl{font-weight:900;font-size:24px;color:#DC2626;margin:12px 0 6px}
 .ko-dsc{font-size:14px;color:#64748B;margin-bottom:14px;line-height:1.7}
-.ko-btn{height:50px;padding:0 28px;background:#FEE2E2;border:1px solid #EF4444;border-radius:10px;color:#DC2626;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
-.ko-revive-task{background:#FFFFFF;padding:12px 18px;border-radius:8px;margin:10px 0;font-size:13px;line-height:1.8;max-width:300px;text-align:left;border-left:3px solid #EF4444;box-shadow:var(--shadow-card)}
+.ko-btn{height:50px;padding:0 28px;background:#fde8e6;border:1px solid #f7aaa1;border-radius:10px;color:#d96b60;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.ko-revive-task{background:#FFFFFF;padding:12px 18px;border-radius:8px;margin:10px 0;font-size:13px;line-height:1.8;max-width:300px;text-align:left;border-left:3px solid #f7aaa1;box-shadow:var(--shadow-card)}
 .ko-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}
-.ko-btn-revive{height:50px;padding:0 24px;background:#DCFCE7;border:1px solid #22C55E;border-radius:10px;color:#15803D;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.ko-btn-revive{height:50px;padding:0 24px;background:#f0f7e0;border:1px solid #5a9a2a;border-radius:10px;color:#4a7a1a;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
 .go-trophy{font-size:64px;margin-bottom:10px;filter:drop-shadow(0 0 20px rgba(240,192,80,.5))}
-.go-h{font-weight:900;font-size:26px;color:#92400E;margin-bottom:5px}
+.go-h{font-weight:900;font-size:26px;color:#3e5a75;margin-bottom:5px}
 .go-s{font-size:13px;color:#64748B;margin-bottom:18px;letter-spacing:2px}
 .go-rows{width:100%;max-width:320px;display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
 .go-row{display:flex;align-items:center;gap:10px;padding:12px 15px;background:#FFFFFF;border-radius:10px;box-shadow:var(--shadow-card)}
-.go-row.w{background:#FFFBEB;box-shadow:0 0 0 2px #F5A623,var(--shadow-card)}
+.go-row.w{background:#fef7d6;box-shadow:0 0 0 2px #f3d86d,var(--shadow-card)}
 .go-rk{font-size:18px;min-width:30px}
 .go-nm{flex:1;text-align:left;font-size:14px;font-weight:700}
 .go-hp{font-size:14px;font-weight:900}
@@ -314,16 +317,16 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .go-hpfill{height:100%;border-radius:2px}
 .fpt{position:fixed;font-size:16px;font-weight:900;pointer-events:none;z-index:250;animation:fup 1.3s ease-out forwards;transform:translateX(-50%)}
 @keyframes fup{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(-70px)}}
-.fpt.pos{color:#15803D;text-shadow:0 1px 3px rgba(22,163,74,.3)}
-.fpt.neg{color:#DC2626;text-shadow:0 1px 3px rgba(220,38,38,.3)}
+.fpt.pos{color:#4a7a1a;text-shadow:0 1px 3px rgba(22,163,74,.3)}
+.fpt.neg{color:#d96b60;text-shadow:0 1px 3px rgba(220,38,38,.3)}
 /* teach-dice-face */
 .teach-dice-face{font-size:44px;line-height:1;filter:drop-shadow(1px 2px 3px rgba(30,30,46,.2))}
 .teach-dice-face.spin-anim{animation:diceSpin .08s steps(2) infinite}
 @keyframes diceSpin{0%{transform:scale(1.15) rotate(-8deg)}50%{transform:scale(.9) rotate(8deg)}}
 .teach-move-trail{display:flex;gap:3px;justify-content:center;flex-wrap:wrap;min-height:14px}
 .trail-dot{width:8px;height:8px;border-radius:50%;background:#CBD5E1}
-.trail-dot.active{background:#F5A623;transform:scale(1.5)}
-.trail-dot.done{background:#22C55E}
+.trail-dot.active{background:#f3d86d;transform:scale(1.5)}
+.trail-dot.done{background:#4a7a1a}
 /* Move-to overlay */
 .moveto-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px;max-height:220px;overflow-y:auto}
 .moveto-btn{height:40px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;border:none;border-radius:6px;background:#F7F8FC;color:#1E1E2E;border:1px solid #E4E8F2;transition:transform .08s}
@@ -461,7 +464,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
     <div class="sv-cdown-lbl">⏱ 作答倒數</div>
     <svg width="110" height="110" viewBox="0 0 120 120">
       <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(240,192,80,.2)" stroke-width="8"/>
-      <circle id="svRing" cx="60" cy="60" r="50" fill="none" stroke="#f0c050"
+      <circle id="svRing" cx="60" cy="60" r="50" fill="none" stroke="#f3d86d"
         stroke-width="8" stroke-dasharray="314.2" stroke-dashoffset="0"
         stroke-linecap="round" transform="rotate(-90 60 60)"
         style="transition:stroke-dashoffset .2s linear,stroke .25s"/>
@@ -524,10 +527,10 @@ const INIT_HP=500;
 
 // 吉祥物 mascot icons per team
 const TDEFS=[
-  {name:'第一組',short:'第一組',color:'#3B82F6'},
-  {name:'第二組',short:'第二組',color:'#EF4444'},
-  {name:'第三組',short:'第三組',color:'#22C55E'},
-  {name:'第四組',short:'第四組',color:'#F5A623'},
+  {name:'第一組',short:'第一組',color:'#4e92b7'},
+  {name:'第二組',short:'第二組',color:'#f7aaa1'},
+  {name:'第三組',short:'第三組',color:'#5a9a2a'},
+  {name:'第四組',short:'第四組',color:'#f3d86d'},
 ];
 // Helper: colored dot HTML for a team
 function teamDot(t,size=12){return`<span style="display:inline-block;width:${size}px;height:${size}px;border-radius:50%;background:${t.color};vertical-align:middle;border:1.5px solid rgba(255,255,255,.8);box-shadow:0 1px 3px rgba(0,0,0,.15)"></span>`;}
@@ -541,20 +544,20 @@ const BOARD=[
   {id:5,  lbl:'武功秘笈', ico:'📖',   t:'martial'},
   {id:6,  lbl:'十字路口', ico:'🔀',   t:'cross'},
   {id:7,  lbl:'機會',    ico:'✨',   t:'opp'},
-  {id:8,  lbl:'幸運祭壇', ico:'💫',   t:'bonus_all'},
+  {id:8,  lbl:'詛咒之地', ico:'☠️',   t:'curse_all'},
   {id:9,  lbl:'十字路口', ico:'🔀',   t:'cross'},
-  {id:10, lbl:'命運',    ico:'💀',   t:'fate'},
+  {id:10, lbl:'互動時間', ico:'🤝',   t:'interact'},
   {id:11, lbl:'機會',    ico:'✨',   t:'opp'},
   {id:12, lbl:'十字路口', ico:'🔀',   t:'cross'},
   {id:13, lbl:'暫停一回合',ico:'⏸',   t:'skip'},
   {id:14, lbl:'命運',    ico:'💀',   t:'fate'},
   {id:15, lbl:'機會',    ico:'✨',   t:'opp'},
   {id:16, lbl:'武功秘笈', ico:'📖',   t:'martial'},
-  {id:17, lbl:'詛咒之地', ico:'☠️',   t:'curse_all'},
+  {id:17, lbl:'互動時間', ico:'🤝',   t:'interact'},
   {id:18, lbl:'十字路口', ico:'🔀',   t:'cross'},
   {id:19, lbl:'移動到任意格',ico:'🌀', t:'move'},
   {id:20, lbl:'機會',    ico:'✨',   t:'opp'},
-  {id:21, lbl:'命運',    ico:'💀',   t:'fate'},
+  {id:21, lbl:'互動時間', ico:'🤝',   t:'interact'},
   {id:22, lbl:'武功秘笈', ico:'📖',   t:'martial'},
   {id:23, lbl:'十字路口', ico:'🔀',   t:'cross'},
   {id:24, lbl:'機會',    ico:'✨',   t:'opp'},
@@ -571,6 +574,13 @@ const GPOS=[
   [6,1],[5,1],[4,1],[3,1],[2,1],
 ];
 
+const INTERACTS=[
+  {t:'🎁 禮物傳遞\n指定另一組，說一句真心話：「你們組的優點是…」\n✅ 雙方各 +30 HP！',hp:30,hp2:30},
+  {t:'🤲 互相打氣\n對另一組比出大拇指，說一件讓你印象深刻的事。\n✅ 你們組 +40 HP，對方 +20 HP！',hp:40,hp2:20},
+  {t:'💌 情緒快遞\n問另一組：「如果我今天心情不好，你們會怎麼安慰我？」\n✅ 你們組 +50 HP，對方 +20 HP！',hp:50,hp2:20},
+  {t:'🪞 鏡子遊戲\n各派一人說出心情，再描述對方的感受。\n✅ 成功後雙方各 +40 HP！',hp:40,hp2:40},
+  {t:'🌟 讚美轟炸\n每人對右手邊那組某位同學說一句真心讚美。\n✅ 你們組 +60 HP，對方 +30 HP！',hp:60,hp2:30},
+];
 const PWRD={
   immunity: {n:'免死金牌',ico:'🛡️',desc:'免除一次扣血'},
   medpack:  {n:'醫藥包',  ico:'💊',desc:'回血 100 點'},
@@ -641,10 +651,10 @@ function mkState(){
     direction:1,
     pendingReverse:false,
     paused:false,pausedAt:0,
-    card:null,cardType:null,cardHp:0,cardTs:0,cardPower:null,
+    card:null,cardType:null,cardHp:0,cardHp2:0,cardTs:0,cardPower:null,interactTarget:-1,
     pendingPow:null,
     skipNext:[false,false,false,false],
-    crossVotes:{},
+    crossVotes:{},lastRoll:{team:null,dice:[],total:0},hpLog:[],
     crossRevealed:false,
     teams:TDEFS.map(d=>({...d,hp:INIT_HP,pos:0,powers:{immunity:0,medpack:0,reverse:0,block:0,extradice:0},reviveUsed:false})),
     ts:0
@@ -652,13 +662,18 @@ function mkState(){
 }
 let S=mkState();
 let myRole=null;
-let oDk,fDk,cDk,mDk,pwDk;
-let teachTimer=null,studTimer=null,diceOverlayTimer=null;
+let oDk,fDk,cDk,mDk,pwDk,iDk;
+let teachTimer=null,studTimer=null,diceOverlayTimer=null,studRollAnim=null;
 
 function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]]}return b}
 function fDeck(dk,fb){if(!dk.length)dk.push(...shuf([...fb]));return dk.shift()}
-function initDecks(){oDk=shuf([...OPPS]);fDk=shuf([...FATES]);cDk=shuf([...CROSS]);mDk=shuf([...MARTIALS]);pwDk=shuf([...POWER_CHANCE_CARDS]);}
+function initDecks(){oDk=shuf([...OPPS]);fDk=shuf([...FATES]);cDk=shuf([...CROSS]);mDk=shuf([...MARTIALS]);pwDk=shuf([...POWER_CHANCE_CARDS]);iDk=shuf([...INTERACTS]);}
 function clampHp(v){return Math.max(0,Math.min(MAX_HP,v))}
+function logHp(ti,delta,reason){
+  if(!S.hpLog)S.hpLog=[];
+  S.hpLog.push({ti,delta,reason,ts:Date.now()});
+  if(S.hpLog.length>200)S.hpLog=S.hpLog.slice(-200);
+}
 function hpColor(hp){const p=hp/MAX_HP;return p>.55?'linear-gradient(90deg,#1a6b3a,#3ab86a)':p>.3?'linear-gradient(90deg,#8b5500,#d08030)':'linear-gradient(90deg,#8b1a1a,#e04040)'}
 
 // ═══════════════════════════════════════════════════════
@@ -744,7 +759,13 @@ function updBoard(){
   document.getElementById('hpGrid').innerHTML=S.teams.map((t,i)=>{
     const p=t.hp/MAX_HP;const isCur=S.cur===i;
     return`<div class="hp-team-mini${isCur?' cur-team':''}" style="${isCur?`color:${t.color}`:''}">
-      <div class="hptm-name" style="color:${t.color}">${t.emoji} ${t.short}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px">
+        <div class="hptm-name" style="color:${t.color};display:flex;align-items:center;gap:4px;cursor:pointer" onclick="showHpLog(${i})">${teamDot(t,10)} ${t.short} <span style="font-size:8px;opacity:.5">📋</span></div>
+        <div style="display:flex;gap:2px">
+          <button onclick="manualHp(${i},-10)" style="width:20px;height:20px;font-size:10px;border:none;border-radius:4px;background:#fde8e6;color:#d96b60;cursor:pointer;font-weight:900;padding:0">-</button>
+          <button onclick="manualHp(${i},10)" style="width:20px;height:20px;font-size:10px;border:none;border-radius:4px;background:#f0f7e0;color:#4a7a1a;cursor:pointer;font-weight:900;padding:0">+</button>
+        </div>
+      </div>
       <div class="hptm-val" style="color:${t.color}">${t.hp}<span style="font-size:10px;opacity:.4">/${MAX_HP}</span></div>
       <div class="hpbar-wrap"><div class="hpbar" style="width:${p*100}%;background:${hpColor(t.hp)}"></div></div>
     </div>`;
@@ -755,24 +776,21 @@ function updBoard(){
   let html='';
   // Legend items always shown
   const LEGEND=[
-    {ico:'✨',lbl:'機會',desc:'完成任務回血',col:'#15803D',bg:'#DCFCE7'},
-    {ico:'💀',lbl:'命運',desc:'遭遇困境扣血',col:'#B91C1C',bg:'#FEE2E2'},
-    {ico:'🔀',lbl:'十字路口',desc:'討論情境，作答加血',col:'#1D4ED8',bg:'#DBEAFE'},
-    {ico:'📖',lbl:'武功秘笈',desc:'回答成功得免死金牌',col:'#C2410C',bg:'#FFEDD5'},
-    {ico:'💫',lbl:'幸運祭壇',desc:'全體 +100 HP',col:'#B45309',bg:'#FEF9C3'},
-    {ico:'🌟',lbl:'神聖聖地',desc:'全體 +150 HP',col:'#92400E',bg:'#FEF3C7'},
-    {ico:'☠️',lbl:'詛咒之地',desc:'全體 -100 HP',col:'#9D174D',bg:'#FCE7F3'},
-    {ico:'🌀',lbl:'傳送門',desc:'移動到任意格',col:'#0369A1',bg:'#E0F2FE'},
-    {ico:'⏸',lbl:'暫停一回合',desc:'下回合跳過',col:'#475569',bg:'#F1F5F9'},
-    {ico:'⚔️',lbl:'起點',desc:'路過回血 +100',col:'#92400E',bg:'#FEF9C3'},
+    {ico:'✨',lbl:'機會',desc:'完成任務回血',col:'#4a7a1a',bg:'#f0f7e0'},
+    {ico:'💀',lbl:'命運',desc:'遭遇困境扣血',col:'#d96b60',bg:'#fde8e6'},
+    {ico:'🔀',lbl:'十字路口',desc:'討論情境，作答加血',col:'#4e92b7',bg:'#e4f3f2'},
+    {ico:'📖',lbl:'武功秘笈',desc:'回答成功得免死金牌',col:'#2d8a82',bg:'#e0f5f3'},
+    {ico:'🤝',lbl:'互動時間',desc:'跨組互動小活動',col:'#4e92b7',bg:'#e4f3f2'},
+    {ico:'☠️',lbl:'詛咒之地',desc:'全體 -100 HP',col:'#c0392b',bg:'#fde8e6'},
+    {ico:'🌟',lbl:'神聖聖地',desc:'全體 +150 HP',col:'#c9a730',bg:'#fef7d6'},
+    {ico:'🌀',lbl:'傳送門',desc:'移動到任意格',col:'#4e92b7',bg:'#e4f3f2'},
+    {ico:'⏸',lbl:'暫停一回合',desc:'下回合跳過',col:'#3e5a75',bg:'#EEF4F6'},
+    {ico:'⚔️',lbl:'起點',desc:'路過回血 +100',col:'#c9a730',bg:'#fef7d6'},
   ];
-  const legendHtml=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%">
-    ${LEGEND.map(l=>`<div style="display:flex;align-items:center;gap:3px;background:${l.bg};border-radius:5px;padding:3px 6px;min-width:0">
-      <span style="font-size:12px;flex-shrink:0">${l.ico}</span>
-      <span style="font-size:9px;color:${l.col};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">
-        <b style="font-weight:900">${l.lbl}</b>
-        <span style="font-weight:400;opacity:.75"> ${l.desc}</span>
-      </span>
+  const legendHtml=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;font-size:8.5px">
+    ${LEGEND.map(l=>`<div style="display:flex;align-items:center;gap:3px;background:${l.bg};border-radius:4px;padding:2px 5px;min-width:0">
+      <span style="font-size:11px;flex-shrink:0">${l.ico}</span>
+      <span style="font-size:8.5px;color:${l.col};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0"><b style="font-weight:900">${l.lbl}</b><span style="font-weight:400;opacity:.75"> ${l.desc}</span></span>
     </div>`).join('')}
   </div>`;
 
@@ -787,7 +805,7 @@ function updBoard(){
     </div>`;
   }else if(S.phase==='card'&&S.card&&S.cardType==='cross'){
     // Cross: FULL UI inside board center — no popup
-    const m={bg:'#DBEAFE',cl:'#1D4ED8',ico:'🔀',lbl:'十字路口'};
+    const m={bg:'#ddeaf3',cl:'#4e92b7',ico:'🔀',lbl:'十字路口'};
     const votes=S.crossVotes||{};
     const revealed=S.crossRevealed;
     const cur=S.teams[S.cur];
@@ -821,16 +839,14 @@ function updBoard(){
       const hintTxt=waiting>0?`⏳ 還有 ${waiting} 組未選擇`:`✅ 各組已選完`;
       actionBtns=`<div style="font-size:10px;color:#94A3B8;margin-bottom:4px">${hintTxt}</div>
         <div style="display:flex;flex-wrap:wrap;gap:5px">
-          ${S.card.opts.map(o=>`<button onclick="revealCross(${o.hp},'${o.l}')" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#DBEAFE;color:${m.cl}">公布 ${o.l}</button>`).join('')}
+          ${S.card.opts.map(o=>`<button onclick="revealCross(${o.hp},'${o.l}')" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#e4f3f2;color:${m.cl}">公布 ${o.l}</button>`).join('')}
           ${hasImm?`<button onclick="applyImmunity()" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#FEF9C3;color:#92400E">🛡️</button>`:''}
         </div>`;
     }else{
       const immBtn=hasImm&&S.cardHp<0?`<button onclick="applyImmunity()" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#FEF9C3;color:#92400E">🛡️ 免死金牌</button>`:'';
-      const revBtn=cur.powers.reverse>0?`<button onclick="useReverse()" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#DBEAFE;color:#1D4ED8">🔄 迴轉</button>`:'';
-      const blkBtn=cur.powers.block>0?`<button onclick="useBlock()" style="height:30px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;background:#FEE2E2;color:#B91C1C">🚫 禁止</button>`:'';
       actionBtns=`<div style="display:flex;flex-wrap:wrap;gap:5px">
         <button onclick="confirmCross()" style="height:30px;padding:0 14px;font-size:11px;font-weight:900;cursor:pointer;border:none;border-radius:6px;background:#22C55E;color:#fff">✓ 繼續</button>
-        ${immBtn}${revBtn}${blkBtn}
+        ${immBtn}
       </div>`;
     }
 
@@ -855,7 +871,47 @@ function updBoard(){
     </div>`;
   }else if(S.phase==='card'&&S.card&&S.cardType!=='cross'){
     const type=S.cardType,hp=S.cardHp,pp=S.cardPower;
-    const CMAP={opp:{cl:'#15803D',bg:'#DCFCE7',ico:'✨',lbl:'機會'},fate:{cl:'#B91C1C',bg:'#FEE2E2',ico:'💀',lbl:'命運'},mart:{cl:'#C2410C',bg:'#FFEDD5',ico:'📖',lbl:'武功秘笈'}};
+    const CMAP={opp:{cl:'#4a7a1a',bg:'#f0f7e0',ico:'✨',lbl:'機會'},fate:{cl:'#d96b60',bg:'#fde8e6',ico:'💀',lbl:'命運'},mart:{cl:'#2d8a82',bg:'#e0f5f3',ico:'📖',lbl:'武功秘笈'},interact:{cl:'#7a5ca0',bg:'#ede8f7',ico:'🤝',lbl:'互動時間'}};
+    const B=(bg,col,fn,txt)=>`<button onclick="${fn}" style="${btnSty(bg,col)}">${txt}</button>`;
+    // Interact: build team picker + confirm UI
+    if(type==='interact'){
+      const iTarget=S.interactTarget;
+      const hpBadgeSelf=`<span style="font-size:11px;font-weight:800;padding:2px 8px;border-radius:8px;background:#f0f7e0;color:#4a7a1a">你們組 +${hp} HP</span>`;
+      const hpBadgeOther=S.cardHp2>0?`<span style="font-size:11px;font-weight:800;padding:2px 8px;border-radius:8px;background:#ede8f7;color:#7a5ca0">互動組 +${S.cardHp2} HP</span>`:'';
+      const teamPicker=TDEFS.map((t,i)=>{
+        if(i===S.cur)return'';
+        const sel=iTarget===i;
+        return`<button onclick="setInteractTarget(${i})" style="height:32px;padding:0 10px;font-size:11px;font-weight:800;cursor:pointer;border:none;border-radius:6px;display:flex;align-items:center;gap:5px;background:${sel?'#7a5ca0':'#EEF4F6'};color:${sel?'#fff':'#3e5a75'}">${teamDot(t,10)} ${t.short}</button>`;
+      }).join('');
+      const canConfirm=iTarget>=0&&iTarget!==S.cur;
+      const confirmBtn=`<button onclick="resolveInteract()" style="height:32px;padding:0 14px;font-size:11px;font-weight:900;cursor:pointer;border:none;border-radius:6px;background:${canConfirm?'#7a5ca0':'#DDE9ED'};color:${canConfirm?'#fff':'#94A3B8'};${canConfirm?'':'cursor:not-allowed'}">✓ 完成！</button>`;
+      const skipBtn=B('#F1F5F9','#64748B',"resolveCard(false)",'✕ 跳過');
+      const elapsed2=S.cardTs?Math.min((Date.now()-S.cardTs)/1000,30):0;
+      const timerPct2=Math.max(0,100-elapsed2/30*100);
+      const timerCol2=timerPct2>50?'#f3d86d':timerPct2>25?'#f7aaa1':'#d96b60';
+      const timerLeft2=Math.max(0,30-elapsed2);
+      const timerTxt2=timerLeft2>0?Math.ceil(timerLeft2)+' 秒':'⏰ 繼續…';
+      html=`<div style="width:100%;display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          <span style="font-size:16px">🤝</span>
+          <span style="font-size:13px;font-weight:900;color:#7a5ca0">互動時間</span>
+          ${hpBadgeSelf} ${hpBadgeOther}
+          <button onclick="toggleCrossTimer()" style="margin-left:auto;${btnSty('#F1F5F9','#3e5a75')}">${S.paused?'▶ 繼續':'⏸ 暫停'}</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="flex:1;height:5px;background:#DDE9ED;border-radius:3px;overflow:hidden"><div style="height:100%;width:${timerPct2}%;background:${timerCol2};border-radius:3px;transition:width .3s linear"></div></div>
+          <span style="font-size:10px;font-weight:700;color:#3e5a75;white-space:nowrap">${timerTxt2}</span>
+        </div>
+        <div style="background:#ede8f7;border-radius:8px;border-left:4px solid #7a5ca0;padding:8px 10px">
+          <div style="font-size:10px;font-weight:900;color:#7a5ca0;margin-bottom:4px">🤝 互動時間</div>
+          <div style="font-size:13px;font-weight:700;color:#3e5a75;line-height:1.75;white-space:pre-line">${S.card.t||''}</div>
+        </div>
+        <div style="font-size:10px;font-weight:900;color:#3e5a75;margin-bottom:2px">選擇互動的組別：</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">${teamPicker}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">${confirmBtn}${skipBtn}</div>
+      </div>`;
+      // interact handled
+    } else {
     const m=CMAP[type]||{cl:'#1E1E2E',bg:'#F7F8FC',ico:'',lbl:type};
     const cur=S.teams[S.cur];
     const hasImm=cur.powers.immunity>0,hasRev=cur.powers.reverse>0,hasBlk=cur.powers.block>0;
@@ -867,7 +923,7 @@ function updBoard(){
     const timerCol2=timerPct2>50?'#F5A623':timerPct2>25?'#F97316':'#EF4444';
     const timerLeft2=Math.max(0,30-elapsed2);
     const timerTxt2=timerLeft2>0?Math.ceil(timerLeft2)+' 秒':'⏰ 繼續討論…';
-    const B=(bg,col,fn,txt)=>`<button onclick="${fn}" style="${btnSty(bg,col)}">${txt}</button>`;
+    // B defined above
     let ab='';
     if(type==='fate'){
       ab=B('#DCFCE7','#15803D',"resolveCard(true)",'✓ 確認扣血')
@@ -904,11 +960,26 @@ function updBoard(){
       <div style="background:${m.bg};border-radius:8px;border-left:4px solid ${m.cl};padding:8px 10px"><div style="font-size:10px;font-weight:900;color:${m.cl};margin-bottom:4px;letter-spacing:.5px">${m.ico} ${m.lbl}</div><div style="font-size:13px;font-weight:700;color:#1E1E2E;line-height:1.75">${S.card.t||''}</div></div>
       <div style="display:flex;flex-wrap:wrap;gap:5px">${ab}</div>
     </div>`;
+    } // end else (non-interact card)
   }else{
     const curT=S.teams[S.cur];
     html=`<div class="ctr-wait" style="color:${curT.color};display:flex;align-items:center;justify-content:center;gap:6px">${teamDot(curT,12)} ${curT.short} 等待擲骰</div>`;
   }
-  ctr.innerHTML=`<div class="ctr-scroll">${html}</div><div class="ctr-legend-fixed">${legendHtml}</div>`;
+  // Dice panel: show last roll result persistently
+  const DFACES=['⚀','⚁','⚂','⚃','⚄','⚅'];
+  const lr=S.lastRoll;
+  const dicePanel=lr&&lr.team!=null
+    ?`<div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 8px;background:#fef7d6;border-radius:8px;border:1px solid #f3d86d;min-width:82px;flex-shrink:0">
+        <div style="display:flex;align-items:center;gap:2px">${teamDot(S.teams[lr.team],10)}<span style="font-size:9px;font-weight:800;color:#92400E">${S.teams[lr.team].short}</span></div>
+        <div style="display:flex;gap:3px;justify-content:center">${lr.dice.map(d=>`<span style="font-size:30px;line-height:1">${DFACES[d-1]}</span>`).join('')}</div>
+        <div style="font-size:11px;font-weight:900;color:#92400E">${lr.total} 步</div>
+      </div>`
+    :`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 8px;background:#F7F8FC;border-radius:8px;border:1px solid #E4E8F2;min-width:82px;flex-shrink:0;color:#94A3B8;font-size:22px;line-height:1">🎲<div style="font-size:9px;margin-top:4px">骰子結果</div></div>`;
+  ctr.innerHTML=`<div class="ctr-scroll">${html}</div>
+  <div class="ctr-legend-fixed" style="display:flex;gap:6px;align-items:flex-start">
+    <div style="flex:1;min-width:0">${legendHtml}</div>
+    ${dicePanel}
+  </div>`;
 }
 function renderTeach(){
   const t=S.teams[S.cur];
@@ -971,10 +1042,14 @@ async function animateMove(ti,oldPos,steps){
       updateTrailDot(stepCount-1,steps);
       if(stepCount===steps){
         setTimeout(()=>{
-          if(el2){el2.classList.remove('moving-highlight');el2.classList.add('land-flash');setTimeout(()=>el2.classList.remove('land-flash'),500);}
+          if(el2){
+            el2.classList.remove('moving-highlight');
+            el2.classList.add('land-flash');
+            el2.classList.add('landed');// persistent highlight until next turn
+          }
           resolve();
         },200);
-      }else{setTimeout(step,220);}
+      }else{setTimeout(step,380);}
     }
     step();
   });
@@ -1020,12 +1095,16 @@ function getNextTeam(){return(S.cur+S.direction+4)%4;}
 
 async function doMove(ti,steps,diceArr){
   const oldPos=S.teams[ti].pos;
-  S.phase='moving';S.ts=Date.now();broadcast();renderTeach();
+  S.phase='moving';S.lastRoll={team:null,dice:[],total:0};S.ts=Date.now();broadcast();renderTeach();
   showTeachDiceOverlay(diceArr,steps,S.teams[ti].short,S.teams[ti].color,steps);
-  await new Promise(r=>setTimeout(r,1400));
+  await new Promise(r=>setTimeout(r,1250));
+  // Now overlay has finished spinning — reveal result in corner panel too
+  S.lastRoll={team:ti,dice:diceArr,total:steps};
+  S.ts=Date.now();broadcast();renderTeach();
+  await new Promise(r=>setTimeout(r,150));
   await animateMove(ti,oldPos,steps);
   const newPos=S.teams[ti].pos;
-  if(newPos<oldPos&&oldPos>0){S.teams[ti].hp=clampHp(S.teams[ti].hp+100);floatPt(ti,100,'⚔️起點+100');}
+  if(newPos<oldPos&&oldPos>0){logHp(ti,100,"起點+100");S.teams[ti].hp=clampHp(S.teams[ti].hp+100);floatPt(ti,100,'⚔️起點+100');}
   hideTeachDiceOverlay();S.ts=Date.now();broadcast();renderTeach();
   await new Promise(r=>setTimeout(r,400));
   await procSpace(ti,BOARD[newPos]);
@@ -1042,7 +1121,8 @@ async function procSpace(ti,sp){
     case'curse_all':S.teams.forEach(x=>x.hp=clampHp(x.hp-100));floatPt(null,-100,'☠️全體-100');S.ts=Date.now();broadcast();renderTeach();await nextTurn();break;
     case'holy_all':S.teams.forEach(x=>x.hp=clampHp(x.hp+150));floatPt(null,150,'🌟全體+150');S.ts=Date.now();broadcast();renderTeach();await nextTurn();break;
     case'skip':S.skipNext[ti]=true;floatPt(ti,0,'⏸ 暫停一回合！');S.ts=Date.now();broadcast();renderTeach();await nextTurn();break;
-    case'move':showMoveTo();break;// teacher picks destination
+    case'move':showMoveTo();break;
+    case'interact':await drawCard('interact');break;
   }
 }
 
@@ -1058,13 +1138,13 @@ function closeMoveTop(){document.getElementById('moveTopop').classList.remove('s
 async function applyMoveTo(idx){
   closeMoveTop();
   const ti=S.cur;const oldPos=S.teams[ti].pos;
-  // animate movement
-  S.phase='moving';S.ts=Date.now();broadcast();renderTeach();
   const steps=(idx-oldPos+BOARD.length)%BOARD.length||BOARD.length;
-  showTeachDiceOverlay([6],steps,S.teams[ti].short,S.teams[ti].color,steps);
+  S.phase='moving';S.ts=Date.now();broadcast();renderTeach();
+  showTeachDiceOverlay([steps],steps,S.teams[ti].short,S.teams[ti].color,steps);
   await new Promise(r=>setTimeout(r,1000));
   await animateMove(ti,oldPos,steps);
   S.teams[ti].pos=idx;
+  S.lastRoll={team:ti,dice:[steps],total:steps};
   hideTeachDiceOverlay();S.ts=Date.now();broadcast();renderTeach();
   await new Promise(r=>setTimeout(r,400));
   await procSpace(ti,BOARD[idx]);
@@ -1082,8 +1162,9 @@ async function drawCard(type){
     card=fDeck(oDk,OPPS);hp=card.hp;
   }else if(type==='fate'){card=fDeck(fDk,FATES);hp=card.hp;}
   else if(type==='cross'){card=fDeck(cDk,CROSS);hp=0;}
+  else if(type==='interact'){card=fDeck(iDk,INTERACTS);hp=card.hp||0;}
   else{card=fDeck(mDk,MARTIALS);hp=0;}
-  S.card={...card};S.cardType=type;S.cardHp=hp;S.cardTs=Date.now();S.phase='card';S.pendingPow=null;S.cardPower=null;
+  S.card={...card};S.cardType=type;S.cardHp=hp;S.cardHp2=card.hp2||0;S.cardTs=Date.now();S.phase='card';S.pendingPow=null;S.cardPower=null;
   S.ts=Date.now();broadcast();showCardPopup(card,type,hp,null);
 }
 
@@ -1104,25 +1185,21 @@ function revealCross(hp,label){S.cardHp=hp;S.crossRevealed=true;S.ts=Date.now();
 async function confirmCross(){
   clearInterval(teachTimer);
   // cross never opened popup, no need to remove it
-  if(S.crossRevealed&&S.cardHp!==0){S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);floatPt(S.cur,S.cardHp,'');}
+  if(S.crossRevealed&&S.cardHp!==0){logHp(S.cur,S.cardHp,"十字路口"+(S.cardHp>0?'+':'')+S.cardHp);S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);floatPt(S.cur,S.cardHp,'');}
   S.crossVotes={};S.crossRevealed=false;S.cardHp=0;S.card=null;S.cardTs=0;S.paused=false;S.pausedAt=0;
   await checkKO();
 }
 
 function renderCardBtns(type,hp,pendingPower){
   const btnRow=document.getElementById('cbtnRow');
-  const cur=S.teams[S.cur];const hasImm=cur.powers.immunity>0;const hasRev=cur.powers.reverse>0;const hasBlk=cur.powers.block>0;
+  const cur=S.teams[S.cur];const hasImm=cur.powers.immunity>0;
   if(type==='fate'){
     const immBtn=hasImm?`<button class="cbimm" onclick="applyImmunity()">🛡️ 免死金牌</button>`:'';
-    const revBtn=hasRev?`<button class="cbrev" onclick="useReverse()">🔄 迴轉</button>`:'';
-    const blkBtn=hasBlk?`<button class="cbblk2" onclick="useBlock()">🚫 禁止</button>`:'';
-    btnRow.innerHTML=`<button class="cbok" onclick="resolveCard(true)">✓ 確認扣血</button>${immBtn}${revBtn}${blkBtn}<button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
+    btnRow.innerHTML=`<button class="cbok" onclick="resolveCard(true)">✓ 確認扣血</button>${immBtn}<button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }else if(type==='opp'&&pendingPower){
     btnRow.innerHTML=`<button class="cbok" onclick="resolvePowerCard('${pendingPower}')">✓ 獲得 ${PWRD[pendingPower].ico}</button><button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }else if(type==='opp'){
-    const revBtn=hasRev?`<button class="cbrev" onclick="useReverse()">🔄 迴轉</button>`:'';
-    const blkBtn=hasBlk?`<button class="cbblk2" onclick="useBlock()">🚫 禁止</button>`:'';
-    btnRow.innerHTML=`<button class="cbok" onclick="resolveCard(true)">✓ 完成 +${hp}HP</button>${revBtn}${blkBtn}<button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
+    btnRow.innerHTML=`<button class="cbok" onclick="resolveCard(true)">✓ 完成 +${hp}HP</button><button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }else if(type==='mart'){
     btnRow.innerHTML=`<button class="cbok" onclick="martSuccess()">🛡️ 成功得免死金牌</button><button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }else{
@@ -1187,11 +1264,28 @@ function togglePopupPause(){
   S.ts=Date.now();broadcast();
 }
 
+function setInteractTarget(ti){
+  S.interactTarget=ti;
+  S.ts=Date.now();broadcast();updBoard();
+}
+async function resolveInteract(){
+  clearInterval(teachTimer);
+  const ti=S.cur;
+  S.teams[ti].hp=clampHp(S.teams[ti].hp+S.cardHp);
+  floatPt(ti,S.cardHp,'🤝+'+S.cardHp);
+  const t2=S.interactTarget;
+  if(t2>=0&&t2!==ti&&S.cardHp2>0){
+    S.teams[t2].hp=clampHp(S.teams[t2].hp+S.cardHp2);
+    floatPt(t2,S.cardHp2,'🤝+'+S.cardHp2);
+  }
+  S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;S.cardPower=null;S.cardHp2=0;S.interactTarget=-1;S.paused=false;S.pausedAt=0;
+  await checkKO();
+}
 async function resolveCard(ok){
   clearInterval(teachTimer);
-  if(ok&&S.cardType==='opp'){S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);floatPt(S.cur,S.cardHp,'');}
-  else if(ok&&S.cardType==='fate'){S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);floatPt(S.cur,S.cardHp,'');}
-  S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;S.cardPower=null;S.paused=false;S.pausedAt=0;
+  if(ok&&S.cardType==='opp'){logHp(S.cur,S.cardHp,"機會+"+S.cardHp);S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);floatPt(S.cur,S.cardHp,'');}
+  else if(ok&&S.cardType==='fate'){logHp(S.cur,S.cardHp,"命運"+S.cardHp);S.teams[S.cur].hp=clampHp(S.teams[S.cur].hp+S.cardHp);floatPt(S.cur,S.cardHp,'');}
+  S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;S.cardPower=null;S.cardHp2=0;S.paused=false;S.pausedAt=0;
   await checkKO();
 }
 async function resolvePowerCard(pk){
@@ -1251,7 +1345,8 @@ async function nextTurn(){
   if(S.pendingReverse){S.direction*=-1;S.pendingReverse=false;}
   let n=(S.cur+S.direction+4)%4;
   if(S.skipNext[n]){S.skipNext[n]=false;n=(n+S.direction+4)%4;}
-  S.cur=n;S.phase='roll';S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;S.pendingPow=null;S.cardPower=null;S.paused=false;S.pausedAt=0;
+  document.querySelectorAll('.landed').forEach(el=>el.classList.remove('landed'));
+  S.cur=n;S.phase='roll';S.crossVotes={};S.crossRevealed=false;S.card=null;S.cardTs=0;S.pendingPow=null;S.cardPower=null;S.cardHp2=0;S.interactTarget=-1;S.paused=false;S.pausedAt=0;
   S.ts=Date.now();broadcast();renderTeach();
 }
 async function dismissCalm(){document.getElementById('calmOv').style.display='none';await nextTurn();}
@@ -1261,6 +1356,52 @@ function showGo(){
   document.getElementById('goH').innerHTML=`${teamDot(sorted[0],18)} <span style="vertical-align:middle">${sorted[0].short} 勝利！</span>`;
   document.getElementById('goRows').innerHTML=sorted.map((t,i)=>{const p=t.hp/MAX_HP;return`<div class="go-row${i===0?' w':''}"><span class="go-rk">${medals[i]}</span><span class="go-nm" style="color:${t.color};display:flex;align-items:center;gap:6px">${teamDot(t,14)} ${t.name}</span><div style="flex:1"><div class="go-hp" style="color:${t.color}">${t.hp}</div><div class="go-hpbar"><div class="go-hpfill" style="width:${p*100}%;background:${hpColor(t.hp)}"></div></div></div></div>`;}).join('');
   document.getElementById('goOv').style.display='flex';
+}
+function manualHp(ti,delta){
+  const reason=delta>0?'手動加分':'手動扣分';
+  S.teams[ti].hp=clampHp(S.teams[ti].hp+delta);
+  logHp(ti,delta,reason);
+  floatPt(ti,delta,reason);
+  S.ts=Date.now();broadcast();updBoard();
+}
+function showHpLog(ti){
+  const t=S.teams[ti];
+  const log=(S.hpLog||[]).filter(e=>e.ti===ti).slice(-20).reverse();
+  const rows=log.length?log.map(e=>{
+    const d=new Date(e.ts);
+    const time=d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
+    const col=e.delta>0?'#4a7a1a':'#d96b60';
+    return`<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #EEF4F6;font-size:12px">
+      <span style="color:#64748B">${time}</span>
+      <span style="color:#3e5a75;flex:1;padding:0 8px">${e.reason}</span>
+      <span style="font-weight:900;color:${col}">${e.delta>0?'+':''}${e.delta}</span>
+    </div>`;
+  }).join(''):`<div style="color:#94A3B8;font-size:12px;text-align:center;padding:12px">目前沒有記錄</div>`;
+  // Create modal
+  const existing=document.getElementById('hpLogModal');if(existing)existing.remove();
+  const modal=document.createElement('div');
+  modal.id='hpLogModal';
+  modal.style.cssText='position:fixed;inset:0;background:rgba(62,90,117,.5);backdrop-filter:blur(6px);z-index:300;display:flex;align-items:center;justify-content:center;padding:16px';
+  modal.innerHTML=`<div style="background:#fff;border-radius:14px;padding:20px;width:100%;max-width:380px;box-shadow:0 20px 50px rgba(62,90,117,.2);max-height:80vh;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:${t.color}"></span><b style="color:${t.color};font-size:15px">${t.short} 加減分明細</b></div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:18px;font-weight:900;color:${t.color}">${t.hp} HP</span>
+        <button onclick="document.getElementById('hpLogModal').remove()" style="border:none;background:#EEF4F6;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:13px;color:#64748B">✕</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:12px">
+      <button onclick="manualHp(${ti},-50);showHpLog(${ti})" style="flex:1;height:34px;border:none;border-radius:8px;background:#fde8e6;color:#d96b60;font-size:12px;font-weight:800;cursor:pointer">-50</button>
+      <button onclick="manualHp(${ti},-20);showHpLog(${ti})" style="flex:1;height:34px;border:none;border-radius:8px;background:#fde8e6;color:#d96b60;font-size:12px;font-weight:800;cursor:pointer">-20</button>
+      <button onclick="manualHp(${ti},-10);showHpLog(${ti})" style="flex:1;height:34px;border:none;border-radius:8px;background:#fde8e6;color:#d96b60;font-size:12px;font-weight:800;cursor:pointer">-10</button>
+      <button onclick="manualHp(${ti},10);showHpLog(${ti})" style="flex:1;height:34px;border:none;border-radius:8px;background:#f0f7e0;color:#4a7a1a;font-size:12px;font-weight:800;cursor:pointer">+10</button>
+      <button onclick="manualHp(${ti},20);showHpLog(${ti})" style="flex:1;height:34px;border:none;border-radius:8px;background:#f0f7e0;color:#4a7a1a;font-size:12px;font-weight:800;cursor:pointer">+20</button>
+      <button onclick="manualHp(${ti},50);showHpLog(${ti})" style="flex:1;height:34px;border:none;border-radius:8px;background:#f0f7e0;color:#4a7a1a;font-size:12px;font-weight:800;cursor:pointer">+50</button>
+    </div>
+    <div style="overflow-y:auto;flex:1">${rows}</div>
+  </div>`;
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+  document.body.appendChild(modal);
 }
 function floatPt(ti,pts,lbl){
   const el=document.createElement('div');el.className='fpt '+(pts>0?'pos':pts<0?'neg':'pos');
@@ -1295,8 +1436,8 @@ function renderStud(){
     const canUse=cnt>0&&(
       pk==='immunity'?(isMine&&S.phase==='card'&&(S.cardType==='fate'||(S.cardType==='cross'&&crossNeg))):
       pk==='medpack'?(isMine&&S.phase==='roll'):
-      pk==='reverse'?(isMine&&S.phase==='card'&&(S.cardType==='opp'||S.cardType==='fate'||(S.cardType==='cross'&&S.crossRevealed))):
-      pk==='block'?(isMine&&S.phase==='card'&&(S.cardType==='opp'||S.cardType==='fate'||(S.cardType==='cross'&&S.crossRevealed))):
+      pk==='reverse'?(isMine&&S.phase==='roll'):
+      pk==='block'?(isMine&&S.phase==='roll'):
       pk==='extradice'?(isMine&&S.phase==='roll'):false
     );
     return`<div class="fcard${cnt<=0?' empty':''}${canUse?' active-card':''}">
@@ -1305,6 +1446,10 @@ function renderStud(){
       <button class="fcard-use" onclick="studPow('${pk}')" ${canUse?'':'disabled'}>使用</button>
     </div>`;
   }).join('');
+  if(S.phase==='moving'&&studRollAnim&&!studRollAnim.revealing){
+    studRollAnim.revealing=true;
+    setTimeout(revealStudRoll,1250);
+  }
   const btn=document.getElementById('sdRoll');const inf=document.getElementById('sdInf');
   if(canRoll){btn.disabled=false;btn.textContent=hasExtraDice?'🎲🎲 擲兩骰！':'🎲 擲骰子！';inf.textContent='';}
   else{btn.disabled=true;btn.textContent=isMine?'處理中…':'等待你的回合…';inf.textContent='';}
@@ -1314,7 +1459,7 @@ function renderStud(){
   else if(S.paused){cdown.classList.add('show');updRing();}// show frozen ring
   else{cdown.classList.remove('show');clearInterval(studTimer);}
   const qb=document.getElementById('svQBox');
-  if(S.card&&S.phase==='card'){
+  if(S.card&&S.phase==='card'&&(isMine||S.cardType==='cross')){
     const bm={opp:['rgba(58,184,106,.12)','#5ad88a','✨ 機會'],fate:['rgba(224,64,64,.12)','#f06060','💀 命運'],cross:['rgba(64,128,224,.12)','#60a0f0','🔀 十字路口'],mart:['rgba(208,128,48,.12)','#e09840','📖 武功秘笈']};
     const[bg,cl,bl]=bm[S.cardType]||['','',''];
     qb.style.display='block';qb.style.background=bg;qb.style.boxShadow=`0 0 0 2px ${cl}`;
@@ -1376,20 +1521,26 @@ function doRoll(){
   document.getElementById('sdRoll').disabled=true;if(navigator.vibrate)navigator.vibrate([40,30,40]);
   f1.classList.add('rolling');if(useExtra)f2.classList.add('rolling');
   document.getElementById('sdInf').textContent='🎲 擲骰中…';
-  let cnt=0;
+  const r1=(0|Math.random()*6)+1;const r2=useExtra?(0|Math.random()*6)+1:0;
+  const total=r1+(useExtra?r2:0);
+  const diceArr=useExtra?[r1,r2]:[r1];
   const anim=setInterval(()=>{
-    f1.textContent=faces[0|Math.random()*6];if(useExtra)f2.textContent=faces[0|Math.random()*6];cnt++;
-    if(cnt>18){
-      clearInterval(anim);f1.classList.remove('rolling');f2.classList.remove('rolling');
-      const r1=(0|Math.random()*6)+1;const r2=useExtra?(0|Math.random()*6)+1:0;
-      f1.textContent=faces[r1-1];const total=r1+(useExtra?r2:0);
-      if(useExtra){f2.textContent=faces[r2-1];document.getElementById('sdInf').textContent=`${r1}+${r2}=${total} 步！`;}
-      else document.getElementById('sdInf').textContent=`擲出 ${r1}！`;
-      const diceArr=useExtra?[r1,r2]:[r1];
-      if(useExtra)sendAct({type:'usePow',power:'extradice'});
-      sendAct({type:'roll',result:total,diceArr:diceArr});
-    }
+    f1.textContent=faces[0|Math.random()*6];if(useExtra)f2.textContent=faces[0|Math.random()*6];
   },70);
+  // keep a handle so we can reveal once teacher console broadcasts (phase->'moving')
+  studRollAnim={anim,f1,f2,r1,r2,useExtra,total};
+  if(useExtra)sendAct({type:'usePow',power:'extradice'});
+  sendAct({type:'roll',result:total,diceArr:diceArr});
+}
+function revealStudRoll(){
+  if(!studRollAnim)return;
+  const{anim,f1,f2,r1,r2,useExtra,total}=studRollAnim;
+  clearInterval(anim);f1.classList.remove('rolling');f2.classList.remove('rolling');
+  const faces=['⚀','⚁','⚂','⚃','⚄','⚅'];
+  f1.textContent=faces[r1-1];
+  if(useExtra){f2.textContent=faces[r2-1];document.getElementById('sdInf').textContent=`${r1}+${r2}=${total} 步！`;}
+  else document.getElementById('sdInf').textContent=`擲出 ${r1}！`;
+  studRollAnim=null;
 }
 
 // Screen management
