@@ -13,7 +13,7 @@
   --opp:#5a9a2a;--opp-l:#4a7a1a;--opp-d:rgba(90,154,42,.15);
   --fate:#f7aaa1;--fate-l:#d96b60;--fate-d:rgba(247,170,161,.25);
   --cross:#a7d7d3;--cross-l:#4e92b7;--cross-d:rgba(167,215,211,.25);
-  --mart:#4e92b7;--mart-l:#3e5a75;--mart-d:rgba(78,146,183,.18);
+  --mart:#1a5fb4;--mart-l:#0f3a7a;--mart-d:rgba(26,95,180,.18);
   --hp-hi:#4a7a1a;--hp-mid:#f3d86d;--hp-lo:#f7aaa1;
   --tx:#3e5a75;--mu:rgba(62,90,117,.5);
   --c1:#4e92b7;--c2:#f7aaa1;--c3:#a7d7d3;--c4:#f3d86d;
@@ -91,7 +91,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .dbtn-opp{background:linear-gradient(135deg,#5a9a2a,#4a7a1a);color:#fff;box-shadow:0 3px 0 #2a5010}
 .dbtn-fate{background:linear-gradient(135deg,#f7aaa1,#d96b60);color:#3e5a75;box-shadow:0 3px 0 #b85050}
 .dbtn-cross{background:linear-gradient(135deg,#a7d7d3,#4e92b7);color:#3e5a75;box-shadow:0 3px 0 #3a6e8a}
-.dbtn-mart{background:linear-gradient(135deg,#4e92b7,#3e5a75);color:#fff;box-shadow:0 3px 0 #2d4560}
+.dbtn-mart{background:linear-gradient(135deg,#1a5fb4,#0f3a7a);color:#fff;box-shadow:0 3px 0 #082560}
 .pwr-notif{display:none;padding:6px 12px;font-size:13px;font-weight:700;background:#FFFBEB;border-radius:6px;color:#92400E;margin-bottom:8px;text-align:center;border:1px solid #FDE68A}
 .pwr-notif.show{display:block}
 
@@ -118,23 +118,23 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .sp-sub{display:none}
 
 /* Card type themes */
-.sp.t-opp{background:#f0f7e0;border-color:#b8d98a}
+.sp.t-opp{background:#f0f7e0;border-color:#d4eaad}
 .sp.t-opp .sp-lbl{color:#4a7a1a}
-.sp.t-fate{background:#fde8e6;border-color:#f7aaa1}
+.sp.t-fate{background:#fde8e6;border-color:#f5c8c3}
 .sp.t-fate .sp-lbl{color:#d96b60}
-.sp.t-cross{background:#e4f3f2;border-color:#a7d7d3}
+.sp.t-cross{background:#e4f3f2;border-color:#c0e4e0}
 .sp.t-cross .sp-lbl{color:#4e92b7}
-.sp.t-martial{background:#e0f5f3;border-color:#2d8a82}
-.sp.t-martial .sp-lbl{color:#2d8a82}
-.sp.t-bonus_all,.sp.t-holy_all{background:#fef7d6;border-color:#f3d86d}
+.sp.t-martial{background:#dce8f8;border-color:#c0d4ef}
+.sp.t-martial .sp-lbl{color:#0f3a7a}
+.sp.t-bonus_all,.sp.t-holy_all{background:#fef7d6;border-color:#f0e08a}
 .sp.t-bonus_all .sp-lbl,.sp.t-holy_all .sp-lbl{color:#c9a730}
-.sp.t-curse_all{background:#fde8e6;border-color:#f7aaa1}
+.sp.t-curse_all{background:#fde8e6;border-color:#f5c8c3}
 .sp.t-curse_all .sp-lbl{color:#d96b60}
-.sp.t-skip{background:#EEF4F6;border-color:#DDE9ED}
-.sp.t-skip .sp-lbl{color:#3e5a75}
-.sp.t-move{background:#e4f3f2;border-color:#a7d7d3}
-.sp.t-move .sp-lbl{color:#4e92b7}
-.sp.t-interact{background:#ede8f7;border-color:#b8a0d8}
+.sp.t-skip{background:#c8d6dc;border-color:#b0c0c8}
+.sp.t-skip .sp-lbl{color:#1e3040}
+.sp.t-move{background:linear-gradient(135deg,#f9b4e0,#fcd08a,#c8f0a0,#a8dff8,#d4b8f8);border-color:#c8a8e8}
+.sp.t-move .sp-lbl{color:#5a1a8a;font-weight:900}
+.sp.t-interact{background:#ede8f7;border-color:#cdc0e8}
 .sp.t-interact .sp-lbl{color:#7a5ca0}
 .sp.t-start{background:linear-gradient(135deg,#fef7d6,#f3d86d);border:3px solid #f3d86d;box-shadow:0 0 0 2px rgba(243,216,109,.35),var(--shadow-card)}
 .sp.t-start .sp-lbl{color:#3e5a75}
@@ -185,7 +185,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .cbadge-opp{background:#f0f7e0;color:#4a7a1a}
 .cbadge-fate{background:#fde8e6;color:#d96b60}
 .cbadge-cross{background:#e4f3f2;color:#1D4ED8}
-.cbadge-mart{background:#e0f5f3;color:#2d8a82}
+.cbadge-mart{background:#dce8f8;color:#0f3a7a}
 .chp{font-size:24px;font-weight:900;margin-bottom:8px}
 .chp.pos{color:var(--hp-hi)}.chp.neg{color:var(--hp-lo)}
 .ctxt{font-size:15px;line-height:1.85;white-space:pre-line;margin-bottom:12px;color:#1E1E2E}
@@ -499,7 +499,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
   <div class="ko-dsc">血量歸零！是否啟動復活機制？</div>
   <div id="koReviveTask" class="ko-revive-task">
     <b style="color:var(--fate-l)">💖 復活條件（每組限一次）：</b><br>
-    全組說出「如果我是你，我的感受是…」並描述三個情緒詞，老師確認後復活，回復 200 HP。
+    全組輪流說出「我最喜歡的情緒是：___，我最不喜歡的情緒是：___」，老師確認後復活，回復 200 HP。
   </div>
   <div id="koSkipMsg" style="display:none;font-size:13px;color:var(--mu);margin:8px 0">已使用過復活機會，本回合跳過。</div>
   <div class="ko-btns">
@@ -575,11 +575,11 @@ const GPOS=[
 ];
 
 const INTERACTS=[
-  {t:'🎁 禮物傳遞\n指定另一組，說一句真心話：「你們組的優點是…」\n✅ 雙方各 +30 HP！',hp:30,hp2:30},
-  {t:'🤲 互相打氣\n對另一組比出大拇指，說一件讓你印象深刻的事。\n✅ 你們組 +40 HP，對方 +20 HP！',hp:40,hp2:20},
-  {t:'💌 情緒快遞\n問另一組：「如果我今天心情不好，你們會怎麼安慰我？」\n✅ 你們組 +50 HP，對方 +20 HP！',hp:50,hp2:20},
-  {t:'🪞 鏡子遊戲\n各派一人說出心情，再描述對方的感受。\n✅ 成功後雙方各 +40 HP！',hp:40,hp2:40},
-  {t:'🌟 讚美轟炸\n每人對右手邊那組某位同學說一句真心讚美。\n✅ 你們組 +60 HP，對方 +30 HP！',hp:60,hp2:30},
+  {t:'🎁 禮物傳遞\n指定另一組，對其中某一位同學說一句感謝的話。\n✅ 雙方各 +30 HP！',hp:30,hp2:30},
+  {t:'🤲 互相打氣\n對另一組比出大拇指，說一件他們在遊戲中做得很好的事情。\n✅ 你們組 +40 HP，對方 +20 HP！',hp:40,hp2:20},
+  {t:'💌 情緒快遞\n問另一組：「如果我今天心情不好，你們會怎麼安慰我？」\n✅ 你們組 +20 HP，對方 +50 HP！',hp:20,hp2:50},
+  {t:'🪞 鏡子遊戲\n各派一人面對面，嘗試觀察後描述對方現在的感受。\n✅ 成功後雙方各 +50 HP！',hp:50,hp2:50},
+  {t:'🌟 讚美轟炸\n每人對遊戲順序下一組某位同學說一句真心的讚美(每人指定的對象不得重複、內容也不得重複)。\n✅ 你們組 +60 HP，對方 +30 HP！',hp:60,hp2:30},
 ];
 const PWRD={
   immunity: {n:'免死金牌',ico:'🛡️',desc:'免除一次扣血'},
@@ -598,16 +598,16 @@ const POWER_CHANCE_CARDS=[
 ];
 
 const OPPS=[
-  {t:'說出一件最近讓你感到驕傲的事，分享你當時的心情。',hp:80},
-  {t:'給在場某位同學一句真心的鼓勵，說說你為什麼欣賞他。',hp:120},
+  {t:'派出代表說出一件最近讓你感到有好心情的事，分享你當時的感受。',hp:80},
+  {t:'一人說出一種你覺得有效的紓壓方式。',hp:80},
   {t:'全組一起站起來伸展雙手 10 秒！完成即回血！',hp:60},
   {t:'說出你最近做過最貼心的一件事，對方有什麼反應？',hp:90},
   {t:'分享一個讓你感到幸福的小事，說說那時候的感受。',hp:70},
   {t:'小組輪流說：此刻的情緒如果是一種動物，是什麼？為什麼？',hp:140},
-  {t:'說出你最近感謝某人的一件事，並說明原因。',hp:80},
+  {t:'請問可以用哪些情緒詞代替「破防」',hp:80},
   {t:'全組深呼吸 3 次——吸氣 4 秒，吐氣 6 秒——完成回血！',hp:50},
-  {t:'分享你最近幫助過別人的一件事，說說當時的感受。',hp:110},
-  {t:'給右手邊那組一句發自內心的鼓勵，說說你看見對方哪些優點！',hp:160},
+  {t:'派出代表分享最近幫助過別人的一件事，說說當時的感受。',hp:110},
+  {t:'一人說出說出一種你最近出現過的情緒。',hp:60},
 ];
 const FATES=[
   {t:'你努力準備的發表，觀眾反應冷淡，讓你感到失落。',hp:-70},
@@ -622,24 +622,24 @@ const FATES=[
   {t:'你被好朋友臨時放鴿子，期待已久的計畫全部泡湯。',hp:-50},
 ];
 const CROSS=[
-  {t:'好朋友考試不及格，在角落默默哭泣。你會…',opts:[{l:'A',txt:'走過去問他需不需要幫助',hp:120},{l:'B',txt:'假裝沒看到，不想打擾他',hp:-30},{l:'C',txt:'叫另一個共同的朋友去陪他',hp:70}]},
-  {t:'小組作業時，組員一直滑手機不做事。你會…',opts:[{l:'A',txt:'直接說出感受，請他一起參與',hp:130},{l:'B',txt:'自己多做，但心裡很不舒服',hp:-40},{l:'C',txt:'叫組長去處理',hp:60}]},
-  {t:'你看到班上同學被孤立欺負。你會…',opts:[{l:'A',txt:'立刻走過去，站在那位同學旁邊',hp:180},{l:'B',txt:'觀望情況，看看其他人怎麼做',hp:-20},{l:'C',txt:'課後偷偷問那位同學還好嗎',hp:90}]},
-  {t:'你和好朋友吵架，對方三天沒理你。你會…',opts:[{l:'A',txt:'主動道歉並說明自己的感受',hp:160},{l:'B',txt:'等他先開口，認為自己沒有錯',hp:-30},{l:'C',txt:'請共同朋友幫忙說和',hp:80}]},
-  {t:'眾人面前發表時，有人嘲笑你。你當下會…',opts:[{l:'A',txt:'深呼吸讓自己冷靜，繼續完成發表',hp:170},{l:'B',txt:'停下來，緊張到說不出話',hp:-80},{l:'C',txt:'直接回嘴反擊那個人',hp:-40}]},
-  {t:'壓力非常大、快要崩潰的時候，你會…',opts:[{l:'A',txt:'找信任的朋友或家人聊聊',hp:130},{l:'B',txt:'一個人悶在房間不說話',hp:-70},{l:'C',txt:'去運動或做喜歡的事轉換心情',hp:160}]},
-  {t:'你發現朋友情緒低落，但他說沒事。你會…',opts:[{l:'A',txt:'告訴他你注意到了，讓他知道你在',hp:150},{l:'B',txt:'相信他說的沒事，就不追問',hp:-20},{l:'C',txt:'持續關心他，等他準備好再說',hp:110}]},
-  {t:'組員說了一句無心的話傷害了你的感受。你會…',opts:[{l:'A',txt:'告訴他那句話讓你不舒服',hp:140},{l:'B',txt:'忍下來，心裡默默難受',hp:-90},{l:'C',txt:'用開玩笑的方式暗示他',hp:40}]},
+  {t:'好朋友考試不及格，在角落默默哭泣，你會…',opts:[{l:'A',txt:'走過去問他需不需要幫助',hp:120},{l:'B',txt:'叫另一個共同的朋友去陪他',hp:70},{l:'C',txt:'假裝沒看到，不關我的事',hp:-30}]},
+  {t:'小組作業時，組員一直滑手機不做事，你會…',opts:[{l:'A',txt:'直接說出感受，請他一起參與',hp:130},{l:'B',txt:'自己多做，但心裡很不舒服',hp:-40},{l:'C',txt:'找老師去處理',hp:60}]},
+  {t:'你看到班上同學被孤立欺負。你會…',opts:[{l:'A',txt:'找信任的老師求助',hp:100},{l:'B',txt:'觀望情況，看看其他人怎麼做',hp:40},{l:'C',txt:'課後偷偷問那位同學還好嗎',hp:100}]},
+  {t:'你和好朋友吵架，對方三天沒理你。你會…',opts:[{l:'A',txt:'在他道歉前，我是不會跟他講話的',hp:-30},{l:'B',txt:'主動溝通並說明自己的感受',hp:120},{l:'C',txt:'請共同朋友幫忙說和',hp:20}]},
+  {t:'眾人面前發表時，有人嘲笑你，你會…',opts:[{l:'A',txt:'深呼吸讓自己冷靜，完成發表後找老師幫忙',hp:120},{l:'B',txt:'停下來，緊張到無法繼續',hp:-20},{l:'C',txt:'直接嘴回去，讓他知道我不是好惹的',hp:-80}]},
+  {t:'壓力非常大、快要崩潰的時候，你會…',opts:[{l:'A',txt:'找信任的朋友或家人聊聊',hp:130},{l:'B',txt:'去運動或做喜歡的事轉換心情',hp:130},{l:'C',txt:'悶在房間不跟任何人互動',hp:-70}]},
+  {t:'當你打開IG，發現便利貼有人開你副本，你會…',opts:[{l:'A',txt:'誰怕誰，我也開回去就好',hp:-100},{l:'B',txt:'當作沒看到，不理就好了',hp:+10},{l:'C',txt:'找可以信任的同學或老師幫忙協調',hp:100}]},
+  {t:'組員說了一句無心的話傷害了你的感受，你會…',opts:[{l:'A',txt:'告訴他那句話讓你不舒服',hp:140},{l:'B',txt:'忍下來，心裡默默難受',hp:-90},{l:'C',txt:'用開玩笑的方式暗示他',hp:40}]},
 ];
 const MARTIALS=[
-  {t:'說出最近讓你有負面情緒的一件事，以及你如何一步步調適心情。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'描述一次你察覺到情緒變化的時刻，你的身體有什麼具體反應？\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'說出三種有效調節情緒的方法，並各解釋一個理由。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'分享一次成功控制情緒的經驗，當時你用了什麼方法？\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'如果朋友情緒很差，你會用什麼方法幫助他？說出具體三步驟。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'什麼是「情緒覺察」？說說你在日常生活中如何練習。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'描述一個讓你非常生氣的情境，以及你如何讓自己不失控。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'帶領全組進行「正念呼吸」——吸氣 4 秒、屏氣 2 秒、吐氣 6 秒，做三次。\n（完成練習可得 🛡️ 免死金牌！）'},
+  {t:'說出最近讓你有負面情緒的一件事，以及你如何一步步調適心情。\n（成功作答可得功能牌！）'},
+  {t:'描述一次你察覺到情緒變化的時刻，你的身體有什麼具體反應？\n（成功作答可得功能牌！）'},
+  {t:'說出三種在壞心情時調節情緒的方法，並各解釋一個理由。\n（成功作答可得功能牌！）'},
+  {t:'分享一次成功排解情緒的經驗，當時你用了什麼方法？\n（成功作答可得功能牌！）'},
+  {t:'如果朋友情緒很差，你會用什麼方法幫助他？說出具體三步驟。\n（成功作答可得功能牌！）'},
+  {t:'請在頭腦裡想一個「心情不好會想訴苦的對象」請說出會讓你想找他的原因是？\n（成功作答可得功能牌！）'},
+  {t:'描述一個讓你非常生氣的情境，以及你如何讓自己不失控。\n（成功作答可得功能牌！）'},
+  {t:'帶領全組進行「正念呼吸」——吸氣 4 秒、屏氣 2 秒、吐氣 6 秒，做三次。\n（完成練習可得功能牌！）'},
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -772,25 +772,25 @@ function updBoard(){
   }).join('');
   // Board center
   const ctr=document.getElementById('bCtr');if(!ctr)return;
-  const bmap2={opp:{bg:'rgba(58,184,106,.12)',cl:'var(--opp-l)',ico:'✨',lbl:'機會'},fate:{bg:'rgba(224,64,64,.12)',cl:'var(--fate-l)',ico:'💀',lbl:'命運'},cross:{bg:'rgba(64,128,224,.12)',cl:'var(--cross-l)',ico:'🔀',lbl:'十字路口'},mart:{bg:'rgba(208,128,48,.12)',cl:'var(--mart-l)',ico:'📖',lbl:'武功秘笈'}};
+  const bmap2={opp:{bg:'rgba(58,184,106,.12)',cl:'var(--opp-l)',ico:'✨',lbl:'機會'},fate:{bg:'rgba(224,64,64,.12)',cl:'var(--fate-l)',ico:'💀',lbl:'命運'},cross:{bg:'rgba(64,128,224,.12)',cl:'var(--cross-l)',ico:'🔀',lbl:'十字路口'},mart:{bg:'rgba(26,95,180,.12)',cl:'var(--mart-l)',ico:'📖',lbl:'武功秘笈'}};
   let html='';
   // Legend items always shown
   const LEGEND=[
     {ico:'✨',lbl:'機會',desc:'完成任務回血',col:'#4a7a1a',bg:'#f0f7e0'},
     {ico:'💀',lbl:'命運',desc:'遭遇困境扣血',col:'#d96b60',bg:'#fde8e6'},
     {ico:'🔀',lbl:'十字路口',desc:'討論情境，作答加血',col:'#4e92b7',bg:'#e4f3f2'},
-    {ico:'📖',lbl:'武功秘笈',desc:'回答成功得免死金牌',col:'#2d8a82',bg:'#e0f5f3'},
+    {ico:'📖',lbl:'武功秘笈',desc:'回答成功得功能牌',col:'#0f3a7a',bg:'#dce8f8'},
     {ico:'🤝',lbl:'互動時間',desc:'跨組互動小活動',col:'#4e92b7',bg:'#e4f3f2'},
     {ico:'☠️',lbl:'詛咒之地',desc:'全體 -100 HP',col:'#c0392b',bg:'#fde8e6'},
     {ico:'🌟',lbl:'神聖聖地',desc:'全體 +150 HP',col:'#c9a730',bg:'#fef7d6'},
     {ico:'🌀',lbl:'傳送門',desc:'移動到任意格',col:'#4e92b7',bg:'#e4f3f2'},
-    {ico:'⏸',lbl:'暫停一回合',desc:'下回合跳過',col:'#3e5a75',bg:'#EEF4F6'},
+    {ico:'⏸',lbl:'暫停一回合',desc:'此回合跳過',col:'#3e5a75',bg:'#EEF4F6'},
     {ico:'⚔️',lbl:'起點',desc:'路過回血 +100',col:'#c9a730',bg:'#fef7d6'},
   ];
-  const legendHtml=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;font-size:8.5px">
+  const legendHtml=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;font-size:12px">
     ${LEGEND.map(l=>`<div style="display:flex;align-items:center;gap:3px;background:${l.bg};border-radius:4px;padding:2px 5px;min-width:0">
-      <span style="font-size:11px;flex-shrink:0">${l.ico}</span>
-      <span style="font-size:8.5px;color:${l.col};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0"><b style="font-weight:900">${l.lbl}</b><span style="font-weight:400;opacity:.75"> ${l.desc}</span></span>
+      <span style="font-size:12px;flex-shrink:0">${l.ico}</span>
+      <span style="font-size:12px;color:${l.col};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0"><b style="font-weight:900">${l.lbl}</b><span style="font-weight:400;opacity:.75"> ${l.desc}</span></span>
     </div>`).join('')}
   </div>`;
 
@@ -871,7 +871,7 @@ function updBoard(){
     </div>`;
   }else if(S.phase==='card'&&S.card&&S.cardType!=='cross'){
     const type=S.cardType,hp=S.cardHp,pp=S.cardPower;
-    const CMAP={opp:{cl:'#4a7a1a',bg:'#f0f7e0',ico:'✨',lbl:'機會'},fate:{cl:'#d96b60',bg:'#fde8e6',ico:'💀',lbl:'命運'},mart:{cl:'#2d8a82',bg:'#e0f5f3',ico:'📖',lbl:'武功秘笈'},interact:{cl:'#7a5ca0',bg:'#ede8f7',ico:'🤝',lbl:'互動時間'}};
+    const CMAP={opp:{cl:'#4a7a1a',bg:'#f0f7e0',ico:'✨',lbl:'機會'},fate:{cl:'#d96b60',bg:'#fde8e6',ico:'💀',lbl:'命運'},mart:{cl:'#0f3a7a',bg:'#dce8f8',ico:'📖',lbl:'武功秘笈'},interact:{cl:'#7a5ca0',bg:'#ede8f7',ico:'🤝',lbl:'互動時間'}};
     const B=(bg,col,fn,txt)=>`<button onclick="${fn}" style="${btnSty(bg,col)}">${txt}</button>`;
     // Interact: build team picker + confirm UI
     if(type==='interact'){
@@ -940,7 +940,8 @@ function updBoard(){
         +(hasBlk?B('#FEE2E2','#B91C1C',"useBlock()",'🚫 禁止'):'')
         +B('#F1F5F9','#64748B',"resolveCard(false)",'✕ 跳過');
     }else if(type==='mart'){
-      ab=B('#DCFCE7','#15803D',"martSuccess()",'🛡️ 成功得免死金牌')
+      const _pw=S.cardPower&&PWRD[S.cardPower]?PWRD[S.cardPower]:PWRD.immunity;
+      ab=B('#DCFCE7','#15803D',"martSuccess()",`${_pw.ico} 成功得【${_pw.n}】`)
         +B('#F1F5F9','#64748B',"resolveCard(false)",'✕ 跳過');
     }else{
       ab=B('#DCFCE7','#15803D',"resolveCard(true)",'✓ 完成')
@@ -1133,7 +1134,7 @@ function showMoveTo(){
   grid.innerHTML=BOARD.map((sp,i)=>`<button class="moveto-btn" style="border-left:3px solid ${getBoardColor(sp.t)}" onclick="applyMoveTo(${i})">${sp.ico} ${i}: ${sp.lbl}</button>`).join('');
   document.getElementById('moveTopop').classList.add('show');
 }
-function getBoardColor(t){const m={opp:'#3ab86a',fate:'#e04040',cross:'#4080e0',martial:'#d08030',bonus_all:'#f0c050',holy_all:'#f0c050',curse_all:'#c06080',skip:'#808080',move:'#80d0f0',start:'#f0c050'};return m[t]||'#888';}
+function getBoardColor(t){const m={opp:'#3ab86a',fate:'#e04040',cross:'#4080e0',martial:'#1a5fb4',bonus_all:'#f0c050',holy_all:'#f0c050',curse_all:'#c06080',skip:'#808080',move:'#9c4dcc',start:'#f0c050'};return m[t]||'#888';}
 function closeMoveTop(){document.getElementById('moveTopop').classList.remove('show');}
 async function applyMoveTo(idx){
   closeMoveTop();
@@ -1154,7 +1155,7 @@ async function drawCard(type){
   S.crossVotes={};S.crossRevealed=false;
   let card,hp=0;
   if(type==='opp'){
-    if(pwDk.length>0&&Math.random()<0.5){
+    if(pwDk.length>0&&Math.random()<0.15){
       card=fDeck(pwDk,POWER_CHANCE_CARDS);hp=card.hp||0;
       S.card={...card};S.cardType='opp';S.cardHp=hp;S.cardTs=Date.now();S.phase='card';S.pendingPow=null;S.cardPower=card.power;
       S.ts=Date.now();broadcast();showCardPopup(card,'opp',hp,card.power);return;
@@ -1164,7 +1165,9 @@ async function drawCard(type){
   else if(type==='cross'){card=fDeck(cDk,CROSS);hp=0;}
   else if(type==='interact'){card=fDeck(iDk,INTERACTS);hp=card.hp||0;}
   else{card=fDeck(mDk,MARTIALS);hp=0;}
-  S.card={...card};S.cardType=type;S.cardHp=hp;S.cardHp2=card.hp2||0;S.cardTs=Date.now();S.phase='card';S.pendingPow=null;S.cardPower=null;
+  const _pwKeys=['immunity','medpack','reverse','block','extradice'];
+  const _martPow=(type==='mart')?_pwKeys[Math.floor(Math.random()*_pwKeys.length)]:null;
+  S.card={...card};S.cardType=type;S.cardHp=hp;S.cardHp2=card.hp2||0;S.cardTs=Date.now();S.phase='card';S.pendingPow=null;S.cardPower=_martPow;
   S.ts=Date.now();broadcast();showCardPopup(card,type,hp,null);
 }
 
@@ -1201,7 +1204,8 @@ function renderCardBtns(type,hp,pendingPower){
   }else if(type==='opp'){
     btnRow.innerHTML=`<button class="cbok" onclick="resolveCard(true)">✓ 完成 +${hp}HP</button><button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }else if(type==='mart'){
-    btnRow.innerHTML=`<button class="cbok" onclick="martSuccess()">🛡️ 成功得免死金牌</button><button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
+    const pw=PWRD[S.cardPower]||PWRD.immunity;
+    btnRow.innerHTML=`<button class="cbok" onclick="martSuccess()">${pw.ico} 成功得【${pw.n}】</button><button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }else{
     btnRow.innerHTML=`<button class="cbok" onclick="resolveCard(true)">✓ 完成</button><button class="cbsk" onclick="resolveCard(false)">✕ 跳過</button>`;
   }
@@ -1271,10 +1275,12 @@ function setInteractTarget(ti){
 async function resolveInteract(){
   clearInterval(teachTimer);
   const ti=S.cur;
+  logHp(ti,S.cardHp,"互動時間+"+S.cardHp);
   S.teams[ti].hp=clampHp(S.teams[ti].hp+S.cardHp);
   floatPt(ti,S.cardHp,'🤝+'+S.cardHp);
   const t2=S.interactTarget;
   if(t2>=0&&t2!==ti&&S.cardHp2>0){
+    logHp(t2,S.cardHp2,"互動時間+"+S.cardHp2);
     S.teams[t2].hp=clampHp(S.teams[t2].hp+S.cardHp2);
     floatPt(t2,S.cardHp2,'🤝+'+S.cardHp2);
   }
@@ -1297,8 +1303,10 @@ async function resolvePowerCard(pk){
 }
 async function martSuccess(){
   clearInterval(teachTimer);
-  S.teams[S.cur].powers.immunity++;floatPt(S.cur,0,'🛡️+1 免死金牌！');
-  S.crossVotes={};S.card=null;S.cardTs=0;S.paused=false;S.pausedAt=0;await nextTurn();
+  const pk=S.cardPower&&PWRD[S.cardPower]?S.cardPower:'immunity';
+  const pw=PWRD[pk];
+  S.teams[S.cur].powers[pk]++;floatPt(S.cur,0,`${pw.ico}+1 ${pw.n}！`);
+  S.crossVotes={};S.card=null;S.cardTs=0;S.cardPower=null;S.paused=false;S.pausedAt=0;await nextTurn();
 }
 async function applyImmunity(){
   const ti=S.cur;if(S.teams[ti].powers.immunity>0)S.teams[ti].powers.immunity--;
@@ -1460,7 +1468,7 @@ function renderStud(){
   else{cdown.classList.remove('show');clearInterval(studTimer);}
   const qb=document.getElementById('svQBox');
   if(S.card&&S.phase==='card'&&(isMine||S.cardType==='cross')){
-    const bm={opp:['rgba(58,184,106,.12)','#5ad88a','✨ 機會'],fate:['rgba(224,64,64,.12)','#f06060','💀 命運'],cross:['rgba(64,128,224,.12)','#60a0f0','🔀 十字路口'],mart:['rgba(208,128,48,.12)','#e09840','📖 武功秘笈']};
+    const bm={opp:['rgba(58,184,106,.12)','#5ad88a','✨ 機會'],fate:['rgba(224,64,64,.12)','#f06060','💀 命運'],cross:['rgba(64,128,224,.12)','#60a0f0','🔀 十字路口'],mart:['rgba(26,95,180,.12)','#1a5fb4','📖 武功秘笈']};
     const[bg,cl,bl]=bm[S.cardType]||['','',''];
     qb.style.display='block';qb.style.background=bg;qb.style.boxShadow=`0 0 0 2px ${cl}`;
     let html=`<div class="svq-badge" style="color:${cl}">${bl}</div><div class="svq-txt">${S.card.t}</div>`;
@@ -1477,7 +1485,8 @@ function renderStud(){
     }else if(S.cardHp!==0){
       html+=`<div class="svq-pts">${S.cardHp>0?'成功可得':'踩到命運！'} <b style="color:${S.cardHp>0?'#5ad88a':'#f06060'}">${S.cardHp>0?'+':''}${S.cardHp} HP</b></div>`;
     }else if(S.cardType==='mart'){
-      html+=`<div class="svq-pts">成功作答可得 <b style="color:var(--gold)">🛡️ 免死金牌 ×1</b></div>`;
+      const pw=S.cardPower&&PWRD[S.cardPower]?PWRD[S.cardPower]:PWRD.immunity;
+      html+=`<div class="svq-pts">成功作答可得 <b style="color:var(--gold)">${pw.ico} ${pw.n} ×1</b></div>`;
     }else if(S.cardPower){
       html+=`<div class="svq-pts">完成即獲得 <b style="color:var(--gold)">${PWRD[S.cardPower].ico} ${PWRD[S.cardPower].n} ×1</b></div>`;
     }
