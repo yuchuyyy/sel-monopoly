@@ -261,10 +261,10 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .fcard-use{margin-top:5px;height:26px;font-size:10px;font-weight:800;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,#f3d86d,#c9a730);color:#3e5a75;border:none;border-radius:5px;box-shadow:0 2px 0 #8B6000;transition:transform .08s}
 .fcard-use:active{transform:translateY(1px);box-shadow:none}
 .fcard-use:disabled{opacity:.25;cursor:not-allowed;box-shadow:none;background:var(--sf2);color:var(--mu)}
-.sv-cdown{display:none;flex-direction:column;align-items:center;gap:2px;padding:2px 0;flex-shrink:0}
+.sv-cdown{display:none;flex-direction:column;align-items:center;gap:2px;padding:4px 0 8px;flex-shrink:0}
 .sv-cdown.show{display:flex}
 .sv-cdown-lbl{font-size:10px;font-weight:700;color:#c9a730;letter-spacing:2px}
-.sv-dice{padding:6px 14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0}
+.sv-dice{padding:6px 14px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0}
 .sdface-wrap{display:flex;gap:16px;justify-content:center}
 .sdface{font-size:64px;user-select:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4));line-height:1;transition:transform .05s}
 .sdface.rolling{animation:diceRoll .08s steps(2) infinite}
@@ -273,7 +273,10 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .sdroll:active{transform:translateY(4px);box-shadow:none}
 .sdroll:disabled{opacity:.3;cursor:not-allowed;box-shadow:none;background:#E4E8F2;color:#94A3B8}
 .sdinf{font-size:12px;color:#64748B;text-align:center;min-height:18px;line-height:1.8}
-.sv-qbox{margin:0 10px 8px;padding:12px;display:none;flex:1 1 auto;min-height:0;overflow-y:auto;border-radius:10px;background:#FFFFFF;box-shadow:var(--shadow-card)}
+.sv-qbox{padding:12px;display:none;flex:1 1 auto;min-height:0;overflow-y:auto;border-radius:10px;background:#FFFFFF;box-shadow:var(--shadow-card)}
+.sv-main{display:flex;flex:1 1 auto;min-height:0;gap:0;overflow:hidden}
+.sv-left{display:flex;flex-direction:column;flex-shrink:0;width:220px;border-right:1px solid #DDE9ED;overflow-y:auto}
+.sv-right{display:flex;flex-direction:column;flex:1 1 auto;min-width:0;padding:0 10px 10px;overflow:hidden}
 .svq-badge{font-size:11px;font-weight:800;letter-spacing:1px;margin-bottom:8px}
 .svq-txt{font-size:15px;line-height:1.85;white-space:pre-line;color:var(--tx)}
 .svq-opts{display:flex;flex-direction:column;gap:7px;margin-top:10px}
@@ -460,29 +463,38 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
   <div class="sv-scores" id="svScores"></div>
   <div class="sv-sec">⚔️ 功能牌</div>
   <div class="sv-fcards" id="svFcards"></div>
-  <div class="sv-cdown" id="svCdown">
-    <div class="sv-cdown-lbl">⏱ 作答倒數</div>
-    <svg width="88" height="88" viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(240,192,80,.2)" stroke-width="8"/>
-      <circle id="svRing" cx="60" cy="60" r="50" fill="none" stroke="#f3d86d"
-        stroke-width="8" stroke-dasharray="314.2" stroke-dashoffset="0"
-        stroke-linecap="round" transform="rotate(-90 60 60)"
-        style="transition:stroke-dashoffset .2s linear,stroke .25s"/>
-      <text x="60" y="68" text-anchor="middle" fill="#f5e8c8"
-        font-size="34" font-weight="900" font-family="inherit" id="svRingNum">30</text>
-    </svg>
-  </div>
-  <div class="sv-sec">🎲 擲骰子</div>
-  <div class="sv-dice">
-    <div class="sdface-wrap">
-      <div class="sdface" id="sdFace">🎲</div>
-      <div class="sdface" id="sdFace2" style="display:none">🎲</div>
+  <!-- two-column main area -->
+  <div class="sv-main">
+    <!-- left column: dice + countdown -->
+    <div class="sv-left">
+      <div class="sv-sec">🎲 擲骰子</div>
+      <div class="sv-dice">
+        <div class="sdface-wrap">
+          <div class="sdface" id="sdFace">🎲</div>
+          <div class="sdface" id="sdFace2" style="display:none">🎲</div>
+        </div>
+        <button class="sdroll" id="sdRoll" onclick="doRoll()" disabled>等待回合…</button>
+        <div class="sdinf" id="sdInf"></div>
+      </div>
+      <div class="sv-cdown" id="svCdown">
+        <div class="sv-cdown-lbl">⏱ 作答倒數</div>
+        <svg width="110" height="110" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(240,192,80,.2)" stroke-width="8"/>
+          <circle id="svRing" cx="60" cy="60" r="50" fill="none" stroke="#f3d86d"
+            stroke-width="8" stroke-dasharray="314.2" stroke-dashoffset="0"
+            stroke-linecap="round" transform="rotate(-90 60 60)"
+            style="transition:stroke-dashoffset .2s linear,stroke .25s"/>
+          <text x="60" y="68" text-anchor="middle" fill="#f5e8c8"
+            font-size="34" font-weight="900" font-family="inherit" id="svRingNum">30</text>
+        </svg>
+      </div>
     </div>
-    <button class="sdroll" id="sdRoll" onclick="doRoll()" disabled>等待回合…</button>
-    <div class="sdinf" id="sdInf"></div>
+    <!-- right column: question box -->
+    <div class="sv-right">
+      <div class="sv-sec">📜 本題目</div>
+      <div class="sv-qbox" id="svQBox"></div>
+    </div>
   </div>
-  <div class="sv-sec">📜 本題目</div>
-  <div class="sv-qbox" id="svQBox"></div>
 </div>
 
 <!-- CALM -->
