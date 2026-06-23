@@ -229,28 +229,28 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .popup-pause-btn.paused{background:#fde8e6;color:#d96b60}
 
 /* ─── STUDENT VIEW ─── */
-#pgStud{display:none;position:relative;z-index:1;flex-direction:column;min-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#F7F8FC}
+#pgStud{display:none;position:relative;z-index:1;flex-direction:column;height:100dvh;max-height:100dvh;overflow:hidden;background:#F7F8FC}
 #pgStud.on{display:flex}
-.sv-hdr{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #DDE9ED;flex-shrink:0;position:sticky;top:0;background:#F7F8FC;z-index:10}
+.sv-hdr{padding:7px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #DDE9ED;flex-shrink:0;background:#F7F8FC;z-index:10}
 .sv-team{font-size:14px;font-weight:900;line-height:1.5}
-.sv-pill{font-size:11px;padding:5px 12px;border-radius:20px;font-weight:700}
+.sv-pill{font-size:11px;padding:4px 12px;border-radius:20px;font-weight:700}
 .sv-pill.on{background:#f0f7e0;color:#4a7a1a}
 .sv-pill.off{background:#F1F5F9;color:#64748B}
-.sv-myhp{padding:12px 14px 6px;flex-shrink:0}
-.sv-myhp-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.sv-myhp{padding:7px 14px 4px;flex-shrink:0}
+.sv-myhp-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
 .sv-myhp-lbl{font-size:10px;color:var(--mu);letter-spacing:1px;font-weight:700}
-.sv-myhp-val{font-size:22px;font-weight:900}
-.sv-myhp-bar{height:18px;background:#DDE9ED;border-radius:9px;overflow:hidden}
+.sv-myhp-val{font-size:20px;font-weight:900}
+.sv-myhp-bar{height:14px;background:#DDE9ED;border-radius:9px;overflow:hidden}
 .sv-myhp-fill{height:100%;border-radius:9px;transition:width .5s ease}
-.sv-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:6px 10px;flex-shrink:0}
+.sv-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px 10px;flex-shrink:0}
 .ssc{background:#FFFFFF;padding:7px 5px;text-align:center;border-radius:8px;box-shadow:var(--shadow-card);transition:box-shadow .2s}
 .ssc.cur{box-shadow:0 0 0 2px currentColor,var(--shadow-card)}
 .ssc-n{font-size:9px;color:#94A3B8;margin-bottom:3px;line-height:1.3}
 .ssc-p{font-size:14px;font-weight:900}
 .ssc-bar{height:4px;background:#DDE9ED;border-radius:2px;overflow:hidden;margin-top:4px}
 .ssc-fill{height:100%;border-radius:2px;transition:width .4s ease}
-.sv-sec{font-size:10px;color:#4e92b7;letter-spacing:2px;padding:8px 14px 3px;text-transform:uppercase;font-weight:700}
-.sv-fcards{display:flex;gap:6px;padding:0 10px 8px;flex-shrink:0;overflow-x:auto}
+.sv-sec{font-size:10px;color:#4e92b7;letter-spacing:2px;padding:4px 14px 2px;text-transform:uppercase;font-weight:700;flex-shrink:0}
+.sv-fcards{display:flex;gap:6px;padding:0 10px 4px;flex-shrink:0;overflow-x:auto}
 .fcard{flex:0 0 auto;width:76px;background:#FFFFFF;padding:10px 5px;text-align:center;border-radius:8px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:2px;transition:transform .15s,box-shadow .15s}
 .fcard.active-card{transform:translateY(-4px);box-shadow:var(--shadow-lift),0 0 0 2px var(--gold)}
 .fcard.empty{opacity:.25}
@@ -261,10 +261,10 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .fcard-use{margin-top:5px;height:26px;font-size:10px;font-weight:800;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,#f3d86d,#c9a730);color:#3e5a75;border:none;border-radius:5px;box-shadow:0 2px 0 #8B6000;transition:transform .08s}
 .fcard-use:active{transform:translateY(1px);box-shadow:none}
 .fcard-use:disabled{opacity:.25;cursor:not-allowed;box-shadow:none;background:var(--sf2);color:var(--mu)}
-.sv-cdown{display:none;flex-direction:column;align-items:center;gap:4px;padding:6px 0;flex-shrink:0}
+.sv-cdown{display:none;flex-direction:column;align-items:center;gap:2px;padding:2px 0;flex-shrink:0}
 .sv-cdown.show{display:flex}
 .sv-cdown-lbl{font-size:10px;font-weight:700;color:#c9a730;letter-spacing:2px}
-.sv-dice{padding:10px 14px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0}
+.sv-dice{padding:6px 14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0}
 .sdface-wrap{display:flex;gap:16px;justify-content:center}
 .sdface{font-size:64px;user-select:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4));line-height:1;transition:transform .05s}
 .sdface.rolling{animation:diceRoll .08s steps(2) infinite}
@@ -273,7 +273,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
 .sdroll:active{transform:translateY(4px);box-shadow:none}
 .sdroll:disabled{opacity:.3;cursor:not-allowed;box-shadow:none;background:#E4E8F2;color:#94A3B8}
 .sdinf{font-size:12px;color:#64748B;text-align:center;min-height:18px;line-height:1.8}
-.sv-qbox{margin:0 10px 14px;padding:14px;display:none;flex-shrink:0;border-radius:10px;background:#FFFFFF;box-shadow:var(--shadow-card)}
+.sv-qbox{margin:0 10px 8px;padding:12px;display:none;flex:1 1 auto;min-height:0;overflow-y:auto;border-radius:10px;background:#FFFFFF;box-shadow:var(--shadow-card)}
 .svq-badge{font-size:11px;font-weight:800;letter-spacing:1px;margin-bottom:8px}
 .svq-txt{font-size:15px;line-height:1.85;white-space:pre-line;color:var(--tx)}
 .svq-opts{display:flex;flex-direction:column;gap:7px;margin-top:10px}
@@ -462,7 +462,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
   <div class="sv-fcards" id="svFcards"></div>
   <div class="sv-cdown" id="svCdown">
     <div class="sv-cdown-lbl">⏱ 作答倒數</div>
-    <svg width="110" height="110" viewBox="0 0 120 120">
+    <svg width="88" height="88" viewBox="0 0 120 120">
       <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(240,192,80,.2)" stroke-width="8"/>
       <circle id="svRing" cx="60" cy="60" r="50" fill="none" stroke="#f3d86d"
         stroke-width="8" stroke-dasharray="314.2" stroke-dashoffset="0"
@@ -499,7 +499,7 @@ tslot{background:#FFFFFF;border-radius:8px;padding:10px 14px;display:flex;align-
   <div class="ko-dsc">血量歸零！是否啟動復活機制？</div>
   <div id="koReviveTask" class="ko-revive-task">
     <b style="color:var(--fate-l)">💖 復活條件（每組限一次）：</b><br>
-    全組輪流說出「我最喜歡的情緒是：___，我最不喜歡的情緒是：___」，老師確認後復活，回復 200 HP。
+    全組說出「如果我是你，我的感受是…」並描述三個情緒詞，老師確認後復活，回復 200 HP。
   </div>
   <div id="koSkipMsg" style="display:none;font-size:13px;color:var(--mu);margin:8px 0">已使用過復活機會，本回合跳過。</div>
   <div class="ko-btns">
@@ -632,14 +632,14 @@ const CROSS=[
   {t:'組員說了一句無心的話傷害了你的感受，你會…',opts:[{l:'A',txt:'告訴他那句話讓你不舒服',hp:140},{l:'B',txt:'忍下來，心裡默默難受',hp:-90},{l:'C',txt:'用開玩笑的方式暗示他',hp:40}]},
 ];
 const MARTIALS=[
-  {t:'說出最近讓你有負面情緒的一件事，以及你如何一步步調適心情。\n（成功作答可得功能牌！）'},
-  {t:'描述一次你察覺到情緒變化的時刻，你的身體有什麼具體反應？\n（成功作答可得功能牌！）'},
-  {t:'說出三種在壞心情時調節情緒的方法，並各解釋一個理由。\n（成功作答可得功能牌！）'},
-  {t:'分享一次成功排解情緒的經驗，當時你用了什麼方法？\n（成功作答可得功能牌！）'},
-  {t:'如果朋友情緒很差，你會用什麼方法幫助他？說出具體三步驟。\n（成功作答可得功能牌！）'},
-  {t:'請在頭腦裡想一個「心情不好會想訴苦的對象」請說出會讓你想找他的原因是？\n（成功作答可得功能牌！）'},
-  {t:'描述一個讓你非常生氣的情境，以及你如何讓自己不失控。\n（成功作答可得功能牌！）'},
-  {t:'帶領全組進行「正念呼吸」——吸氣 4 秒、屏氣 2 秒、吐氣 6 秒，做三次。\n（完成練習可得功能牌！）'},
+  {t:'說出最近讓你有負面情緒的一件事，以及你如何一步步調適心情。\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'描述一次你察覺到情緒變化的時刻，你的身體有什麼具體反應？\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'說出三種在壞心情時調節情緒的方法，並各解釋一個理由。\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'分享一次成功排解情緒的經驗，當時你用了什麼方法？\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'如果朋友情緒很差，你會用什麼方法幫助他？說出具體三步驟。\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'請在頭腦裡想一個「心情不好會想訴苦的對象」請說出會讓你想找他的原因是？\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'描述一個讓你非常生氣的情境，以及你如何讓自己不失控。\n（成功作答可得 🛡️ 免死金牌！）'},
+  {t:'帶領全組進行「正念呼吸」——吸氣 4 秒、屏氣 2 秒、吐氣 6 秒，做三次。\n（完成練習可得 🛡️ 免死金牌！）'},
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -779,18 +779,18 @@ function updBoard(){
     {ico:'✨',lbl:'機會',desc:'完成任務回血',col:'#4a7a1a',bg:'#f0f7e0'},
     {ico:'💀',lbl:'命運',desc:'遭遇困境扣血',col:'#d96b60',bg:'#fde8e6'},
     {ico:'🔀',lbl:'十字路口',desc:'討論情境，作答加血',col:'#4e92b7',bg:'#e4f3f2'},
-    {ico:'📖',lbl:'武功秘笈',desc:'回答成功得功能牌',col:'#0f3a7a',bg:'#dce8f8'},
+    {ico:'📖',lbl:'武功秘笈',desc:'回答成功得免死金牌',col:'#0f3a7a',bg:'#dce8f8'},
     {ico:'🤝',lbl:'互動時間',desc:'跨組互動小活動',col:'#4e92b7',bg:'#e4f3f2'},
     {ico:'☠️',lbl:'詛咒之地',desc:'全體 -100 HP',col:'#c0392b',bg:'#fde8e6'},
     {ico:'🌟',lbl:'神聖聖地',desc:'全體 +150 HP',col:'#c9a730',bg:'#fef7d6'},
     {ico:'🌀',lbl:'傳送門',desc:'移動到任意格',col:'#4e92b7',bg:'#e4f3f2'},
-    {ico:'⏸',lbl:'暫停一回合',desc:'此回合跳過',col:'#3e5a75',bg:'#EEF4F6'},
+    {ico:'⏸',lbl:'暫停一回合',desc:'下回合跳過',col:'#3e5a75',bg:'#EEF4F6'},
     {ico:'⚔️',lbl:'起點',desc:'路過回血 +100',col:'#c9a730',bg:'#fef7d6'},
   ];
-  const legendHtml=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;font-size:12px">
+  const legendHtml=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;font-size:8.5px">
     ${LEGEND.map(l=>`<div style="display:flex;align-items:center;gap:3px;background:${l.bg};border-radius:4px;padding:2px 5px;min-width:0">
-      <span style="font-size:12px;flex-shrink:0">${l.ico}</span>
-      <span style="font-size:12px;color:${l.col};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0"><b style="font-weight:900">${l.lbl}</b><span style="font-weight:400;opacity:.75"> ${l.desc}</span></span>
+      <span style="font-size:11px;flex-shrink:0">${l.ico}</span>
+      <span style="font-size:8.5px;color:${l.col};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0"><b style="font-weight:900">${l.lbl}</b><span style="font-weight:400;opacity:.75"> ${l.desc}</span></span>
     </div>`).join('')}
   </div>`;
 
@@ -1465,7 +1465,7 @@ function renderStud(){
   const cdown=document.getElementById('svCdown');
   if(S.phase==='card'&&S.cardTs>0&&!S.paused){cdown.classList.add('show');startStudTimer();}
   else if(S.paused){cdown.classList.add('show');updRing();}// show frozen ring
-  else{cdown.classList.remove('show');clearInterval(studTimer);}
+  else{cdown.classList.remove('show');clearInterval(studTimer);studTimer=null;}
   const qb=document.getElementById('svQBox');
   if(S.card&&S.phase==='card'&&(isMine||S.cardType==='cross')){
     const bm={opp:['rgba(58,184,106,.12)','#5ad88a','✨ 機會'],fate:['rgba(224,64,64,.12)','#f06060','💀 命運'],cross:['rgba(64,128,224,.12)','#60a0f0','🔀 十字路口'],mart:['rgba(26,95,180,.12)','#1a5fb4','📖 武功秘笈']};
@@ -1496,8 +1496,9 @@ function renderStud(){
 }
 function castVote(choice){sendAct({type:'crossVote',choice:choice});if(!S.crossVotes)S.crossVotes={};S.crossVotes[myRole]=choice;renderStud();}
 function startStudTimer(){
-  clearInterval(studTimer);updRing();
-  studTimer=setInterval(()=>{if(!S.cardTs||S.paused)return;updRing();},200);
+  if(studTimer)return;// already running — don't reset
+  updRing();
+  studTimer=setInterval(()=>{if(!S.cardTs||S.paused){clearInterval(studTimer);studTimer=null;return;}updRing();},200);
 }
 function updRing(){
   // Use shared cardTs for elapsed calculation — in sync with teacher
