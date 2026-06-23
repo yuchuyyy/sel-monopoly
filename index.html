@@ -644,14 +644,14 @@ const CROSS=[
   {t:'組員說了一句無心的話傷害了你的感受，你會…',opts:[{l:'A',txt:'告訴他那句話讓你不舒服',hp:140},{l:'B',txt:'忍下來，心裡默默難受',hp:-90},{l:'C',txt:'用開玩笑的方式暗示他',hp:40}]},
 ];
 const MARTIALS=[
-  {t:'說出最近讓你有負面情緒的一件事，以及你如何一步步調適心情。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'描述一次你察覺到情緒變化的時刻，你的身體有什麼具體反應？\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'說出三種在壞心情時調節情緒的方法，並各解釋一個理由。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'分享一次成功排解情緒的經驗，當時你用了什麼方法？\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'如果朋友情緒很差，你會用什麼方法幫助他？說出具體三步驟。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'請在頭腦裡想一個「心情不好會想訴苦的對象」請說出會讓你想找他的原因是？\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'描述一個讓你非常生氣的情境，以及你如何讓自己不失控。\n（成功作答可得 🛡️ 免死金牌！）'},
-  {t:'帶領全組進行「正念呼吸」——吸氣 4 秒、屏氣 2 秒、吐氣 6 秒，做三次。\n（完成練習可得 🛡️ 免死金牌！）'},
+  {t:'說出最近讓你有負面情緒的一件事，以及你如何一步步調適心情。\n（成功作答可得功能牌！）'},
+  {t:'描述一次你察覺到情緒變化的時刻，你的身體有什麼具體反應？\n（成功作答可得功能牌！）'},
+  {t:'說出三種在壞心情時調節情緒的方法，並各解釋一個理由。\n（成功作答可得功能牌！）'},
+  {t:'分享一次成功排解情緒的經驗，當時你用了什麼方法？\n（成功作答可得功能牌！）'},
+  {t:'如果朋友情緒很差，你會用什麼方法幫助他？說出具體三步驟。\n（成功作答可得功能牌！）'},
+  {t:'請在頭腦裡想一個「心情不好會想訴苦的對象」請說出會讓你想找他的原因是？\n（成功作答可得功能牌！）'},
+  {t:'描述一個讓你非常生氣的情境，以及你如何讓自己不失控。\n（成功作答可得功能牌！）'},
+  {t:'帶領全組進行「正念呼吸」——吸氣 4 秒、屏氣 2 秒、吐氣 6 秒，做三次。\n（完成練習可得功能牌！）'},
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -675,7 +675,7 @@ function mkState(){
 let S=mkState();
 let myRole=null;
 let oDk,fDk,cDk,mDk,pwDk,iDk;
-let teachTimer=null,studTimer=null,diceOverlayTimer=null,studRollAnim=null;
+let teachTimer=null,studTimer=null,diceOverlayTimer=null,studRollAnim=null,clockOffset=0;
 
 function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]]}return b}
 function fDeck(dk,fb){if(!dk.length)dk.push(...shuf([...fb]));return dk.shift()}
@@ -710,7 +710,7 @@ async function goTeacher(){
   });
   peer.on('error',err=>{if(err.type==='unavailable-id'){peer.destroy();setTimeout(goTeacher,400);}});
 }
-function broadcast(){const m={type:'state',state:S};tcConns.forEach(c=>{if(c&&c.open)c.send(m);});}
+function broadcast(){const m={type:'state',state:S,serverNow:Date.now()};tcConns.forEach(c=>{if(c&&c.open)c.send(m);});}
 function renderTeamGrid(){
   document.getElementById('lobbySt').textContent=`已連線 ${cFlags.filter(Boolean).length}/4 組`;
   document.getElementById('teamGrid').innerHTML=TDEFS.map((t,i)=>`<div class="tslot${cFlags[i]?' ok':''}"><span class="tslot-ico">${teamDot(t,16)}</span><span style="color:${t.color};font-weight:800">${t.short}</span><span class="tslot-st">${cFlags[i]?'✓ 已連線':'待連線'}</span></div>`).join('');
@@ -726,7 +726,7 @@ async function joinGame(ti){
   peer.on('open',()=>{
     scConn=peer.connect('SELRPG-'+code,{metadata:{team:ti},reliable:true});
     scConn.on('open',()=>{clearTimeout(to);initDecks();document.getElementById('cMsg').textContent='✅ 連線成功！';setTimeout(showStudView,900);});
-    scConn.on('data',d=>{if(d.type==='state'){S=d.state;renderStud();}});
+    scConn.on('data',d=>{if(d.type==='state'){S=d.state;if(d.serverNow)clockOffset=Date.now()-d.serverNow;renderStud();}});
     scConn.on('close',()=>{if(document.getElementById('sdInf'))document.getElementById('sdInf').textContent='連線中斷';});
     scConn.on('error',e=>{clearTimeout(to);connErr('❌ '+e.message);});
   });
@@ -1525,7 +1525,7 @@ function updRing(){
     // Frozen at the moment paused
     left=Math.max(0,CARD_SECS-(S.pausedAt-S.cardTs)/1000);
   }else{
-    left=Math.max(0,CARD_SECS-(Date.now()-S.cardTs)/1000);
+    left=Math.max(0,CARD_SECS-(Date.now()-clockOffset-S.cardTs)/1000);
   }
   const pct=left/CARD_SECS;const offset=(1-pct)*CIRC;
   const ring=document.getElementById('svRing');const num=document.getElementById('svRingNum');if(!ring)return;
